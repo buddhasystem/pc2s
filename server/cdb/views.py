@@ -5,5 +5,8 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Future home of the CDB.")
+    return render(request, 'index.html', {'message': 'hi'})
+
+#######################################################
+#     return HttpResponse("Future home of the CDB.")
 
