@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import *
+############
+class TagAdmin(admin.ModelAdmin):
+    empty_value_display = '-empty-'
+    
+admin.site.register(Tag, TagAdmin)
