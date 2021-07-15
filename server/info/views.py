@@ -9,4 +9,4 @@ def index(request):
 
 ###
 def ping(request):
-    return HttpResponse("OK")
+    return HttpResponse("OK\n")

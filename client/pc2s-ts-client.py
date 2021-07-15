@@ -39,9 +39,8 @@ args = parser.parse_args()
 
 server	= args.server
 tst	= args.test
-### p3s interface defined here
+### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
-
 
 ################# JOB TYPES: DUMP AND SET LIMITS   #####################
 

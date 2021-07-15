@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    re_path(r'^ping/', views.ping, name='ping'),
+    re_path(r'^ping', views.ping, name='ping'),
 #    path('', views.index, name='index'),
 ]

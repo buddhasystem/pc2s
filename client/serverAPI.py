@@ -1,5 +1,5 @@
 ###########################################################################
-# This is a dictionary which maps mneumonic keys to URLs of the p3s       #
+# This is a dictionary which maps mneumonic keys to URLs of the pc2s       #
 # server. It thus allows for more flexibility when changing URLs and also #
 # serves as a reference to the server API.                                #
 ###########################################################################
