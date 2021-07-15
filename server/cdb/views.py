@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from .models import *
 
 def index(request):
-    return render(request, 'test_index.html', {'message': 'cdb'})
+    return render(request, 'cdb.html', {'message': 'cdb'})
 
 #######################################################
-#     return HttpResponse("Future home of the CDB.")
+#     return HttpResponse("For debugging only.")
 
