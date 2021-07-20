@@ -3,8 +3,8 @@ from django.http import HttpResponse
 
 from .models import *
 
-def index(request):
-    return render(request, 'cdb.html', {'active': 'cdb'})
+def index(request, what='test'):
+    return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 
 #######################################################
 #     return HttpResponse("For debugging only.")
