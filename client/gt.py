@@ -15,7 +15,6 @@ import os
 
 from serverAPI		import serverAPI
 
-
 #########################################################
 settings.configure(USE_TZ = True)
 
@@ -32,15 +31,31 @@ parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
 
-parser.add_argument("-j", "--json_in",	type=str,	help="JSON file with job templates (list)",		default='')
-
+parser.add_argument("-n", "--name",     type=str,	help="Global Tag Name",	    default='')
+parser.add_argument("-s", "--status",   type=str,	help="Status to be set",    default='')
+parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
 args = parser.parse_args()
 
 server	= args.server
-tst	= args.test
+tst	    = args.test # for debugging only
+
+name    = args.name
+status  = args.status
+verb    = args.verbosity
+
 ### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
+d = {}
+d['name']   = name
+d['status'] = status
+
+if(status==''):
+    resp=API.simple_get('cdb', 'gtstatus', {'key':'name', 'value':name})
+    print(resp)
+    exit(0)
+resp = API.post2server('cdb', 'gtstatus', d)
+print(resp)
 
 ################# JOB TYPES: DUMP AND SET LIMITS   #####################
 

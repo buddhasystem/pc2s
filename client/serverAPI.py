@@ -21,9 +21,9 @@ class serverAPI(dict):
             'pilotinfo':server+'pilotinfo'+'%s',
         }
 
-        ### JOB
-        self['job']	= {
-            'adjust':	server+'jobs/adjust',
+        ### CDB
+        self['cdb']	= {
+            'gtstatus':	server+'cdb/gtstatus',
             'delete':	server+'jobs/delete',
             'purge':	server+'jobs/purge',
             'add':	server+'jobs/add',
@@ -116,7 +116,11 @@ class serverAPI(dict):
         resp = communicate(self[view][url] % stuff, logger=self.logger)
         return rdec(resp)
 
-
+    def simple_get(self, view, url, stuff):
+        theURL=self[view][url]+'?'+stuff['key']+'='+stuff['value']
+        if(self.verb>0): print(theURL)
+        resp = communicate(theURL, logger=self.logger)
+        return rdec(resp)
     
     #############
     # Some wrappers for convenience, will keep for now
