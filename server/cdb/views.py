@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf	import csrf_exempt
+import yaml
 
 from .models import *
 
@@ -30,7 +31,10 @@ def gtstatus(request):
             gt=GlobalTag.objects.get(name=name)
         except:
             return HttpResponse("ERR")
-
+        
+        to_dump = [{gt.name:{'status':gt.status, 'timestamp':gt.timestamp}},]
+        data = yaml.dump(to_dump)
+        print(data)
         return HttpResponse(gt.status)
 
 
