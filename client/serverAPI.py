@@ -3,9 +3,7 @@
 # server. It thus allows for more flexibility when changing URLs and also #
 # serves as a reference to the server API.                                #
 ###########################################################################
-
 from comms		import data2post, rdec, communicate
-
 
 ###########################################################################
 class serverAPI(dict):
@@ -15,19 +13,15 @@ class serverAPI(dict):
         self.logger	= logger
         self.verb	= verb
 
-
         ### CDB
         self['cdb']	= {
             'gtstatus':	server+'cdb/gtstatus',
             'gt':	    server+'cdb/gt',
             'gtcreate': server+'cdb/gtcreate',
-            'delete':	server+'jobs/delete',
-            'purge':	server+'jobs/purge',
-            'add':	server+'jobs/add',
-            'ltype':	server+'jobs/ltype?name=%s',
-            'limit':	server+'jobs/limit',
+            'gtdelete':	server+'cdb/gtdelete',
         }
 
+# 'ltype':	server+'jobs/ltype?name=%s'
 
     def setLogger(self, logger):
         self.logger=logger
@@ -51,27 +45,5 @@ class serverAPI(dict):
         if(self.verb>0): print(theURL)
         resp = communicate(theURL, logger=self.logger)
         return rdec(resp)
-    
-    #############
-    # Some wrappers for convenience, will keep for now
-    
-    ############# WORKFLOW
-    def deleteAllDagWF(self, what):
-        return rdec(communicate(self['workflow']['deleteallURL'] % what, logger=self.logger))
 
-    ############# PILOT
-    def registerPilot(self, p):
-        pilotData = data2post(p).utf8()
-        if(self.verb>1 and self.logger): self.logger.info('Pilot data in UTF-8: %s' % pilotData)
-        return rdec(communicate(self['pilot']['registerURL'], pilotData, self.logger)) # will croak if unsuccessful
-
-    def reportPilot(self, p):
-        return self.post2server('pilot', 'reportURL', p)
-
-    ############# DATA /deprecated
-    #    def registerData(self, d):
-    #        return rdec(communicate(self['data']['register'], data2post(d).utf8(), self.logger))
-
-    #    def adjData(self, d):
-    #        return rdec(communicate(self['data']['adjdata'], data2post(d).utf8()))
 

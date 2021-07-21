@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.5
 #
-# The script to manage Global Tags with the pc2s system
+# The script to manage Global Tag Maps with the pc2s system
 #
 #########################################################
 # TZ-awarewness:					#
