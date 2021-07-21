@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf	import csrf_exempt
 import yaml
+from yaml.loader import SafeLoader
 
 from .models import *
 
@@ -9,6 +10,7 @@ statuses = ['NEW','PUB','INV']
 
 def index(request, what='test'):
     return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
+
 @csrf_exempt
 def gtstatus(request):
     if request.method =='POST':
@@ -25,6 +27,49 @@ def gtstatus(request):
         gt.save()
 
         return HttpResponse(gt.status)
+    else: # GET
+        name = request.GET.get('name', '')
+        try:
+            gt=GlobalTag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+        
+        to_dump = [{gt.name:{'status':gt.status, 'timestamp':gt.timestamp}},]
+        data = yaml.dump(to_dump)
+        print(data)
+        return HttpResponse(gt.status)
+
+@csrf_exempt
+def gtcreate(request):
+    if request.method =='POST':
+        post         = request.POST
+        yaml_content = post.get('yaml', None)
+        name         = post.get('name', None)
+
+        if(name is None and yaml_content is None): return HttpResponse("ERR")
+
+        if(name):
+            gt = GlobalTag(name=name)
+            gt.save()
+            return HttpResponse('OK')
+
+        gt_content = yaml.load(yaml_content, SafeLoader)[0]
+        name = list(gt_content.keys())[0]
+        attributes = gt_content[name]
+
+        status=attributes['status']
+        timestamp=attributes['timestamp']
+        if(status and timestamp):
+            gt = GlobalTag(name=name, status=status, timestamp=timestamp)
+        elif(status):
+            gt = GlobalTag(name=name, status=status)
+        elif(timestamp):
+            gt = GlobalTag(name=name, timestamp=timestamp)
+        else:
+            gt = GlobalTag(name=name)
+
+        gt.save()
+        return HttpResponse('OK')
     else: # GET
         name = request.GET.get('name', '')
         try:

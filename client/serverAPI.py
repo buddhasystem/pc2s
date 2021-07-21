@@ -15,87 +15,17 @@ class serverAPI(dict):
         self.logger	= logger
         self.verb	= verb
 
-        ### INFO
-        self['info']	= {
-            'dash':	server+'%s',
-            'pilotinfo':server+'pilotinfo'+'%s',
-        }
 
         ### CDB
         self['cdb']	= {
             'gtstatus':	server+'cdb/gtstatus',
+            'gt':	    server+'cdb/gt',
+            'gtcreate': server+'cdb/gtcreate',
             'delete':	server+'jobs/delete',
             'purge':	server+'jobs/purge',
             'add':	server+'jobs/add',
             'ltype':	server+'jobs/ltype?name=%s',
             'limit':	server+'jobs/limit',
-        }
-
-        ### SITE
-        self['site']	= {
-            'getsiteURL':server+'sites?name=%s',
-            'defineURL': server+'sites/define',
-            'deleteURL': server+'sites/delete',
-        }
-
-        ### DATA
-        self['data']	= {
-            'register':		server+'data/register',
-            'delete':		server+'data/delete',
-            'adjust':		server+'data/adjust',
-            'registertype':	server+'data/registertype',
-            'deletetype':	server+'data/deletetype',
-            'getdata':		server+'data/getdata?name=%s',
-        }
-
-        ### PILOT
-        self['pilot']	= {
-            'reportURL':	server+'pilots/report',
-            'registerURL':	server+'pilots/register',
-            'delete':		server+'pilots/delete',
-            'kill':		server+'pilots/kill',
-            'jobRequestURL':	server+'pilots/request',
-        }
-
-        ### WORKFLOW
-        self['workflow']	= {
-            'addwfURL':		server+'workflows/addwf',
-            'setwfstateURL':	server+'workflows/setwfstate',
-            'deleteallURL':	server+'workflows/deleteall?what=%s',
-            'deleteURL':	server+'workflows/delete',
-            'getdagURL':	server+'workflows/getdag?name=%s',
-            'adddagURL':	server+'workflows/adddag',
-            'addwfURL':		server+'workflows/addwf',
-        }
-
-        ### LOGIC
-        self['logic']	= {
-            'purge':	server+'logic/purge',
-            'pilotTO':	server+'logic/pilotTO',
-            'jobTO':	server+'logic/jobTO',
-            'service':	server+'logic/service',
-            'delete':	server+'logic/delete',
-        }
-
-        ### DQM purity
-        self['purity']	= {
-            'add':	server+'purity/add',
-            'delete':	server+'purity/delete',
-            'index':	server+'purity/index/%s',
-        }
-
-        ### DQM evdisp
-        self['evd']	= {
-            'add':	server+'evd/add',
-            'delete':	server+'evd/delete',
-            'maxrun':	server+'evd/maxrun/%s',
-        }
-
-        ### DQM monitor
-        self['monitor']	= {
-            'addmon':	server+'monitor/addmon',
-            'delmon':	server+'monitor/delmon',
-            'move':	server+'monitor/move',
         }
 
 

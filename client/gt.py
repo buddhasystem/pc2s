@@ -13,6 +13,8 @@ import time
 import datetime
 import os
 
+from jinja2.environment import create_cache
+
 from serverAPI		import serverAPI
 
 #########################################################
@@ -31,8 +33,10 @@ parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
 
+parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag")
 parser.add_argument("-n", "--name",     type=str,	help="Global Tag Name",	    default='')
 parser.add_argument("-s", "--status",   type=str,	help="Status to be set",    default='')
+parser.add_argument("-y", "--yaml_file",type=str,	help="YAML definition",     default='', nargs='?')
 parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
 args = parser.parse_args()
@@ -40,8 +44,12 @@ args = parser.parse_args()
 server	= args.server
 tst	    = args.test # for debugging only
 
+create  = args.create
 name    = args.name
 status  = args.status
+
+y_file  = args.yaml_file
+
 verb    = args.verbosity
 
 ### pc2s interface defined here
@@ -50,8 +58,32 @@ d = {}
 d['name']   = name
 d['status'] = status
 
+if(create):
+    if(name):
+        resp = API.post2server('cdb', 'gtcreate', {'name':name})
+        print(resp)
+        exit(0)
+    if(y_file is None or y_file==''):
+        print('Please supply the YAML file name')
+        exit(-1)
+    else:
+        print("yaml")
+        try:
+            file = open(y_file,mode='r')
+        except:
+            print('Could not open the Global Tag definition file (YAML):'+y_file)
+            exit(-1)
+        # read all lines at once
+        all_of_it = file.read()
+        file.close()
+        resp = API.post2server('cdb', 'gtcreate', {'yaml':all_of_it})
+        print(resp)
+        exit(0)
+
+exit(0)
+
 if(status==''):
-    resp=API.simple_get('cdb', 'gtstatus', {'key':'name', 'value':name})
+    resp=API.simple_get('cdb', 'gt', {'key':'name', 'value':name})
     print(resp)
     exit(0)
 resp = API.post2server('cdb', 'gtstatus', d)
