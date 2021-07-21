@@ -28,8 +28,6 @@ verb = 0
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-t", "--test",	action='store_true',	help="do not contact the server - testing the client")
-
 parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
@@ -44,7 +42,6 @@ parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     de
 args = parser.parse_args()
 
 server	= args.server
-tst	    = args.test # for debugging only
 
 create  = args.create
 delete  = args.delete
@@ -69,7 +66,6 @@ if(create):
         print('Please supply the YAML file name')
         exit(-1)
     else:
-        print("yaml")
         try:
             file = open(y_file,mode='r')
         except:

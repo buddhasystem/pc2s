@@ -28,31 +28,27 @@ verb = 0
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-t", "--test",	action='store_true',	help="do not contact the server - testing the client")
-
 parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
 
 parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag")
 parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global Tag")
-parser.add_argument("-n", "--name",     type=str,	help="Global Tag Name",	    default='')
-parser.add_argument("-s", "--status",   type=str,	help="Status to be set",    default='')
-parser.add_argument("-y", "--yaml_file",type=str,	help="YAML definition",     default='', nargs='?')
+
+parser.add_argument("-g", "--global_tag",   type=str,	help="Global Tag Name",	    default='')
+parser.add_argument("-t", "--tag",          type=str,	help="Tag",                 default='')
+
 parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
 args = parser.parse_args()
 
 server	= args.server
-tst	    = args.test # for debugging only
 
 create  = args.create
 delete  = args.delete
 
-name    = args.name
-status  = args.status
-
-y_file  = args.yaml_file
+gt      = args.global_tag
+tag     = args.tag
 
 verb    = args.verbosity
 
@@ -61,30 +57,20 @@ API  = serverAPI(server=server, verb=verb)
 ###########################################
 
 if(create):
-    if(name):
-        resp = API.post2server('cdb', 'gtcreate', {'name':name})
-        print(resp)
-        exit(0)
-    if(y_file is None or y_file==''):
-        print('Please supply the YAML file name')
+    if(gt is None or tag is None):
+        print('Please supply valid names for the global tag and the tag')
         exit(-1)
     else:
-        print("yaml")
-        try:
-            file = open(y_file,mode='r')
-        except:
-            print('Could not open the Global Tag definition file (YAML):'+y_file)
-            exit(-1)
-        # read all lines at once
-        all_of_it = file.read()
-        file.close()
-        resp = API.post2server('cdb', 'gtcreate', {'yaml':all_of_it})
+        resp = API.post2server('cdb', 'gtmcreate', {'globaltag':gt, 'tag':tag})
         print(resp)
         exit(0)
 
 if(delete):
-    if(name):
-        resp = API.post2server('cdb', 'gtdelete', {'name':name})
+    if(gt is None or tag is None):
+        print('Please supply valid names for the global tag and the tag')
+        exit(-1)
+    else:
+        resp = API.post2server('cdb', 'gtmdelete', {'globaltag':gt, 'tag':tag})
         print(resp)
         exit(0)
 

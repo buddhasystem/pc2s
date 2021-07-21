@@ -15,8 +15,9 @@ class GlobalTag(models.Model):
 
 
 class GlobalTagMap(models.Model):
-    name		= models.CharField(max_length=128, primary_key=True, null=False, default="")
-    gtname		= models.CharField(max_length=128, null=False, default="")
+    id          = models.AutoField(primary_key=True)
+    globaltag	= models.CharField(max_length=128, null=False, default="")
+    tag		    = models.CharField(max_length=128, null=False, default="")
 
 class Tag(models.Model):
     name		= models.CharField(max_length=128, primary_key=True, null=False, default="")
