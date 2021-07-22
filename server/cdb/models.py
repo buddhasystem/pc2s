@@ -30,10 +30,7 @@ class IOV(models.Model):
     payload	    = models.UUIDField(null=True)
 
 class Payload(models.Model):
-    uuid	    = models.UUIDField(primary_key=True, null=False, default=uuid.uuid4)
+    id          = models.AutoField(primary_key=True)
     url		    = models.CharField(max_length=256, default="")
-    
-#-------------------------------------------------------------------------------    
-# time		= models.BigIntegerField()
-# time		= models.DateTimeField()
+
 
