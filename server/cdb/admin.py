@@ -18,6 +18,6 @@ class PayloadAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
 admin.site.register(Payload, PayloadAdmin)
 
-class IOVAdmin(admin.ModelAdmin):
-    empty_value_display = '-empty-'
-admin.site.register(IOV, IOVAdmin) 
+#class IOVAdmin(admin.ModelAdmin):
+#    empty_value_display = '-empty-'
+#admin.site.register(IOV, IOVAdmin) 

@@ -104,6 +104,22 @@ def gtmdelete(request):
     else:
         return HttpResponse("ERR")
 
+@csrf_exempt
+def tag(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else:
+        name = request.GET.get('name', '')
+        try:
+            tag=Tag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+
+        to_dump = {'name':tag.name, 'until':tag.until}
+        data = yaml.dump(to_dump)
+        print(data)
+        return HttpResponse(data)
+
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 # return HttpResponse("For debugging only.")

@@ -7,14 +7,10 @@ from django.db import models
 from django.core.validators import *
 
 class GlobalTag(models.Model):
-    STATUS_CHOICES = [
-        ('PUB', 'Published'),
-        ('NEW', 'New'),
-        ('INV', 'Invalid'),
-    ]
+    STATUS_CHOICES = [('PUB', 'Published'), ('NEW', 'New'), ('INV', 'Invalid'), ]
+
     name		= models.CharField(max_length=128, primary_key=True, null=False, default="")
     status		= models.CharField(max_length=4, choices=STATUS_CHOICES, default='NEW')
-    timestamp   = models.DateTimeField(default=timezone.now)
 
 class GlobalTagMap(models.Model):
     id          = models.AutoField(primary_key=True)
@@ -23,14 +19,19 @@ class GlobalTagMap(models.Model):
 
 class Tag(models.Model):
     name		= models.CharField(max_length=128, primary_key=True, null=False, default="")
-    timestamp   = models.DateTimeField(default=timezone.now)
-
-class IOV(models.Model):
-    since       = models.DateTimeField(default=timezone.now)
-    payload	    = models.UUIDField(null=True)
+    until       = models.DateTimeField(default=timezone.now)
 
 class Payload(models.Model):
-    id          = models.AutoField(primary_key=True)
+    sha256      = models.CharField(max_length=64, primary_key=True, null=False, default="")
+    tag		    = models.CharField(max_length=128, null=False, default="")
+    since       = models.DateTimeField(default=timezone.now)
     url		    = models.CharField(max_length=256, default="")
 
 
+
+################################
+#  -mxp- flatten the model by merging IOV into the payload
+################################
+# class IOV(models.Model):
+#    since       = models.DateTimeField(default=timezone.now)
+#    payload	    = models.UUIDField(null=True)

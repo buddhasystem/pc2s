@@ -13,6 +13,9 @@ urlpatterns = [
     # Global Tag Maps
     path('gtmcreate',   views.gtmcreate,        name='gtmcreate'),
     path('gtmdelete',   views.gtmdelete,        name='gtmdelete'),
+
+    # Tags
+    path('tag',views.tag,name='tag'),
 ]
 #################
 # path('gtstatus', views.gtstatus, name='gtstatus'),
