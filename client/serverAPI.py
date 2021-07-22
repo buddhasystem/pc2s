@@ -19,8 +19,11 @@ class serverAPI(dict):
             'gt':	    server+'cdb/gt',
             'gtcreate': server+'cdb/gtcreate',
             'gtdelete':	server+'cdb/gtdelete',
-            'gtmcreate': server+'cdb/gtmcreate',
-            'gtmdelete': server+'cdb/gtmdelete',
+            'gtmcreate':server+'cdb/gtmcreate',
+            'gtmdelete':server+'cdb/gtmdelete',
+            'tag':      server+'cdb/tag',
+            'tagcreate':server+'cdb/tagcreate',
+            'tagdelete':server+'cdb/tagdelete',
         }
 
 # 'ltype':	server+'jobs/ltype?name=%s'

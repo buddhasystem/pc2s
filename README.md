@@ -11,7 +11,7 @@ Example:
 temp_date=parse_datetime("2026-07-21 22:50:50+00:00")
 ```
 ...which results in
-```
+```python
 datetime.datetime(2026, 7, 21, 22, 50, 50, tzinfo=datetime.timezone(datetime.timedelta(0), '+0000'))
 ```
 

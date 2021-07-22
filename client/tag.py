@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.5
 #
-# The script to manage Global Tag Maps with the pc2s system
+# The script to manage Tag pbjects with the pc2s system
 #
 #########################################################
 # TZ-awarewness:					#
@@ -32,11 +32,12 @@ parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
 
-parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag")
-parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global Tag")
+parser.add_argument("-c", "--create", action='store_true',	help="Create a Tag")
+parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Tag")
+parser.add_argument("-U", "--usage",  action='store_true',	help="Useful tips")
 
-parser.add_argument("-g", "--global_tag",   type=str,	help="Global Tag Name",	    default='')
-parser.add_argument("-t", "--tag",          type=str,	help="Tag",                 default='')
+parser.add_argument("-n", "--name",   type=str,	            help="Tag Name",    default='')
+parser.add_argument("-u", "--until",  type=str,	            help="Valid until", default='')
 
 parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
@@ -46,33 +47,41 @@ server	= args.server
 
 create  = args.create
 delete  = args.delete
+usage   = args.usage
 
-gt      = args.global_tag
-tag     = args.tag
+name    = args.name
+until   = args.until
 
 verb    = args.verbosity
 
 ### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
 ###########################################
+if(usage):
+    print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
+    exit(0)
+
+if(name is None or name==''):
+    print('Please supply valid name for the tag')
+    exit(-1)
 
 if(create):
-    if(gt is None or tag is None):
-        print('Please supply valid names for the global tag and the tag')
+    if(until is None or until==''):
+        print('Please supply a valid name and the end time of the tag validity')
         exit(-1)
     else:
-        resp = API.post2server('cdb', 'gtmcreate', {'globaltag':gt, 'tag':tag})
+        resp = API.post2server('cdb', 'tagcreate', {'name':name, 'until':until})
         print(resp)
         exit(0)
 
 if(delete):
-    if(gt is None or tag is None):
-        print('Please supply valid names for the global tag and the tag')
-        exit(-1)
-    else:
-        resp = API.post2server('cdb', 'gtmdelete', {'globaltag':gt, 'tag':tag})
-        print(resp)
-        exit(0)
+    resp = API.post2server('cdb', 'tagdelete', {'name':name})
+    print(resp)
+    exit(0)
+
+
+resp=API.simple_get('cdb', 'tag', {'key':'name', 'value':name})
+print(resp)
 
 exit(0)
 

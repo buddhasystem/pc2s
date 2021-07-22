@@ -51,8 +51,7 @@ def gtcreate(request):
             return HttpResponse("ERR")
         
         to_dump = [{gt.name:{'status':gt.status, 'timestamp':gt.timestamp}},]
-        data = yaml.dump(to_dump)
-        print(data)
+        data = yaml.dump(to_dump) #  print(data)
         return HttpResponse(gt.status)
 
 #####
@@ -116,9 +115,42 @@ def tag(request):
             return HttpResponse("ERR")
 
         to_dump = {'name':tag.name, 'until':tag.until}
-        data = yaml.dump(to_dump)
-        print(data)
+        data = yaml.dump(to_dump) #  print(data)
         return HttpResponse(data)
+
+#####
+@csrf_exempt
+def tagcreate(request):
+    if request.method =='POST':
+        post        = request.POST
+        name        = post.get('name',  None)
+        until       = post.get('until', None)
+
+        if(name is None or name=='' or until is None or until==''): return HttpResponse("ERR")
+        tag = Tag(name=name, until=until)
+        tag.save()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse("ERR")
+
+#####
+@csrf_exempt
+def tagdelete(request):
+    if request.method =='POST':
+        post         = request.POST
+        name         = post.get('name', None)
+
+        if(name is None or name==''): return HttpResponse("ERR")
+        try:
+            tag=Tag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+       
+        tag.delete()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse('ERR')
+
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
