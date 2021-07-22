@@ -13,6 +13,8 @@ urlpatterns = [
     # Global Tag Maps
     path('gtmcreate',   views.gtmcreate,    name='gtmcreate'),
     path('gtmdelete',   views.gtmdelete,    name='gtmdelete'),
-# path('gtstatus', views.gtstatus, name='gtstatus'),
-#path('', views.index, name='index'),
 ]
+#################
+# path('gtstatus', views.gtstatus, name='gtstatus'),
+# path('', views.index, name='index'),
+
