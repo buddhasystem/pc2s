@@ -18,6 +18,11 @@ urlpatterns = [
     path('tag',         views.tag,                      name='tag'),
     path('tagcreate',   views.tagcreate,                name='tagcreate'),
     path('tagdelete',   views.tagdelete,                name='tagdelete'),
+
+    # Payloads
+#    path('tag',         views.tag,                      name='tag'),
+    path('payloadcreate',views.payloadcreate,           name='payloadcreate'),
+#    path('tagdelete',   views.tagdelete,                name='tagdelete'),    
 ]
 #################
 # path('gtstatus', views.gtstatus, name='gtstatus'),

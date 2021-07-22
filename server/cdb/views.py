@@ -151,6 +151,26 @@ def tagdelete(request):
     else:
         return HttpResponse('ERR')
 
+#####
+@csrf_exempt
+def payloadcreate(request):
+    if request.method =='POST':
+        post        = request.POST
+        sha256      = post.get('sha256',    None)
+        tag         = post.get('tag',       None)
+        since       = post.get('since',     None)
+        url         = post.get('url',       None)
+
+        print(sha256, tag, since, url)
+        payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
+        payload.save()
+
+ #       if(name is None or name=='' or until is None or until==''): return HttpResponse("ERR")
+ #       tag = Tag(name=name, until=until)
+ #       tag.save()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse("ERR")
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
