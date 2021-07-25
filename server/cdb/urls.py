@@ -22,7 +22,7 @@ urlpatterns = [
     # Payloads
 #    path('tag',         views.tag,                      name='tag'),
     path('payloadcreate',views.payloadcreate,           name='payloadcreate'),
-#    path('tagdelete',   views.tagdelete,                name='tagdelete'),    
+    path('payloaddelete',views.payloaddelete,           name='payloaddelete'),    
 ]
 #################
 # path('gtstatus', views.gtstatus, name='gtstatus'),

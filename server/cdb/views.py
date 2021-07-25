@@ -185,12 +185,40 @@ def payloadcreate(request):
         except:
             return HttpResponse("ERR")
 
-        print(sha256, tag, since, url)
+# print(sha256, tag, since, url)
         payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
         payload.save()
         return HttpResponse('OK')
     else:
         return HttpResponse("ERR")
+
+#####
+@csrf_exempt
+def payloaddelete(request):
+    if request.method =='POST':
+        post         = request.POST
+        tag          = post.get('tag', None)
+        sha256       = post.get('sha256', None)
+
+        if(tag is None or tag==''):
+            if(sha256 is None or sha256==''):
+                return HttpResponse("ERR")
+            else:
+                payloads = Payload.objects.filter(sha256=sha256)
+                try:
+                    payloads.delete()
+                    return HttpResponse('OK')
+                except:
+                    return HttpResponse('ERR')
+
+        payloads = Payload.objects.filter(tag=tag)
+        try:
+            payloads.delete()
+        except:
+            return HttpResponse('ERR')
+
+        return HttpResponse('OK')
+
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})

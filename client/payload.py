@@ -69,6 +69,15 @@ url     = args.url
 ### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
 ###########################################
+if(delete):
+    if(sha256 is not None and sha256!=''):
+        resp = API.post2server('cdb', 'payloaddelete', {'sha256':sha256})
+        if(verb>0): print(resp)
+        exit(0)
+
+    resp = API.post2server('cdb', 'payloaddelete', {'tag':tag})
+    if(verb>0): print(resp)
+    
 if(tag is None or tag==''):
     print('Please supply valid name for the tag')
     exit(-1)
@@ -99,28 +108,22 @@ if(usage):
     print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
     exit(0)
 
-if(sha256 is None or sha256==''):
-    print('Automatic calculation of sha256 is not implemented yet, please supply a value')
-    exit(-1)
-
 if(create):
+    if(sha256 is None or sha256==''):
+        print('Automatic calculation of sha256 is not implemented yet, please supply a value')
+        exit(-1)
     if(since is None or since==''):
         print('Please supply a valid time for the start of validity')
         exit(-1)
-    else:
-        d={'sha256': sha256, 'tag': tag, 'since' : since, 'url': url}
-        if(verb>1): print(d)         
-        resp = API.post2server('cdb', 'payloadcreate', d)
-        print(resp)
-        exit(0)
 
-exit(0)
-if(delete):
-    resp = API.post2server('cdb', 'tagdelete', {'name':name})
-    print(resp)
+    d={'sha256': sha256, 'tag': tag, 'since' : since, 'url': url}
+    if(verb>1): print(d)         
+    resp = API.post2server('cdb', 'payloadcreate', d)
+    if(verb>0): print(resp)
     exit(0)
 
 
+exit(0)
 resp=API.simple_get('cdb', 'tag', {'key':'name', 'value':name})
 print(resp)
 

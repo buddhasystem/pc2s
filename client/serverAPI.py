@@ -24,7 +24,8 @@ class serverAPI(dict):
             'tag':      server+'cdb/tag',
             'tagcreate':server+'cdb/tagcreate',
             'tagdelete':server+'cdb/tagdelete',
-            'payloadcreate':server+'cdb/payloadcreate',            
+            'payloadcreate':server+'cdb/payloadcreate',
+            'payloaddelete':server+'cdb/payloaddelete',
         }
 
 # 'ltype':	server+'jobs/ltype?name=%s'
