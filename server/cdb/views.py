@@ -161,13 +161,9 @@ def payloadcreate(request):
         since       = post.get('since',     None)
         url         = post.get('url',       None)
 
-        print(sha256, tag, since, url)
+# print(sha256, tag, since, url)
         payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
         payload.save()
-
- #       if(name is None or name=='' or until is None or until==''): return HttpResponse("ERR")
- #       tag = Tag(name=name, until=until)
- #       tag.save()
         return HttpResponse('OK')
     else:
         return HttpResponse("ERR")

@@ -8,13 +8,16 @@
 # so we are using timzone.now() where needed		#
 #########################################################
 
-from django.conf import settings
+from django.conf  import settings
 from django.utils import timezone
 
 import argparse
 import time
 import datetime
 import os
+import string
+import random
+import hashlib
 
 from serverAPI		import serverAPI
 
@@ -42,8 +45,13 @@ parser.add_argument("-i", "--iov",      type=str,	            help="start of IOV
 parser.add_argument("-u", "--url",      type=str,	            help="url",     default='')
 
 parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
+parser.add_argument("-p", "--populate", type=int,	help="Number of simulated records to create", default=0, nargs='?')
+
 ########################### Parse all arguments #########################
 args = parser.parse_args()
+
+verb    = args.verbosity
+populate=args.populate
 
 server	= args.server
 
@@ -56,22 +64,45 @@ tag     = args.tag
 since   = args.iov
 url     = args.url
 
-if(usage):
-    print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
-    exit(0)
-
-if(sha256 is None or sha256==''):
-    print('Automatic calculation of sha256 is not implemented yet, please supply a value')
-    exit(-1)
-
-verb    = args.verbosity
-
 ### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
 ###########################################
 if(tag is None or tag==''):
     print('Please supply valid name for the tag')
     exit(-1)
+    
+if(populate is not None and populate!=0):
+    if(verb>0): print('Will create '+str(populate)+' test records')
+    letters = string.ascii_lowercase
+    for pop in range(populate):
+        random_name =''.join(random.choice(letters) for i in range(10))
+        sha256      = hashlib.sha256(random_name.encode()).hexdigest()
+        month   = random.randint(1,12)
+        day     = random.randint(1,30)
+        since       = '2026-{:02}-{:02} {:02}:{:02}:{:02}+00:00'.format(month, day, random.randint(0, 24), random.randint(0, 60), random.randint(0, 60))
+
+        url = 'https://nginx.sphenix.bnl.gov/cdb/'+random_name+'.root'
+
+        d={
+            'sha256': sha256,
+            'tag'   : tag,
+            'since' : since,            
+            'url'   : url
+        }
+        resp = API.post2server('cdb', 'payloadcreate', d)
+        if(verb>0): print(resp)
+    exit(0)     
+
+if(usage):
+    print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
+#                                           '2026-06-08 11:07:36+00.00'
+    exit(0)
+
+if(sha256 is None or sha256==''):
+    print('Automatic calculation of sha256 is not implemented yet, please supply a value')
+    exit(-1)
+
+
 
 if(create):
     if(since is None or since==''):
@@ -84,6 +115,7 @@ if(create):
             'since' : since,
             'url'   : url
         }
+        if(verb>1): print(d)         
         resp = API.post2server('cdb', 'payloadcreate', d)
         print(resp)
         exit(0)
