@@ -103,6 +103,9 @@ def gtmdelete(request):
     else:
         return HttpResponse("ERR")
 
+
+
+################################### TAG ##########################
 @csrf_exempt
 def tag(request):
     if request.method =='POST':
@@ -114,8 +117,17 @@ def tag(request):
         except:
             return HttpResponse("ERR")
 
-        to_dump = {'name':tag.name, 'until':tag.until}
-        data = yaml.dump(to_dump) #  print(data)
+        payloads = Payload.objects.filter(tag=name)
+        payload_list=[]
+        for p in payloads:
+            p_dict={}
+            p_dict['sha26'] = p.sha256
+            p_dict['since'] = p.since
+            p_dict['url']   = p.url
+            payload_list.append(p_dict)
+        
+        to_dump = {'name':tag.name, 'until':tag.until, 'payloads':payload_list}
+        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
         return HttpResponse(data)
 
 #####
@@ -145,13 +157,20 @@ def tagdelete(request):
             tag=Tag.objects.get(name=name)
         except:
             return HttpResponse("ERR")
-       
+
+        payloads = Payload.objects.filter(tag=name)
+        try:
+            payloads.delete()
+        except:
+            pass
+
         tag.delete()
         return HttpResponse('OK')
     else:
         return HttpResponse('ERR')
 
 #####
+################################### PAYLOAD ######################
 @csrf_exempt
 def payloadcreate(request):
     if request.method =='POST':
@@ -161,7 +180,12 @@ def payloadcreate(request):
         since       = post.get('since',     None)
         url         = post.get('url',       None)
 
-# print(sha256, tag, since, url)
+        try:
+            found_tag=Tag.objects.get(name=tag)
+        except:
+            return HttpResponse("ERR")
+
+        print(sha256, tag, since, url)
         payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
         payload.save()
         return HttpResponse('OK')

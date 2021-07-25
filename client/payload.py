@@ -19,6 +19,8 @@ import string
 import random
 import hashlib
 
+from yaml.nodes import SequenceNode
+
 from serverAPI		import serverAPI
 
 #########################################################
@@ -77,44 +79,36 @@ if(populate is not None and populate!=0):
     for pop in range(populate):
         random_name =''.join(random.choice(letters) for i in range(10))
         sha256      = hashlib.sha256(random_name.encode()).hexdigest()
-        month   = random.randint(1,12)
-        day     = random.randint(1,30)
-        since       = '2026-{:02}-{:02} {:02}:{:02}:{:02}+00:00'.format(month, day, random.randint(0, 24), random.randint(0, 60), random.randint(0, 60))
+        month   = random.randint(1, 12)
+        day     = random.randint(1, 30)
+        hour    = random.randint(0, 23)
+        minute  = random.randint(0, 59)        
+        second  = random.randint(0, 59)
+
+        since   = '2026-{:02}-{:02} {:02}:{:02}:{:02}+00:00'.format(month, day, hour, minute, second)
 
         url = 'https://nginx.sphenix.bnl.gov/cdb/'+random_name+'.root'
 
-        d={
-            'sha256': sha256,
-            'tag'   : tag,
-            'since' : since,            
-            'url'   : url
-        }
+        d={'sha256': sha256, 'tag': tag, 'since': since, 'url': url}
         resp = API.post2server('cdb', 'payloadcreate', d)
         if(verb>0): print(resp)
+        if(resp=='ERR'): exit(-1)
     exit(0)     
 
 if(usage):
     print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
-#                                           '2026-06-08 11:07:36+00.00'
     exit(0)
 
 if(sha256 is None or sha256==''):
     print('Automatic calculation of sha256 is not implemented yet, please supply a value')
     exit(-1)
 
-
-
 if(create):
     if(since is None or since==''):
         print('Please supply a valid time for the start of validity')
         exit(-1)
     else:
-        d={
-            'sha256': sha256,
-            'tag'   : tag,
-            'since' : since,
-            'url'   : url
-        }
+        d={'sha256': sha256, 'tag': tag, 'since' : since, 'url': url}
         if(verb>1): print(d)         
         resp = API.post2server('cdb', 'payloadcreate', d)
         print(resp)
