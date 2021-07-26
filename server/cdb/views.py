@@ -24,9 +24,16 @@ def globaltag(request):
         except:
             return HttpResponse("ERR")
         
-        to_dump = [{gt.name:{'status':gt.status, 'timestamp':gt.timestamp}},]
+        gtms=GlobalTagMap.objects.filter(globaltag=name)
+        tags=[]
+        for gtm in gtms:
+            tag_name=gtm.tag
+            tag=Tag.objects.get(name=tag_name)
+            tags.append({'name':tag.name, 'until':tag.until})
+
+        to_dump = {'name':gt.name, 'status':gt.status, 'tags':tags}
         data = yaml.dump(to_dump) #  print(data)
-        return HttpResponse(gt.status)
+        return HttpResponse(data)
 #####
 @csrf_exempt
 def gtcreate(request):
@@ -195,13 +202,13 @@ def payloadcreate(request):
         tag         = post.get('tag',       None)
         since       = post.get('since',     None)
         url         = post.get('url',       None)
+####### print(sha256, tag, since, url)
 
         try:
             found_tag=Tag.objects.get(name=tag)
         except:
             return HttpResponse("ERR")
 
-# print(sha256, tag, since, url)
         payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
         payload.save()
         return HttpResponse('OK')
@@ -238,32 +245,3 @@ def payloaddelete(request):
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
-# return HttpResponse("For debugging only.")
-
-# @csrf_exempt
-# def gtstatus(request):
-#     if request.method =='POST':
-#         post=request.POST
-#         name=post.get('name', None)
-#         status=post.get('status', None)
-#         if status not in statuses: return HttpResponse("ERR")
-#         try:
-#             gt=GlobalTag.objects.get(name=name)
-#         except:
-#             return HttpResponse("ERR")
-
-#         gt.status = status
-#         gt.save()
-
-#         return HttpResponse(gt.status)
-#     else: # GET
-#         name = request.GET.get('name', '')
-#         try:
-#             gt=GlobalTag.objects.get(name=name)
-#         except:
-#             return HttpResponse("ERR")
-        
-#         to_dump = [{gt.name:{'status':gt.status, 'timestamp':gt.timestamp}},]
-#         data = yaml.dump(to_dump)
-#         print(data)
-#         return HttpResponse(gt.status)
