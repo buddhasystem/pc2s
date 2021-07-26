@@ -5,6 +5,7 @@ import yaml
 from yaml.loader import SafeLoader
 
 from .models import *
+from .cdbutils import *
 
 statuses = ['NEW','PUB','INV']
 
@@ -140,16 +141,7 @@ def tag(request):
         except:
             return HttpResponse("ERR")
 
-        payloads = Payload.objects.filter(tag=name)
-        payload_list=[]
-        for p in payloads:
-            p_dict={}
-            p_dict['sha26'] = p.sha256
-            p_dict['since'] = p.since
-            p_dict['url']   = p.url
-            payload_list.append(p_dict)
-        
-        to_dump = {'name':tag.name, 'until':tag.until, 'payloads':payload_list}
+        to_dump = tag2dict(name)
         data = yaml.dump(to_dump, sort_keys=False) #  print(data)
         return HttpResponse(data)
 
