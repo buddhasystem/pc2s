@@ -35,6 +35,7 @@ parser.add_argument("-S", "--server",	type=str,
 parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag")
 parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global Tag")
 
+parser.add_argument("-n", "--name",         type=str,	help="Global Tag Map Name", default='')
 parser.add_argument("-g", "--global_tag",   type=str,	help="Global Tag Name",	    default='')
 parser.add_argument("-t", "--tag",          type=str,	help="Tag",                 default='')
 
@@ -47,6 +48,7 @@ server	= args.server
 create  = args.create
 delete  = args.delete
 
+name    = args.name
 gt      = args.global_tag
 tag     = args.tag
 
@@ -56,23 +58,23 @@ verb    = args.verbosity
 API  = serverAPI(server=server, verb=verb)
 ###########################################
 
+if(name is None or name==''):
+    print('Please supply a valid name for the global tag map')
+    exit(-1)
+
 if(create):
-    if(gt is None or tag is None):
+    if(gt is None or gt=='' or tag is None or tag==''):
         print('Please supply valid names for the global tag and the tag')
         exit(-1)
     else:
-        resp = API.post2server('cdb', 'gtmcreate', {'globaltag':gt, 'tag':tag})
+        resp = API.post2server('cdb', 'gtmcreate', {'name':name, 'globaltag':gt, 'tag':tag})
         print(resp)
         exit(0)
 
 if(delete):
-    if(gt is None or tag is None):
-        print('Please supply valid names for the global tag and the tag')
-        exit(-1)
-    else:
-        resp = API.post2server('cdb', 'gtmdelete', {'globaltag':gt, 'tag':tag})
-        print(resp)
-        exit(0)
+    resp = API.post2server('cdb', 'gtmdelete', {'name':name})
+    print(resp)
+    exit(0)
 
 exit(0)
 

@@ -13,7 +13,7 @@ class GlobalTag(models.Model):
     status		= models.CharField(max_length=4, choices=STATUS_CHOICES, default='NEW')
 
 class GlobalTagMap(models.Model):
-    id          = models.AutoField(primary_key=True)
+    name		= models.CharField(max_length=128, primary_key=True, null=False, default="")    
     globaltag	= models.CharField(max_length=128, null=False, default="")
     tag		    = models.CharField(max_length=128, null=False, default="")
 

@@ -32,12 +32,12 @@ parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
 
-parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag")
-parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global Tag")
-parser.add_argument("-n", "--name",     type=str,	help="Global Tag Name",	    default='')
-parser.add_argument("-s", "--status",   type=str,	help="Status to be set",    default='')
-parser.add_argument("-y", "--yaml_file",type=str,	help="YAML definition",     default='', nargs='?')
-parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
+parser.add_argument("-c", "--create",       action='store_true',	help="Create a Global Tag")
+parser.add_argument("-d", "--delete",       action='store_true',	help="Delete a Global Tag")
+parser.add_argument("-n", "--name",         type=str,	            help="Global Tag Name",	    default='')
+parser.add_argument("-s", "--status",       type=str,	            help="Status to be set",    default='')
+parser.add_argument("-y", "--yaml_file",    type=str,	            help="YAML definition",     default='', nargs='?')
+parser.add_argument("-v", "--verbosity",    type=int,	            help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
 args = parser.parse_args()
 
@@ -57,13 +57,16 @@ verb    = args.verbosity
 API  = serverAPI(server=server, verb=verb)
 ###########################################
 
+
 if(create):
-    if(name):
+    if(name is not None and name!=''):
         resp = API.post2server('cdb', 'gtcreate', {'name':name})
         print(resp)
         exit(0)
+    
+
     if(y_file is None or y_file==''):
-        print('Please supply the YAML file name')
+        print('Please supply a YAML file name or a global tag name')
         exit(-1)
     else:
         try:
@@ -79,10 +82,9 @@ if(create):
         exit(0)
 
 if(delete):
-    if(name):
-        resp = API.post2server('cdb', 'gtdelete', {'name':name})
-        print(resp)
-        exit(0)
+    resp = API.post2server('cdb', 'gtdelete', {'name':name})
+    print(resp)
+    exit(0)
 
 exit(0)
 

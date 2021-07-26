@@ -7,12 +7,13 @@ urlpatterns = [
     path('test',        views.index, {'what':'test'},   name='index'),
 
     # Global Tags
-    path('gtcreate',    views.gtcreate,                 name='gtcreate'),
-    path('gtdelete',    views.gtdelete,                 name='gtdelete'),
+    path('globaltag',       views.globaltag,            name='globaltag'),
+    path('globaltag/create',views.gtcreate,             name='gtcreate'),
+    path('globaltag/delete',views.gtdelete,             name='gtdelete'),
 
     # Global Tag Maps
-    path('gtmcreate',   views.gtmcreate,                name='gtmcreate'),
-    path('gtmdelete',   views.gtmdelete,                name='gtmdelete'),
+    path('gtm/create',  views.gtmcreate,                name='gtmcreate'),
+    path('gtm/delete',  views.gtmdelete,                name='gtmdelete'),
 
     # Tags
     path('tag',             views.tag,                  name='tag'),
