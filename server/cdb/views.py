@@ -1,3 +1,8 @@
+from django.conf import settings
+import pytz
+from datetime import datetime
+from django.utils.dateparse import parse_datetime
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf	import csrf_exempt
@@ -199,6 +204,10 @@ def payloadcreate(request):
         except:
             return HttpResponse("ERR")
 
+        p_since = parse_datetime(since)
+        if(p_since>=found_tag.until):
+            return HttpResponse("ERR")
+        
         payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
         payload.save()
         return HttpResponse('OK')
@@ -235,3 +244,6 @@ def payloaddelete(request):
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
+
+#print(settings.TIME_ZONE)
+#local_tz = pytz.timezone(settings.TIME_ZONE)

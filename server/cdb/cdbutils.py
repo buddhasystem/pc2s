@@ -6,8 +6,9 @@ def tag2dict(name):
     except:
         return {}
 
-    payloads = Payload.objects.filter(tag=name)
+    payloads = Payload.objects.filter(tag=name).order_by('since')
     payload_list=[]
+
     for p in payloads:
         p_dict={}
         p_dict['sha26'] = p.sha256
