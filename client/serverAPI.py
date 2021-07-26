@@ -15,17 +15,17 @@ class serverAPI(dict):
 
         ### CDB
         self['cdb']	= {
-            'gtstatus':	server+'cdb/gtstatus',
-            'gt':	    server+'cdb/gt',
-            'gtcreate': server+'cdb/gtcreate',
-            'gtdelete':	server+'cdb/gtdelete',
-            'gtmcreate':server+'cdb/gtmcreate',
-            'gtmdelete':server+'cdb/gtmdelete',
-            'tag':      server+'cdb/tag',
-            'tagcreate':server+'cdb/tagcreate',
-            'tagdelete':server+'cdb/tagdelete',
-            'payloadcreate':server+'cdb/payloadcreate',
-            'payloaddelete':server+'cdb/payloaddelete',
+            'gtstatus':         server+'cdb/gtstatus',
+            'gt':	            server+'cdb/gt',
+            'gtcreate':         server+'cdb/gtcreate',
+            'gtdelete':	        server+'cdb/gtdelete',
+            'gtmcreate':        server+'cdb/gtmcreate',
+            'gtmdelete':        server+'cdb/gtmdelete',
+            'tag':              server+'cdb/tag',
+            'tagcreate':        server+'cdb/tag/create',
+            'tagdelete':        server+'cdb/tag/delete',
+            'payloadcreate':    server+'cdb/payload/create',
+            'payloaddelete':    server+'cdb/payload/delete',
         }
 
 # 'ltype':	server+'jobs/ltype?name=%s'

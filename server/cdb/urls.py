@@ -15,14 +15,13 @@ urlpatterns = [
     path('gtmdelete',   views.gtmdelete,                name='gtmdelete'),
 
     # Tags
-    path('tag',         views.tag,                      name='tag'),
-    path('tagcreate',   views.tagcreate,                name='tagcreate'),
-    path('tagdelete',   views.tagdelete,                name='tagdelete'),
+    path('tag',             views.tag,                  name='tag'),
+    path('tag/create',      views.tagcreate,            name='tagcreate'),
+    path('tag/delete',      views.tagdelete,            name='tagdelete'),
 
     # Payloads
-#    path('tag',         views.tag,                      name='tag'),
-    path('payloadcreate',views.payloadcreate,           name='payloadcreate'),
-    path('payloaddelete',views.payloaddelete,           name='payloaddelete'),    
+    path('payload/create',  views.payloadcreate,        name='payloadcreate'),
+    path('payload/delete',  views.payloaddelete,        name='payloaddelete'),    
 ]
 #################
 # path('gtstatus', views.gtstatus, name='gtstatus'),
