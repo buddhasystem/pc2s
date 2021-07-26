@@ -24,7 +24,5 @@ urlpatterns = [
     path('payload/create',  views.payloadcreate,        name='payloadcreate'),
     path('payload/delete',  views.payloaddelete,        name='payloaddelete'),    
 ]
-#################
-# path('gtstatus', views.gtstatus, name='gtstatus'),
-# path('', views.index, name='index'),
+
 

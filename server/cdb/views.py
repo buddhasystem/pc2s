@@ -28,12 +28,10 @@ def globaltag(request):
         gtms=GlobalTagMap.objects.filter(globaltag=name)
         tags=[]
         for gtm in gtms:
-            tag_name=gtm.tag
-            tag=Tag.objects.get(name=tag_name)
-            tags.append({'name':tag.name, 'until':tag.until})
+            tags.append(tag2dict(gtm.tag))
 
         to_dump = {'name':gt.name, 'status':gt.status, 'tags':tags}
-        data = yaml.dump(to_dump) #  print(data)
+        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
         return HttpResponse(data)
 #####
 @csrf_exempt
