@@ -18,6 +18,7 @@ class serverAPI(dict):
             # Global Tag
             'globaltag':        server+'cdb/globaltag',
             'gtlist':           server+'cdb/globaltag/list',
+            'gttaglist':        server+'cdb/globaltag/taglist',
             'gtcreate':         server+'cdb/globaltag/create',
             'gtdelete':	        server+'cdb/globaltag/delete',
             # Global Tag Map

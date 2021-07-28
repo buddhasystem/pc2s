@@ -38,6 +38,28 @@ def globaltag(request):
         to_dump = {'name':gt.name, 'status':gt.status, 'tags':tags}
         data = yaml.dump(to_dump, sort_keys=False) #  print(data)
         return HttpResponse(data)
+
+
+#####
+@csrf_exempt
+def gttaglist(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else: # GET
+        name = request.GET.get('name', '')
+        try:
+            gt=GlobalTag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+        
+        gtms=GlobalTagMap.objects.filter(globaltag=name)
+        tagnames=[]
+        for gtm in gtms:
+            tagnames.append(gtm.tag)
+
+        to_dump = {'name':gt.name, 'tags':tagnames}
+        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
+        return HttpResponse(data)
 #####
 @csrf_exempt
 def gtlist(request):

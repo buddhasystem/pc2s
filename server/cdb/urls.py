@@ -9,6 +9,7 @@ urlpatterns = [
     # Global Tags
     path('globaltag',       views.globaltag,            name='globaltag'),
     path('globaltag/list',  views.gtlist,               name='gtlist'),
+    path('globaltag/taglist',views.gttaglist,           name='gttaglist'),
     path('globaltag/create',views.gtcreate,             name='gtcreate'),
     path('globaltag/delete',views.gtdelete,             name='gtdelete'),
 
