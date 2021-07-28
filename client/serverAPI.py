@@ -17,6 +17,7 @@ class serverAPI(dict):
         self['cdb']	= {
             # Global Tag
             'globaltag':        server+'cdb/globaltag',
+            'gtlist':           server+'cdb/globaltag/list',
             'gtcreate':         server+'cdb/globaltag/create',
             'gtdelete':	        server+'cdb/globaltag/delete',
             # Global Tag Map
@@ -50,8 +51,11 @@ class serverAPI(dict):
         resp = communicate(self[view][url] % stuff, logger=self.logger)
         return rdec(resp)
 
-    def simple_get(self, view, url, stuff):
-        theURL=self[view][url]+'?'+stuff['key']+'='+stuff['value']
+    def simple_get(self, view, url, stuff=None):
+        if(stuff is None):
+            theURL=self[view][url]
+        else:
+            theURL=self[view][url]+'?'+stuff['key']+'='+stuff['value']
         if(self.verb>0): print(theURL)
         resp = communicate(theURL, logger=self.logger)
         return rdec(resp)

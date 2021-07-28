@@ -34,6 +34,7 @@ parser.add_argument("-S", "--server",	type=str,
 
 parser.add_argument("-c", "--create",       action='store_true',	help="Create a Global Tag")
 parser.add_argument("-d", "--delete",       action='store_true',	help="Delete a Global Tag")
+parser.add_argument("-l", "--list_gt",      action='store_true',	help="List names of all Global Tags")
 parser.add_argument("-n", "--name",         type=str,	            help="Global Tag Name",	    default='')
 parser.add_argument("-s", "--status",       type=str,	            help="Status to be set",    default='')
 parser.add_argument("-y", "--yaml_file",    type=str,	            help="YAML definition",     default='', nargs='?')
@@ -45,6 +46,7 @@ server	= args.server
 
 create  = args.create
 delete  = args.delete
+list_gt = args.list_gt
 
 name    = args.name
 status  = args.status
@@ -89,6 +91,16 @@ if(delete):
     resp = API.post2server('cdb', 'gtdelete', {'name':name})
     print(resp)
     exit(0)
+
+if(list_gt):
+    resp=API.simple_get('cdb', 'gtlist')
+    print(resp)
+    exit(0)
+
+# Catch all: print information about a specific tag
+if(name is None or name==''):
+    print('Please provide a valid global tag name')
+    exit(-1)
 
 resp=API.simple_get('cdb', 'globaltag', {'key':'name', 'value':name})
 print(resp)

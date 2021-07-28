@@ -40,6 +40,24 @@ def globaltag(request):
         return HttpResponse(data)
 #####
 @csrf_exempt
+def gtlist(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    
+    try:
+        gts=GlobalTag.objects.all()
+    except:
+        return HttpResponse("ERR")
+    
+    gt_list=[]
+    for gt in gts:
+        gt_list.append({'name': gt.name})
+
+    data = yaml.dump(gt_list, sort_keys=False)
+    return HttpResponse(data)
+
+#####
+@csrf_exempt
 def gtcreate(request):
     if request.method =='POST':
         post         = request.POST
