@@ -107,14 +107,13 @@ if(fetch):
         print(resp)
         exit(0)
 
-    if(gt is None or gt==''):
-        print('Please supply a valid Global Tag name')
+    if(gt is None or gt=='' or tag is None or tag==''):
+        print('Please supply valid Global Tag and Tag names')
         exit(-1)
 
-    if(p_time is None or p_time==''):
-        p_time=str(timezone.now())
+    if(p_time is None or p_time==''): p_time=str(timezone.now())
     
-    resp=API.simple_get('cdb', 'payload', {'globaltag':gt, 'time':p_time})
+    resp=API.simple_get('cdb', 'payload', {'globaltag':gt, 'tag': tag, 'time':p_time})
     print(resp)   
     exit(0)
         

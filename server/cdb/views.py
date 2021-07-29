@@ -1,7 +1,7 @@
 from django.conf import settings
 import pytz
 from datetime import datetime
-from django.utils.dateparse import parse_datetime, parse_time
+from django.utils.dateparse import parse_datetime
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -253,6 +253,7 @@ def payload(request):
     else: # GET
         sha256  = request.GET.get('sha256', '')
         gt      = request.GET.get('globaltag', '')
+        tag     = request.GET.get('tag', '')
         p_time  = request.GET.get('time', '')
 
         if(sha256 is not None and sha256!=''):
@@ -262,15 +263,15 @@ def payload(request):
                 return HttpResponse("ERR")
         elif(gt is not None and gt!='' and p_time is not None and p_time!=''):
             try:
-                return HttpResponse("TEST")
-                # payload=Payload.objects.filter(sha256=sha256)
+                # print(p_time)
+                payload=find_payload(gt, tag, parse_datetime(p_time))
             except:
                 return HttpResponse("ERR")   
-            
-            return HttpResponse("OK")
         else:
             return HttpResponse("ERR")
 
+        if(payload is None):
+            return HttpResponse("ERR")
 
         to_dump={
             'sha256':   payload.sha256,
