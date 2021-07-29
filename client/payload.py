@@ -98,7 +98,7 @@ if(delete):
 if(get):
     if(sha256 is not None and sha256!=''):
         pass
-        resp=API.simple_get('cdb', 'payload', {'key':'sha256', 'value':sha256})
+        resp=API.simple_get('cdb', 'payload', {'sha256':sha256})
         print(resp)
     exit(0)
 

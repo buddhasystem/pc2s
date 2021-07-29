@@ -80,7 +80,7 @@ if(delete):
     exit(0)
 
 
-resp=API.simple_get('cdb', 'tag', {'key':'name', 'value':name})
+resp=API.simple_get('cdb', 'tag', {'name':name})
 print(resp)
 
 exit(0)

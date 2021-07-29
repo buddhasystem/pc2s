@@ -105,11 +105,11 @@ if(name is None or name==''):
     exit(-1)
 
 if(tag_list):
-    resp=API.simple_get('cdb', 'gttaglist', {'key':'name', 'value':name})
+    resp=API.simple_get('cdb', 'gttaglist', {'name':name})
     print(resp)
     exit(0)
 
-resp=API.simple_get('cdb', 'globaltag', {'key':'name', 'value':name})
+resp=API.simple_get('cdb', 'globaltag', {'name':name})
 print(resp)
 exit(0)
 

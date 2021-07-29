@@ -57,7 +57,11 @@ class serverAPI(dict):
         if(stuff is None):
             theURL=self[view][url]
         else:
-            theURL=self[view][url]+'?'+stuff['key']+'='+stuff['value']
+            query=[]
+            for k in stuff.keys(): query.append(k+'='+stuff[k])
+            query_string="&".join(query)
+            theURL=self[view][url]+'?'+query_string
+        
         if(self.verb>0): print(theURL)
         resp = communicate(theURL, logger=self.logger)
         return rdec(resp)
