@@ -39,6 +39,7 @@ parser.add_argument("-S", "--server",	type=str,
 
 parser.add_argument("-c", "--create",   action='store_true',	help="Create a Payload")
 parser.add_argument("-d", "--delete",   action='store_true',	help="Delete a Payload")
+parser.add_argument("-g", "--get",      action='store_true',	help="Get payload")
 parser.add_argument("-U", "--usage",    action='store_true',	help="Useful tips")
 
 parser.add_argument("-s", "--sha256",   type=str,	            help="sha256",  default='', nargs='?')
@@ -59,6 +60,7 @@ server	= args.server
 
 create  = args.create
 delete  = args.delete
+get     = args.get
 usage   = args.usage
 
 sha256  = args.sha256
@@ -69,19 +71,44 @@ url     = args.url
 ### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
 ###########################################
+if(usage):
+    print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
+    exit(0)
+
+
+
+###
+# Deletion can be blanket for a tag (i.e. all payloads in a tag are removed)
+# or more targeted if the hash is supplied.
 if(delete):
     if(sha256 is not None and sha256!=''):
         resp = API.post2server('cdb', 'payloaddelete', {'sha256':sha256})
         if(verb>0): print(resp)
         exit(0)
 
+    if(tag is None or tag==''):
+        print('Please supply valid name for the tag for payload deletion')
+        exit(-1)
+
     resp = API.post2server('cdb', 'payloaddelete', {'tag':tag})
     if(verb>0): print(resp)
-    
+
+
+###
+if(get):
+    if(sha256 is not None and sha256!=''):
+        pass
+        resp=API.simple_get('cdb', 'payload', {'key':'sha256', 'value':sha256})
+        print(resp)
+    exit(0)
+
+
+###
 if(tag is None or tag==''):
     print('Please supply valid name for the tag')
     exit(-1)
-    
+
+###
 if(populate is not None and populate!=0):
     if(verb>0): print('Will create '+str(populate)+' test records')
     letters = string.ascii_lowercase
@@ -103,11 +130,7 @@ if(populate is not None and populate!=0):
         if(verb>0): print(resp)
         if(resp=='ERR'): exit(-1)
     exit(0)     
-
-if(usage):
-    print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
-    exit(0)
-
+###
 if(create):
     if(sha256 is None or sha256==''):
         print('Automatic calculation of sha256 is not implemented yet, please supply a value')
@@ -124,9 +147,6 @@ if(create):
 
 
 exit(0)
-resp=API.simple_get('cdb', 'tag', {'key':'name', 'value':name})
-print(resp)
 
-exit(0)
 
 

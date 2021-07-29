@@ -229,6 +229,29 @@ def tagdelete(request):
 
 #####
 ################################### PAYLOAD ######################
+#####
+@csrf_exempt
+def payload(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else: # GET
+        sha256 = request.GET.get('sha256', '')
+        try:
+            payload=Payload.objects.get(sha256=sha256)
+        except:
+            return HttpResponse("ERR")
+        
+        to_dump={
+            'sha256':   payload.sha256,
+            'tag':      payload.tag,
+            'since':    payload.since,
+            'url':      payload.url
+            }
+        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
+        return HttpResponse(data)
+
+
+#####
 @csrf_exempt
 def payloadcreate(request):
     if request.method =='POST':
