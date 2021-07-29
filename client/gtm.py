@@ -76,6 +76,10 @@ if(delete):
     print(resp)
     exit(0)
 
+resp=API.simple_get('cdb', 'gtm', {'name':name})
+print(resp)
 exit(0)
+
+
 
 

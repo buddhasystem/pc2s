@@ -5,6 +5,8 @@
 ###########################################################################
 from comms		import data2post, rdec, communicate
 
+from django.utils.http import urlencode
+
 ###########################################################################
 class serverAPI(dict):
     def __init__(self, server='http://localhost:8000/', logger=None, verb=0):
@@ -22,6 +24,7 @@ class serverAPI(dict):
             'gtcreate':         server+'cdb/globaltag/create',
             'gtdelete':	        server+'cdb/globaltag/delete',
             # Global Tag Map
+            'gtm':              server+'cdb/gtm',
             'gtmcreate':        server+'cdb/gtm/create',
             'gtmdelete':        server+'cdb/gtm/delete',
             # Tag
@@ -34,7 +37,6 @@ class serverAPI(dict):
             'payloaddelete':    server+'cdb/payload/delete',
         }
 
-# 'ltype':	server+'jobs/ltype?name=%s'
 
     def setLogger(self, logger):
         self.logger=logger
@@ -57,11 +59,12 @@ class serverAPI(dict):
         if(stuff is None):
             theURL=self[view][url]
         else:
-            query=[]
-            for k in stuff.keys(): query.append(k+'='+stuff[k])
-            query_string="&".join(query)
-            theURL=self[view][url]+'?'+query_string
-        
+#            query=[]
+#            for k in stuff.keys(): query.append(k+'='+stuff[k])
+#            query_string="&".join(query)
+#            theURL=self[view][url]+'?'+query_string
+            theURL=self[view][url]+'?'+urlencode(stuff)
+
         if(self.verb>0): print(theURL)
         resp = communicate(theURL, logger=self.logger)
         return rdec(resp)

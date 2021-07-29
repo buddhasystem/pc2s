@@ -1,7 +1,7 @@
 from django.conf import settings
 import pytz
 from datetime import datetime
-from django.utils.dateparse import parse_datetime
+from django.utils.dateparse import parse_datetime, parse_time
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -139,6 +139,22 @@ def gtdelete(request):
     else:
         return HttpResponse('ERR')
 
+####################### Global Tag Map #########################
+@csrf_exempt
+def gtm(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else:
+        name = request.GET.get('name', '')
+        try:
+            gtm=GlobalTagMap.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+
+        to_dump = {'name':gtm.name, 'globaltag':gtm.globaltag, 'tag':gtm.tag}
+        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
+        return HttpResponse(data)
+
 #####
 @csrf_exempt
 def gtmcreate(request):
@@ -235,12 +251,27 @@ def payload(request):
     if request.method =='POST':
         return HttpResponse("ERR")
     else: # GET
-        sha256 = request.GET.get('sha256', '')
-        try:
-            payload=Payload.objects.get(sha256=sha256)
-        except:
+        sha256  = request.GET.get('sha256', '')
+        gt      = request.GET.get('globaltag', '')
+        p_time  = request.GET.get('time', '')
+
+        if(sha256 is not None and sha256!=''):
+            try:
+                payload=Payload.objects.get(sha256=sha256)
+            except:
+                return HttpResponse("ERR")
+        elif(gt is not None and gt!='' and p_time is not None and p_time!=''):
+            try:
+                return HttpResponse("TEST")
+                # payload=Payload.objects.filter(sha256=sha256)
+            except:
+                return HttpResponse("ERR")   
+            
+            return HttpResponse("OK")
+        else:
             return HttpResponse("ERR")
-        
+
+
         to_dump={
             'sha256':   payload.sha256,
             'tag':      payload.tag,

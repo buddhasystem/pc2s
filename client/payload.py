@@ -39,16 +39,19 @@ parser.add_argument("-S", "--server",	type=str,
 
 parser.add_argument("-c", "--create",   action='store_true',	help="Create a Payload")
 parser.add_argument("-d", "--delete",   action='store_true',	help="Delete a Payload")
-parser.add_argument("-g", "--get",      action='store_true',	help="Get payload")
+parser.add_argument("-f", "--fetch",    action='store_true',	help="Fetch a payload, by hash or Global Tag and time value")
 parser.add_argument("-U", "--usage",    action='store_true',	help="Useful tips")
 
-parser.add_argument("-s", "--sha256",   type=str,	            help="sha256",  default='', nargs='?')
-parser.add_argument("-t", "--tag",      type=str,	            help="tag",     default='')
-parser.add_argument("-i", "--iov",      type=str,	            help="start of IOV",     default='')
-parser.add_argument("-u", "--url",      type=str,	            help="url",     default='')
+parser.add_argument("-s", "--sha256",       type=str,	help="sha256",  default='', nargs='?')
+parser.add_argument("-t", "--tag",          type=str,	help="tag",     default='')
+parser.add_argument("-i", "--iov",          type=str,	help="start of IOV ('since')",     default='')
+parser.add_argument("-u", "--url",          type=str,	help="url",     default='')
 
-parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
-parser.add_argument("-p", "--populate", type=int,	help="Number of simulated records to create", default=0, nargs='?')
+parser.add_argument("-T", "--time",         type=str,	help="time",     default='')
+parser.add_argument("-g", "--global_tag",   type=str,   help="Global Tag name",  default='')
+
+parser.add_argument("-v", "--verbosity",    type=int,	help="Verbosity level",     default=0)
+parser.add_argument("-p", "--populate",     type=int,	help="For testing only: number of simulated records to create, with random IOVs. Requires a tag name.", default=0, nargs='?')
 
 ########################### Parse all arguments #########################
 args = parser.parse_args()
@@ -60,13 +63,16 @@ server	= args.server
 
 create  = args.create
 delete  = args.delete
-get     = args.get
+fetch   = args.fetch
 usage   = args.usage
 
 sha256  = args.sha256
 tag     = args.tag
 since   = args.iov
 url     = args.url
+
+p_time  = args.time
+gt      = args.global_tag
 
 ### pc2s interface defined here
 API  = serverAPI(server=server, verb=verb)
@@ -95,13 +101,23 @@ if(delete):
 
 
 ###
-if(get):
+if(fetch):
     if(sha256 is not None and sha256!=''):
-        pass
         resp=API.simple_get('cdb', 'payload', {'sha256':sha256})
         print(resp)
-    exit(0)
+        exit(0)
 
+    if(gt is None or gt==''):
+        print('Please supply a valid Global Tag name')
+        exit(-1)
+
+    if(p_time is None or p_time==''):
+        p_time=str(timezone.now())
+    
+    resp=API.simple_get('cdb', 'payload', {'globaltag':gt, 'time':p_time})
+    print(resp)   
+    exit(0)
+        
 
 ###
 if(tag is None or tag==''):

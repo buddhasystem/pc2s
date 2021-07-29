@@ -16,6 +16,8 @@ import time
 import datetime
 import os
 
+from django.utils.http import urlencode
+
 from serverAPI		import serverAPI
 
 #########################################################
