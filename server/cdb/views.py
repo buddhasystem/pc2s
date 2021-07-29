@@ -15,7 +15,9 @@ from .cdbutils import *
 statuses = ['NEW','PUB','INV']
 
 def index(request, what='test'):
-    return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
+    return render(request, 'index.html')
+
+#return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 
 
 #####
@@ -336,6 +338,26 @@ def payloaddelete(request):
 
         return HttpResponse('OK')
 
+
+
+###################### MONITOR ###################################
+#####
+@csrf_exempt
+def globaltags(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    
+    try:
+        gts=GlobalTag.objects.all()
+    except:
+        return HttpResponse("ERR")
+    
+    gt_list=[]
+    for gt in gts:
+        gt_list.append({'name': gt.name})
+
+    print(gt_list)
+    return render(request, 'globaltags.html')
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
