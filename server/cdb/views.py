@@ -349,7 +349,9 @@ def payloaddelete(request):
 def globaltags(request):
     if request.method =='POST':
         return HttpResponse("ERR")
-    
+
+    settings.domain	= request.get_host()
+
     try:
         gts=GlobalTag.objects.all()
     except:
@@ -363,6 +365,31 @@ def globaltags(request):
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
     return render(request, 'globaltags.html', {'gt_table':gt_table})
+
+
+#####
+@csrf_exempt
+def globaltagdetail(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else: # GET
+        domain		= request.get_host()
+        settings.domain	= domain
+
+        name = request.GET.get('name', '')
+        try:
+            gt=GlobalTag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+        
+        gtms=GlobalTagMap.objects.filter(globaltag=name)
+        tags=[]
+        for gtm in gtms:
+            tags.append(tag2dict(gtm.tag))
+
+        to_dump = {'name':gt.name, 'status':gt.status, 'tags':tags}
+        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
+        return HttpResponse(data)
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})

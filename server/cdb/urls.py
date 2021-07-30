@@ -6,6 +6,12 @@ urlpatterns = [
     path('',            views.index, {'what':'main'},   name='index'),
     path('test',        views.index, {'what':'test'},   name='index'),
 
+    ###########################################################
+    ############ Engine API for CLI applications ##############
+    ###### All URLs are implicitly prepended with /cdb ########
+    ## For the Web interface URLs please see monitor_urls.py ##
+    ###########################################################
+
     # Global Tags
     path('globaltag',       views.globaltag,            name='globaltag'),
     path('globaltag/list',  views.gtlist,               name='gtlist'),
@@ -26,7 +32,8 @@ urlpatterns = [
     # Payloads
     path('payload',         views.payload,              name='payload'),
     path('payload/create',  views.payloadcreate,        name='payloadcreate'),
-    path('payload/delete',  views.payloaddelete,        name='payloaddelete'),    
+    path('payload/delete',  views.payloaddelete,        name='payloaddelete'),
+
 ]
 
 
