@@ -21,7 +21,7 @@ class GlobalTagTable(tables.Table):
     def render_name(self, value):
 
         print(settings.domain, reverse('globaltagdetail'))
-        return 'foo'
+        return value
 
     
     class Meta:

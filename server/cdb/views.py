@@ -364,7 +364,7 @@ def globaltags(request):
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
-    return render(request, 'globaltags.html', {'gt_table':gt_table})
+    return render(request, 'globaltags.html', {'header':'Global Tags', 'gt_table':gt_table})
 
 
 #####

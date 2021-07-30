@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 {% load render_table from django_tables2 %}
 {% block content %}
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-  <h1 class="h2">Global Tags</h1>
-
-</div>
-
 <div style="width:300px">{% render_table gt_table %}</div>
 {% endblock %}
