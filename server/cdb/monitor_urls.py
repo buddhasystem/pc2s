@@ -12,6 +12,8 @@ urlpatterns = [
     path('tags',            views.index,            name='tags'),
     path('tagdetail',       views.tagdetail,        name='tagdetail'),
 
+    path('documentation',   views.documentation,    name='documentation'),
+
 #    path('',            views.index, {'what':'main'},   name='index'),    
   ]
 

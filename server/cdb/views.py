@@ -15,6 +15,8 @@ from .cdbutils import *
 
 from	django_tables2	import RequestConfig
 
+import markdown
+
 statuses = ['NEW','PUB','INV']
 
 def index(request, what='test'):
@@ -408,7 +410,30 @@ def tagdetail(request):
         payloadtable = PayloadTable(payloads)
         RequestConfig(request, paginate={'per_page': 10}).configure(payloadtable)
 
-        return render(request, 'tablepage.html', {'header':'Tags', 'width': '400px', 'main_table':payloadtable})
+        return render(request, 'tablepage.html', {'header':'Tags', 'width': '800px', 'main_table':payloadtable})
+
+
+#####
+@csrf_exempt
+def documentation(request):
+    path = str(settings.BASE_DIR)+'/cdb/documentation.md'
+    try:
+        file = open(path,mode='r')
+    except:
+        return render(request, 'textpage.html', {'header':'Documentation', 'width': '800px', 'text':'Under construction'})
+    # read all lines at once
+
+    md_docs = file.read()
+    file.close()
+
+    md = markdown.Markdown(extensions=['extra'])
+    html_docs = md.convert(md_docs)
+    print(html_docs)
+
+    return render(request,
+                    'textpage.html',
+                    {'header':'Documentation', 'width': '800px', 'text':html_docs})
+
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 
