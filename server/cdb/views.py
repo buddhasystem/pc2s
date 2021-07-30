@@ -356,15 +356,11 @@ def globaltags(request):
         gts=GlobalTag.objects.all()
     except:
         return HttpResponse("ERR")
-    
-    gt_list=[]
-    for gt in gts:
-        gt_list.append({'name': gt.name})
 
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
-    return render(request, 'globaltags.html', {'header':'Global Tags', 'gt_table':gt_table})
+    return render(request, 'tablepage.html', {'header':'Global Tags', 'width': '400px', 'main_table':gt_table})
 
 
 #####
@@ -383,13 +379,16 @@ def globaltagdetail(request):
             return HttpResponse("ERR")
         
         gtms=GlobalTagMap.objects.filter(globaltag=name)
-        tags=[]
+        tag_names=[]
         for gtm in gtms:
-            tags.append(tag2dict(gtm.tag))
+            tag_names.append(gtm.tag)
 
-        to_dump = {'name':gt.name, 'status':gt.status, 'tags':tags}
-        data = yaml.dump(to_dump, sort_keys=False) #  print(data)
-        return HttpResponse(data)
+        tags=Tag.objects.filter(pk__in=tag_names)
+        tagtable = TagTable(tags)
+        RequestConfig(request, paginate={'per_page': 10}).configure(tagtable)
+
+        return render(request, 'tablepage.html', {'header':'Tags', 'width': '400px', 'main_table':tagtable})
+
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})

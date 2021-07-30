@@ -13,17 +13,26 @@ from .models		            import *
 import operator
 
 #####
+#########################################################
+############## Links formatters #########################
+#########################################################
+def makelink(what, key, value):
+    return mark_safe('<a href="http://%s%s?%s=%s">%s</a>'
+                     % (settings.domain, reverse(what), key, value, value))
 
 
-
+###
 class GlobalTagTable(tables.Table):
-
     def render_name(self, value):
+        return makelink('globaltagdetail', 'name', value)
 
-        print(settings.domain, reverse('globaltagdetail'))
-        return value
-
-    
     class Meta:
         model=GlobalTag
-        
+
+###
+class TagTable(tables.Table):
+    def render_name(self, value):
+        return makelink('globaltagdetail', 'name', value)
+
+    class Meta:
+        model=Tag
