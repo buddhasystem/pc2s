@@ -10,7 +10,10 @@ import yaml
 from yaml.loader import SafeLoader
 
 from .models import *
+from .cdb_tables import *
 from .cdbutils import *
+
+from	django_tables2	import RequestConfig
 
 statuses = ['NEW','PUB','INV']
 
@@ -356,8 +359,10 @@ def globaltags(request):
     for gt in gts:
         gt_list.append({'name': gt.name})
 
-    print(gt_list)
-    return render(request, 'globaltags.html')
+    gt_table = GlobalTagTable(gts)
+    RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
+
+    return render(request, 'globaltags.html', {'gt_table':gt_table})
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
