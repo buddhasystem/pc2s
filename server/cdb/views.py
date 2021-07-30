@@ -389,7 +389,26 @@ def globaltagdetail(request):
 
         return render(request, 'tablepage.html', {'header':'Tags', 'width': '400px', 'main_table':tagtable})
 
+#####
+@csrf_exempt
+def tagdetail(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else: # GET
+        domain		= request.get_host()
+        settings.domain	= domain
 
+        name = request.GET.get('name', '')
+        try:
+            gt=Tag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+
+        payloads = Payload.objects.filter(tag=name).order_by('since')
+        payloadtable = PayloadTable(payloads)
+        RequestConfig(request, paginate={'per_page': 10}).configure(payloadtable)
+
+        return render(request, 'tablepage.html', {'header':'Tags', 'width': '400px', 'main_table':payloadtable})
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 

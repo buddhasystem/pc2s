@@ -32,7 +32,15 @@ class GlobalTagTable(tables.Table):
 ###
 class TagTable(tables.Table):
     def render_name(self, value):
-        return makelink('globaltagdetail', 'name', value)
+        return makelink('tagdetail', 'name', value)
 
     class Meta:
         model=Tag
+
+###
+class PayloadTable(tables.Table):
+#    def render_name(self, value):
+#        return makelink('globaltagdetail', 'name', value)
+
+    class Meta:
+        model=Payload
