@@ -416,7 +416,7 @@ def tagdetail(request):
 #####
 @csrf_exempt
 def documentation(request):
-    path = str(settings.BASE_DIR)+'/cdb/documentation.md'
+    path = str(settings.DOCUMENTATION)+'/documentation.md'
     try:
         file = open(path,mode='r')
     except:
@@ -427,12 +427,16 @@ def documentation(request):
     file.close()
 
     md = markdown.Markdown(extensions=['extra'])
-    html_docs = md.convert(md_docs)
-    print(html_docs)
+    html_docs = md.convert(md_docs) # print(html_docs)
 
     return render(request,
                     'textpage.html',
-                    {'header':'PC2S documentation', 'width': '1000px', 'text':html_docs})
+                    {
+                        'header':'PC2S documentation',
+                        'width': '1000px',
+                        'text':html_docs
+                        }
+                    )
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
