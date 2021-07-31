@@ -1,21 +1,4 @@
-#### Design principles
-
-![foo!](/static/images/PC2S_ERD_v2.png"San Juan Mountains")
-
-The system design closely follows the philosopy and recommendations
-developed in the HEP community for the conditions database systems.
-
-The overarching principle of these designs is separation of the
-metadata and data delivery domains - 
-for the most part the *data content* (i.e. the "payload")
-is stored and delivered separately from the **database**
-used to keep the *location* of these data. In a nutshell, this means that by
-quering the database the client (or the user) gets a URL pointing
-the location of the data, from which it can be retrieved using
-the HTTP(S) protocol or any other comparable means.
-
-#### The Data Model
-##### Conditions vs Calibrations
+#### Conditions vs Calibrations
 In practice, most steps in a production process require
 specific sets of conditions and/or calibrations data. Semantics
 of the conditions vs calibrations are virtually identical in that
@@ -23,6 +6,31 @@ these are sets of parameters necessary to process a particular
 body of data, thus forming the static part of a particular process
 input. In the following there will be no distinction made between
 the "conditions" and "calibarations" types of data.
+
+#### Design principles
+
+The PC2S design closely follows the philosopy and recommendations
+developed in the HEP community for the conditions database systems.
+General design principles for such systmes are
+presented in a recent HSF paper: <https://arxiv.org/abs/1901.05429>
+
+In many cases (such as in the Belle II Conditions database)
+there is separation of the metadata and data delivery domains.
+In practice, this means that the *data content* (i.e. the "payload")
+is stored and delivered separately from the **database**
+used to keep the *location* of these data - essentially a *metadata* system.
+By quering the database the client (or the user) gets a URL pointing the
+location of the data, from which it can be retrieved using the HTTP(S)
+protocol or any other comparable means.
+
+#### The Data Model
+
+##### ERD
+The ERD of the system is presented in the diagram below.
+It is a simplified version of the design detailed in the
+HSF paper cited above.
+![foo!](/static/images/PC2S_ERD_v2.png"PC2S EDR")
+
 
 ##### Object Entities
 

@@ -432,7 +432,7 @@ def documentation(request):
     return render(request,
                     'textpage.html',
                     {
-                        'header':'PC2S documentation',
+                        'header':'PC2S - documentation',
                         'width': '1000px',
                         'text':html_docs
                         }
