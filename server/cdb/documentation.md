@@ -1,4 +1,4 @@
-##### Design principles
+#### Design principles
 
 The system design closely follows the philosopy and recommendations
 developed in the HEP community for the conditions database systems.
@@ -12,8 +12,8 @@ quering the database the client (or the user) gets a URL pointing
 the location of the data, from which it can be retrieved using
 the HTTP(S) protocol or any other comparable means.
 
-##### The Data Model
-###### Conditions vs Calibrations
+#### The Data Model
+##### Conditions vs Calibrations
 In practice, most steps in a production process require
 specific sets of conditions and/or calibrations data. Semantics
 of the conditions vs calibrations are virtually identical in that
@@ -22,15 +22,16 @@ body of data, thus forming the static part of a particular process
 input. In the following there will be no distinction made between
 the "conditions" and "calibarations" types of data.
 
-###### Object Entities
+##### Object Entities
 
 
-##### CLI client utilities
+#### CLI client utilities
 PC2S comes with a complete suite of clients supporting the full
 spectrim of its functionality
 
 <hr/>
-###### Global Tag
+
+##### Global Tag
 ```bash
 usage: gt.py [-h] [-S SERVER] [-c] [-d] [-l] [-t] [-n NAME] [-s STATUS]
              [-y [YAML_FILE]] [-v VERBOSITY]
@@ -52,7 +53,8 @@ optional arguments:
                         Verbosity level
 ```
 <hr/>
-###### Global Tag Map
+
+##### Global Tag Map
 ```bash
 usage: gtm.py [-h] [-S SERVER] [-c] [-d] [-n NAME] [-g GLOBAL_TAG] [-t TAG]
               [-v VERBOSITY]
@@ -72,7 +74,8 @@ optional arguments:
 ```
 
 <hr/>
-###### Tag
+
+##### Tag
 ```bash
 usage: tag.py [-h] [-S SERVER] [-c] [-d] [-U] [-n NAME] [-u UNTIL]
               [-v VERBOSITY]
@@ -91,7 +94,8 @@ optional arguments:
                         Verbosity level
 ```
 <hr/>
-###### Payload
+
+##### Payload
 ```bash
 usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-s [SHA256]] [-t TAG]
                   [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG] [-v VERBOSITY]
