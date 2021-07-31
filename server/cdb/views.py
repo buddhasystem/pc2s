@@ -432,7 +432,7 @@ def documentation(request):
 
     return render(request,
                     'textpage.html',
-                    {'header':'Documentation', 'width': '800px', 'text':html_docs})
+                    {'header':'PC2S documentation', 'width': '1000px', 'text':html_docs})
 
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
