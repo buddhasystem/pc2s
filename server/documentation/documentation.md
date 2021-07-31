@@ -1,5 +1,7 @@
 #### Design principles
 
+<!-- ![foo!](/static/images/sphenix-logo-black-bg.png "San Juan Mountains") -->
+
 The system design closely follows the philosopy and recommendations
 developed in the HEP community for the conditions database systems.
 
