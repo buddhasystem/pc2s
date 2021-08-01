@@ -16,7 +16,7 @@ optional arguments:
   -c, --create          Create a Global Tag
   -d, --delete          Delete a Global Tag
   -l, --list_gt         List names of all Global Tags
-  -t, --tag_list        List names of tags in a Global Tags
+  -t, --tag_list        List names of tags in a Global Tag
   -n NAME, --name NAME  Global Tag Name
   -s STATUS, --status STATUS
                         Status to be set
