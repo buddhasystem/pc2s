@@ -415,8 +415,9 @@ def tagdetail(request):
 
 #####
 @csrf_exempt
-def documentation(request):
-    path = str(settings.DOCUMENTATION)+'/documentation.md'
+def documentation(request, what, header):
+    path = str(settings.DOCUMENTATION)+what # '/documentation.md'
+    print(path)
     try:
         file = open(path,mode='r')
     except:
@@ -432,7 +433,7 @@ def documentation(request):
     return render(request,
                     'textpage.html',
                     {
-                        'header':'PC2S - documentation',
+                        'header':header,
                         'width': '1000px',
                         'text':html_docs
                         }

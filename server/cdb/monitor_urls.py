@@ -12,8 +12,13 @@ urlpatterns = [
     path('tags',            views.index,            name='tags'),
     path('tagdetail',       views.tagdetail,        name='tagdetail'),
 
-    path('documentation',   views.documentation,    name='documentation'),
-
+    path('about',
+            views.documentation,
+            {'what':'/about.md', 'header':'About'},
+            name='about'),
+    path('clients',
+            views.documentation,
+            {'what':'/clients.md', 'header':'PC2S CLI Clients'},name='clients'),
 #    path('',            views.index, {'what':'main'},   name='index'),    
   ]
 
