@@ -353,16 +353,30 @@ def globaltags(request):
         return HttpResponse("ERR")
 
     settings.domain	= request.get_host()
+    q               = request.GET.get('query', '')
 
-    try:
-        gts=GlobalTag.objects.all()
-    except:
-        return HttpResponse("ERR")
-
+    search = 'Search'
+    if(q is None or q==''):
+        try:
+            gts=GlobalTag.objects.all()
+        except:
+            return HttpResponse("ERR")
+    else:
+        gts=GlobalTag.objects.filter(name__contains=q)
+        search='Click and press <ENTER> to reset search'
+    
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
-    return render(request, 'tablepage.html', {'header':'Global Tags', 'width': '400px', 'main_table':gt_table})
+    page_dict = {
+        'header':'Global Tags',
+        'width': '400px',
+        'main_table':gt_table,
+        'search':search,
+        'show_query':True,
+        }
+
+    return render(request, 'tablepage.html', page_dict)
 
 
 #####
