@@ -9,14 +9,15 @@
         <img src="{% static 'images/sphenix-logo-black-bg.png' %}" height="50">&nbsp;&nbsp; PC2S
       </a>
       
-
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      
-      <ul class="navbar-nav px-3">
+    <form class="w-100">
+      <input id="query" name="query" class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <input type="submit" style="display: none" />
+    </form>      
+      <!-- ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="#">Sign out</a>
         </li>
-      </ul>
+      </ul -->
     </nav>
 
     <div class="container-fluid">
