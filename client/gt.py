@@ -39,6 +39,7 @@ parser.add_argument("-d", "--delete",       action='store_true',	help="Delete a 
 parser.add_argument("-l", "--list_gt",      action='store_true',	help="List names of all Global Tags")
 parser.add_argument("-t", "--tag_list",     action='store_true',	help="List names of tags in a Global Tag")
 parser.add_argument("-n", "--name",         type=str,	            help="Global Tag Name",	    default='')
+parser.add_argument("-q", "--query",        type=str, help="Partial Name to narrow down the list of Global Tags",default='')
 parser.add_argument("-s", "--status",       type=str,	            help="Status to be set",    default='')
 parser.add_argument("-y", "--yaml_file",    type=str,	            help="YAML definition",     default='', nargs='?')
 parser.add_argument("-v", "--verbosity",    type=int,	            help="Verbosity level",     default=0)
@@ -53,6 +54,7 @@ list_gt = args.list_gt
 tag_list= args.tag_list
 
 name    = args.name
+query   = args.query
 status  = args.status
 
 y_file  = args.yaml_file
@@ -97,7 +99,11 @@ if(delete):
     exit(0)
 
 if(list_gt):
-    resp=API.simple_get('cdb', 'gtlist')
+    if(query is not None and query!=''):
+        resp=API.simple_get('cdb', 'gtlist', {'query':query})
+    else:
+        resp=API.simple_get('cdb', 'gtlist')
+        
     print(resp)
     exit(0)
 

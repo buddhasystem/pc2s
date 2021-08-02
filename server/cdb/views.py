@@ -73,10 +73,15 @@ def gtlist(request):
     if request.method =='POST':
         return HttpResponse("ERR")
     
-    try:
-        gts=GlobalTag.objects.all()
-    except:
-        return HttpResponse("ERR")
+    q = request.GET.get('query', '')
+
+    if(q is None or q==''):
+        try:
+            gts=GlobalTag.objects.all()
+        except:
+            return HttpResponse("ERR")
+    else:
+        gts=GlobalTag.objects.filter(name__contains=q)
     
     gt_list=[]
     for gt in gts:
