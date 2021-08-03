@@ -2,4 +2,15 @@
 {% load render_table from django_tables2 %}
 {% block content %}
 <div style="width:{{ main_table_width }}">{% render_table main_table %}</div>
+
+{% if aux_list %}
+<hr/>
+<h3>{{ aux_list_header }}</h3>
+<ul>
+{% for item in aux_list %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
 {% endblock %}

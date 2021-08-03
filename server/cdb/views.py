@@ -443,7 +443,7 @@ def globaltagdetail(request):
 
         return render(request, 'tablepage.html',
                 {
-                    'header':'Tags for global tag "'+name+'"',
+                    'header':mark_safe('Tags for global tag: '+highlight(name)),
                     'main_table_width': main_table_width,
                     'main_table':tagtable
                 }
@@ -468,11 +468,22 @@ def tagdetail(request):
         payloadtable = PayloadTable(payloads)
         RequestConfig(request, paginate={'per_page': 10}).configure(payloadtable)
 
+        try:
+            gtms=GlobalTagMap.objects.filter(tag=name)
+            gts=[]
+            for gtm in gtms:
+                # gts.append(gtm.globaltag)
+                gts.append(makelink('globaltagdetail', 'name', gtm.globaltag))
+        except:
+            pass
+
         return render(request, 'tablepage.html',
             {
                 'header': mark_safe('Payloads for the tag: '+highlight(name)),
                 'main_table_width': main_table_width_max,
-                'main_table':payloadtable
+                'main_table':payloadtable,
+                'aux_list_header':mark_safe('Global Tags Referencing tag: '+highlight(name)),
+                'aux_list': gts
                 }
             )
 
