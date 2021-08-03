@@ -17,12 +17,13 @@ from	django_tables2	import RequestConfig
 
 import markdown
 
-statuses = ['NEW','PUB','INV']
-
+#############################################
+statuses    = ['NEW','PUB','INV']
+text_width  = '1000px'
+table_width = '800px'
+#####
 def index(request, what='test'):
     return render(request, 'index.html')
-
-#return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 
 
 #####
@@ -368,7 +369,7 @@ def globaltags(request):
             return HttpResponse("ERR")
     else:
         gts=GlobalTag.objects.filter(name__contains=q)
-        search='Click and press <ENTER> to reset search'
+        search='Showing results for "'+q+'". Click here and press <ENTER> to reset search.'
     
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
@@ -429,7 +430,13 @@ def tagdetail(request):
         payloadtable = PayloadTable(payloads)
         RequestConfig(request, paginate={'per_page': 10}).configure(payloadtable)
 
-        return render(request, 'tablepage.html', {'header':'Tags', 'width': '800px', 'main_table':payloadtable})
+        return render(request, 'tablepage.html',
+            {
+                'header':'Tags',
+                'width': table_width,
+                'main_table':payloadtable
+                }
+            )
 
 
 #####
@@ -440,9 +447,15 @@ def documentation(request, what, header):
     try:
         file = open(path,mode='r')
     except:
-        return render(request, 'textpage.html', {'header':'Documentation', 'width': '800px', 'text':'Under construction'})
-    # read all lines at once
-
+        return render(request, 'textpage.html',
+            {
+                'header':'Documentation',
+                'width': text_width,
+                'text':'Under construction'
+                }
+            )
+    
+    
     md_docs = file.read()
     file.close()
 
@@ -453,7 +466,7 @@ def documentation(request, what, header):
                     'textpage.html',
                     {
                         'header':header,
-                        'width': '1000px',
+                        'width': text_width,
                         'text':html_docs
                         }
                     )

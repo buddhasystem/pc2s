@@ -1,5 +1,5 @@
-#### Portable Conditions and Calobrations System (PC2S)
-PC2S stands for *"portable conditions and calibration system"*.
+#### Portable Conditions and Calibrations Service (PC2S)
+PC2S stands for *"portable conditions and calibration service"*.
 The "portable" aspect implies that
 
 * the system is experiment-agnostic
