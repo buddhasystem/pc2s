@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
 {% load render_table from django_tables2 %}
 {% block content %}
-<div style="width:{{ width }}">{% render_table main_table %}</div>
+<div style="width:{{ main_table_width }}">{% render_table main_table %}</div>
 {% endblock %}

@@ -20,7 +20,8 @@ import markdown
 #############################################
 statuses    = ['NEW','PUB','INV']
 text_width  = '1000px'
-table_width = '800px'
+main_table_width = '1000px'
+main_table_width_max = '1400px'
 #####
 def index(request, what='test'):
     return render(request, 'index.html')
@@ -376,7 +377,7 @@ def globaltags(request):
 
     page_dict = {
         'header':'Global Tags',
-        'width': '400px',
+        'main_table_width': main_table_width,
         'main_table':gt_table,
         'search':search,
         'show_query':True,
@@ -384,6 +385,37 @@ def globaltags(request):
 
     return render(request, 'tablepage.html', page_dict)
 
+#####
+@csrf_exempt
+def tags(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+
+    settings.domain	= request.get_host()
+    q               = request.GET.get('query', '')
+
+    search = 'Search'
+    if(q is None or q==''):
+        try:
+            tags=Tag.objects.all()
+        except:
+            return HttpResponse("ERR")
+    else:
+        tags=Tag.objects.filter(name__contains=q)
+        search='Showing results for "'+q+'". Click here and press <ENTER> to reset search.'
+    
+    tag_table = TagTable(tags)
+    RequestConfig(request, paginate={'per_page': 10}).configure(tag_table)
+
+    page_dict = {
+        'header':'Tags',
+        'main_table_width': main_table_width,
+        'main_table':tag_table,
+        'search':search,
+        'show_query':True,
+        }
+
+    return render(request, 'tablepage.html', page_dict)
 
 #####
 @csrf_exempt
@@ -412,7 +444,7 @@ def globaltagdetail(request):
         return render(request, 'tablepage.html',
                 {
                     'header':'Tags for global tag "'+name+'"',
-                    'width': '400px',
+                    'main_table_width': main_table_width,
                     'main_table':tagtable
                 }
             )
@@ -438,8 +470,8 @@ def tagdetail(request):
 
         return render(request, 'tablepage.html',
             {
-                'header':'Payloads for tag "'+name+'"',
-                'width': table_width,
+                'header': mark_safe('Payloads for the tag: '+highlight(name)),
+                'main_table_width': main_table_width_max,
                 'main_table':payloadtable
                 }
             )

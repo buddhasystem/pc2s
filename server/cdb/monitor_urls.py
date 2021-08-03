@@ -9,7 +9,7 @@ urlpatterns = [
     path('globaltagdetail', views.globaltagdetail,  name='globaltagdetail'),
     path('globaltagmaps',   views.index,            name='globaltagmaps'),
 
-    path('tags',            views.index,            name='tags'),
+    path('tags',            views.tags,             name='tags'),
     path('tagdetail',       views.tagdetail,        name='tagdetail'),
 
     path('about',

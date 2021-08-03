@@ -1,3 +1,18 @@
+#### The Objective
+The objective of this service is to discover, locate
+and deliver *conditions and calibrations data* of a particular
+type as requested by the client, which is considered valid
+at a point in time relevant to the processing of the experiment's data.
+Logically, the overall system is a tandem of a *metadata service*, which is
+the focus of the PC2S project, and a data delivery system which can be
+implemented using any suitable technology (Apache, ndinx, CVMFS etc or
+even a combination of these platforms).
+
+This two components are weakly coupled. The only connection between
+them is the requiment that PC2S needs to provide a valid URL pointing
+to a data product to be shipped to the consumer by the data delivery service.
+This provides considerable flexibility in implementation stage.
+
 #### Portable Conditions and Calibrations Service (PC2S)
 PC2S stands for *"portable conditions and calibration service"*.
 The "portable" aspect implies that
@@ -62,4 +77,21 @@ simplify the system.
     It is expired automatically by the next payload in the time series, according to the "since"
     values.
 
+#### Implementation
 
+PC2S is a Web application based on the Django framework. Included are both
+the Web client for monitoring and exploring the database contents, and the
+CLI client suite used to manipulate the database content. At the time of writing,
+the data delivery portion (e.g. an instance of a *nginx* service) has not yet
+been established and will be finalized later.
+
+Sample requirements (as they are set in the virtual environment):
+```bash
+asgiref==3.3.1
+Django==3.1.5
+django-tables2==2.4.0
+Markdown==3.3.4
+pytz==2020.5
+PyYAML==5.4.1
+sqlparse==0.4.1
+```
