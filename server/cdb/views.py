@@ -409,7 +409,13 @@ def globaltagdetail(request):
         tagtable = TagTable(tags)
         RequestConfig(request, paginate={'per_page': 10}).configure(tagtable)
 
-        return render(request, 'tablepage.html', {'header':'Tags', 'width': '400px', 'main_table':tagtable})
+        return render(request, 'tablepage.html',
+                {
+                    'header':'Tags for global tag "'+name+'"',
+                    'width': '400px',
+                    'main_table':tagtable
+                }
+            )
 
 #####
 @csrf_exempt
@@ -432,7 +438,7 @@ def tagdetail(request):
 
         return render(request, 'tablepage.html',
             {
-                'header':'Tags',
+                'header':'Payloads for tag "'+name+'"',
                 'width': table_width,
                 'main_table':payloadtable
                 }
