@@ -44,16 +44,19 @@ class TagTable(tables.Table):
         return n_of_payloads
 
     def render_global_tags(self,record):
+        gt_url=''
         gtms=GlobalTagMap.objects.filter(tag=record.name)
         gts = []
         for gtm in gtms:
-            # gt_url=makelink('globaltagdetail', 'name', gtm.globaltag)
-            gts.append(gtm.globaltag)
+            gt_url=makelink('globaltagdetail', 'name', gtm.globaltag)
+            # gts.append(gtm.globaltag)
+            gts.append(gt_url)
+        
         
         if(len(gts)==0):
             return '-'
         else:
-            return ', '.join(gts)
+            return(mark_safe(', '.join(gts)))
 
     class Meta:
         model=Tag
