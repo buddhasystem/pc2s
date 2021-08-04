@@ -19,7 +19,7 @@ import markdown
 
 #############################################
 statuses    = ['NEW','PUB','INV']
-text_width  = '1000px'
+text_width  = '1100px'
 main_table_width = '1000px'
 main_table_width_max = '1400px'
 #####

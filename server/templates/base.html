@@ -11,10 +11,18 @@
 
     {% if show_query %}
     <form class="w-100">
+    
       <input id="query" name="query" class="form-control form-control-dark w-100" type="text" placeholder="{{search}}" aria-label="Search">
       <input type="submit" style="display: none" />
+      <!-- select name="cars" id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+      </select -->
+      <!-- input type="submit" / -->
     </form>
-    {% endif %}     
+    {% endif %} 
       <!-- ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="#">Sign out</a>
