@@ -153,6 +153,30 @@ def gtdelete(request):
     else:
         return HttpResponse('ERR')
 
+#####
+@csrf_exempt
+def gtstatus(request):
+    if request.method =='POST':
+        post    = request.POST
+        name    = post.get('name',      None)
+        status  = post.get('status',    None)
+
+        if(name is None or name==''): return HttpResponse("ERR")
+
+        if(status not in GlobalTag.status_choices()):
+            return HttpResponse("ERR")
+
+        try:
+            gt=GlobalTag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+       
+        gt.status=status
+        gt.save()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse('ERR')
+
 ####################### Global Tag Map #########################
 @csrf_exempt
 def gtm(request):

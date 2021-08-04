@@ -63,9 +63,9 @@ simplify the system.
 * **Global Tag**
     * Serves as a handle for the entirety of the conditions and calibrations
     data created for a particular purpose, e.g. production for a particular time period or a
-    specific Monte Carlo campaign
+    specific Monte Carlo campaign.
 * **Global Tag Map**
-    * A simple object which helps manage which types of data ("tags", see below) are included
+    * A simple object which helps manage which types of data (*"Tags"*, see below) are included
     in a particular Global Tag.
 * **Tag**
     * This object is used to denote a particular type of data (e.g. EMCal calibrations etc) and also specify
@@ -77,8 +77,12 @@ simplify the system.
     up to efficiently deliver the data to the client. The payload object contains
     the timestamp of the *start* of its *Interval of Validity*. The name of the corresponding
     attribute is "since". By convention, there is no expiry timestamp in the payload object.
-    It is expired automatically by the next payload in the time series, according to the "since"
-    values.
+    It is expired automatically by the next payload in the time series, according to its "since"
+    values. The *Payload* object also contains a sha256 value for the actual payload file, helping
+    in debugging and content validation. This object is always tied to a specific *Tag* by design,
+    so it can't exist meaningfully as a standalone entity. When a *Tag* is deleted from the database,
+    all *Payload* records are deleted as well. Keep in mind that this only applies to the database
+    records, while the payload data on disk is managed separately.
 
 #### Example
 
@@ -131,9 +135,9 @@ monitor screen (see the "Tags") entry in the left had side navigation bar.
 
 **Create a Global Tag**
 
-Let's now create a Global Tag wiith a descriptive name, e.g. "EMCal":
+Let's now create a Global Tag wiith a descriptive name, e.g. "sPHENIX2024":
 ```bash
-./gt.py -c -n EMCal
+./gt.py -c -n sPHENIX2024
 ```
 This global tag can contain any number of different types of data relevant
 for the EMCal, e.g. channel gains, pedestals etc. We'll limit our example
@@ -144,10 +148,11 @@ to just one tag which is the dead channel map.
 We will use the "global tag map" client to associate this particular tag
 - EMCalDeadMap - with the Global Tag "EMCal".
 ```bash
-./gtm.py -c -n emcaldead -g EMCal -t EMCalDeadMap -v 1
+./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap -v 1
 ```
-Additional tags can be assigned as necessary to the "EMCal" Global Tag in
-a similar manner.
+Additional tags can be assigned as necessary to the Global Tag in
+a similar manner. The tags can also be detached from a Global Tag by
+removing the corresponding Global Tag Map objects.
 
 
 #### Implementation

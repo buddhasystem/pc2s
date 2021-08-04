@@ -4,7 +4,11 @@ from . import views
 ################### CDB Monitor (Web) ##########################
 
 urlpatterns = [
-    path('',                views.index,            name='index'),
+#    path('',                views.index,            name='index'),
+    path('',
+        views.documentation,
+        {'what':'/welcome.md', 'header':'Welcome to PC2S'}, name='index'),
+
     path('globaltags',      views.globaltags,       name='globaltags'),
     path('globaltagdetail', views.globaltagdetail,  name='globaltagdetail'),
     path('globaltagmaps',   views.index,            name='globaltagmaps'),

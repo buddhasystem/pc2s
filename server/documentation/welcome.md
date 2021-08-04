@@ -1,9 +1,3 @@
-{% extends 'base.html' %}
-{% block content %}
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-  <h1 class="h2">Welcome to PC2S</h1>
-
-</div>
 The Portable Conditions and Calibrations Service (PC2S) is based
 on concepts developed by the HEP Software Foundation. It's objective
 is to manage metadata for calibrations and conditions and locate
@@ -14,10 +8,5 @@ of clients providing the functionality of managing the database and
 accessing its content. These Web pages provide the monitoring capability
 for the system.
 
-<br/>
-&nbsp;
-<p/>
 The sidebar on the left contains links to the PC2S monitoring pages
 and documentation.
-<!-- h4 align="center">...{{message}}</h4 -->
-{% endblock %}

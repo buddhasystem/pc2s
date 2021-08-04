@@ -36,12 +36,12 @@ optional arguments:
   -h, --help            show this help message and exit
   -S SERVER, --server SERVER
                         server URL: defaults to http://localhost:8000/
-  -c, --create          Create a Global Tag
-  -d, --delete          Delete a Global Tag
+  -c, --create          Create a Global Tag Map
+  -d, --delete          Delete a Global Tag Map
   -n NAME, --name NAME  Global Tag Map Name
   -g GLOBAL_TAG, --global_tag GLOBAL_TAG
                         Global Tag Name
-  -t TAG, --tag TAG     Tag
+  -t TAG, --tag TAG     Tag Name
   -v VERBOSITY, --verbosity VERBOSITY
                         Verbosity level
 ```

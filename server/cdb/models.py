@@ -11,6 +11,13 @@ class GlobalTag(models.Model):
 
     name		= models.CharField(max_length=128, primary_key=True, null=False, default="")
     status		= models.CharField(max_length=4, choices=STATUS_CHOICES, default='NEW')
+    
+    @classmethod
+    def status_choices(self):
+        choices=[]
+        for stat in self.STATUS_CHOICES:
+            choices.append(stat[0])
+        return choices
 
 class GlobalTagMap(models.Model):
     name		= models.CharField(max_length=128, primary_key=True, null=False, default="")    
