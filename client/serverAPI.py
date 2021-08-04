@@ -23,6 +23,7 @@ class serverAPI(dict):
             'gttaglist':        server+'cdb/globaltag/taglist',
             'gtcreate':         server+'cdb/globaltag/create',
             'gtdelete':	        server+'cdb/globaltag/delete',
+            'gtstatus':	        server+'cdb/globaltag/status',
             # Global Tag Map
             'gtm':              server+'cdb/gtm',
             'gtmcreate':        server+'cdb/gtm/create',

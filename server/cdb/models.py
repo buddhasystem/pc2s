@@ -26,7 +26,7 @@ class GlobalTagMap(models.Model):
 
 class Tag(models.Model):
     name		= models.CharField(max_length=128, primary_key=True, null=False, default="")
-    until       = models.DateTimeField(default=timezone.now)
+    until       = models.DateTimeField(verbose_name='Valid Until', default=timezone.now)
 
 class Payload(models.Model):
     sha256      = models.CharField(max_length=64, primary_key=True, null=False, default="")

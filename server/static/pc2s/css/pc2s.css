@@ -1,1 +1,13 @@
-blockquote {background-color: #eee; line-height: 2.2; box-shadow: 0 0 0 10px #eee;}
+pre {
+    padding: .5em .5em .5em .75em;
+    background-color: #f8f9fa;
+    line-height: 2.0;
+    /* box-shadow: 0 0 0 8px #f8f9fa; */
+    border-left: 0.2em solid #AAA;
+    border-right: 0.2em solid #AAA;
+    border-radius: 6px;
+
+}
+table, th {
+    background-color: #eee;
+}

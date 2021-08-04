@@ -40,7 +40,7 @@ parser.add_argument("-l", "--list_gt",      action='store_true',	help="List name
 parser.add_argument("-t", "--tag_list",     action='store_true',	help="List names of tags in a Global Tag")
 parser.add_argument("-n", "--name",         type=str,	            help="Global Tag Name",	    default='')
 parser.add_argument("-q", "--query",        type=str, help="Partial Name to narrow down the list of Global Tags",default='')
-parser.add_argument("-s", "--status",       type=str,	            help="Status to be set",    default='')
+parser.add_argument("-s", "--status",       type=str, help="Set status: NEW, INV, PUB",    default='')
 parser.add_argument("-y", "--yaml_file",    type=str,	            help="YAML definition",     default='', nargs='?')
 parser.add_argument("-v", "--verbosity",    type=int,	            help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
@@ -103,7 +103,7 @@ if(list_gt):
         resp=API.simple_get('cdb', 'gtlist', {'query':query})
     else:
         resp=API.simple_get('cdb', 'gtlist')
-        
+
     print(resp)
     exit(0)
 
@@ -115,6 +115,11 @@ if(name is None or name==''):
 if(tag_list):
     resp=API.simple_get('cdb', 'gttaglist', {'name':name})
     print(resp)
+    exit(0)
+
+if(status):
+    resp = API.post2server('cdb', 'gtstatus', {'name':name, 'status':status})
+    if verb>0: print(resp)
     exit(0)
 
 resp=API.simple_get('cdb', 'globaltag', {'name':name})

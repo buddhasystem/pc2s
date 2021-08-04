@@ -37,7 +37,7 @@ parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global
 
 parser.add_argument("-n", "--name",         type=str,	help="Global Tag Map Name", default='')
 parser.add_argument("-g", "--global_tag",   type=str,	help="Global Tag Name",	    default='')
-parser.add_argument("-t", "--tag",          type=str,	help="Tag",                 default='')
+parser.add_argument("-t", "--tag",          type=str,	help="Tag Name",            default='')
 
 parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
 ########################### Parse all arguments #########################
