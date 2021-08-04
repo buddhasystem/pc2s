@@ -32,8 +32,8 @@ parser.add_argument("-S", "--server",	type=str,
                     help="server URL: defaults to http://localhost:8000/",
                     default=server)
 
-parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag")
-parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global Tag")
+parser.add_argument("-c", "--create", action='store_true',	help="Create a Global Tag Map")
+parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Global Tag Map")
 
 parser.add_argument("-n", "--name",         type=str,	help="Global Tag Map Name", default='')
 parser.add_argument("-g", "--global_tag",   type=str,	help="Global Tag Name",	    default='')
