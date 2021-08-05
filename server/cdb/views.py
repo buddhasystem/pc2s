@@ -561,6 +561,15 @@ def documentation(request, what, header):
                         }
                     )
 
+@csrf_exempt
+def test(request):
+    return render(request,
+                    'test.html',
+                    {
+                        'stuff':'test',
+                    }
+                )
+
 ##### ATTIC
 # return render(request, 'cdb.html', {'active': 'cdb', 'message':what})
 

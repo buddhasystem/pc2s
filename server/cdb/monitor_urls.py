@@ -22,7 +22,10 @@ urlpatterns = [
             name='about'),
     path('clients',
             views.documentation,
-            {'what':'/clients.md', 'header':'PC2S CLI Clients'},name='clients'),
+            {'what':'/clients.md', 'header':'PC2S CLI Clients'},
+            name='clients'),
+    path('test',            views.test,             name='test'),
+
 #    path('',            views.index, {'what':'main'},   name='index'),    
   ]
 
