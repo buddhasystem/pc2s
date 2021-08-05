@@ -1,0 +1,13 @@
+{% if show_selector %}
+<select name="status" id="{{ selector_id }}" class="w-auto">
+    {% for item in selector_items %}
+    {% if selected == item.0 %}
+        <option value="{{ item.0 }}" selected>{{ item.1 }}</option>
+      {% else %}
+        <option value="{{ item.0 }}">{{ item.1 }}</option>
+      {% endif %}
+    {% endfor %}
+    </select>
+{% endif %}
+
+  

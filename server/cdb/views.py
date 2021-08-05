@@ -389,7 +389,7 @@ def globaltags(request):
     namepattern = request.GET.get('namepattern', '')
     status      = request.GET.get('status', '')
 
-    search      = 'Search'
+    search      = 'Search by Partial Name'
 
     no_name     = namepattern is None or namepattern==''
     no_status   = status is None or status==''
@@ -403,10 +403,11 @@ def globaltags(request):
         gts=None
         if (no_status):
             gts=GlobalTag.objects.filter(name__contains=namepattern)
-            search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset search.'
+            search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset.'
         else:
             gts=GlobalTag.objects.filter(status=status)
             if(not no_name):
+                search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset.'
                 gts=gts.filter(name__contains=namepattern)
             
     # Defer this approach to the selector:
@@ -415,13 +416,18 @@ def globaltags(request):
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
+    items=[('', 'All'),]+GlobalTag.STATUS_CHOICES
+    # items = [('', 'Filter'), ('NEW','New'), ('PUB', 'Published'),]
     page_dict = {
         'header':'Global Tags',
         'main_table_width': main_table_width,
-        'main_table':gt_table,
-        'search':search,
-        'show_query':True,
-        'show_selector':True,
+        'main_table':       gt_table,
+        'search':           search,
+        'show_query':       True,
+        'show_selector':    True,
+        'selector_items':   items,
+        'selected':         status,
+        'selector_id':      'status',
         }
 
     return render(request, 'tablepage.html', page_dict)
@@ -563,10 +569,15 @@ def documentation(request, what, header):
 
 @csrf_exempt
 def test(request):
+
+    items = [('', 'Filter by Status'), ('NEW','New'), ('PUB', 'Published'),]
     return render(request,
                     'test.html',
                     {
-                        'stuff':'test',
+                        'selected':     '',
+                        'selector_id':  'status',
+                        'stuff':        'test',
+                        'selector_items':items,
                     }
                 )
 
