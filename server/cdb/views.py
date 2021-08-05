@@ -421,6 +421,7 @@ def globaltags(request):
         'main_table':gt_table,
         'search':search,
         'show_query':True,
+        'show_selector':True,
         }
 
     return render(request, 'tablepage.html', page_dict)
@@ -432,17 +433,17 @@ def tags(request):
         return HttpResponse("ERR")
 
     settings.domain	= request.get_host()
-    q               = request.GET.get('query', '')
+    namepattern     = request.GET.get('namepattern', '')
 
     search = 'Search'
-    if(q is None or q==''):
+    if(namepattern is None or namepattern==''):
         try:
             tags=Tag.objects.all()
         except:
             return HttpResponse("ERR")
     else:
-        tags=Tag.objects.filter(name__contains=q)
-        search='Showing results for "'+q+'". Click here and press <ENTER> to reset search.'
+        tags=Tag.objects.filter(name__contains=namepattern)
+        search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset search.'
     
     tag_table = TagTable(tags)
     RequestConfig(request, paginate={'per_page': 10}).configure(tag_table)
