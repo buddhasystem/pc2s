@@ -11,16 +11,18 @@
 
     {% if show_query %}
     <form class="w-100">
-    
-      <input id="query" name="query" class="form-control form-control-dark w-100" type="text" placeholder="{{search}}" aria-label="Search">
+      <div style="width:100%; display: flex;">
+      <input id="query" name="namepattern" class="form-control form-control-dark w-100" type="text" placeholder="{{search}}" aria-label="Search">
       <input type="submit" style="display: none" />
-      <!-- select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-      </select -->
-      <!-- input type="submit" / -->
+      <select name="status" id="cars" class="w-auto">
+        <option value="" selected disabled>Filter by Status</option>
+        <option value="NEW">New</option>
+        <option value="PUB">Published</option>
+        <option value="INV">Invalid</option>
+      </select>
+
+      <input type="submit" class="w-auto"/>
+      </div> 
     </form>
     {% endif %} 
       <!-- ul class="navbar-nav px-3">

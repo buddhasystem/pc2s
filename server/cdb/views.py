@@ -13,6 +13,8 @@ from .models import *
 from .cdb_tables import *
 from .cdbutils import *
 
+from .selector_utils import *
+
 from	django_tables2	import RequestConfig
 
 import markdown
@@ -384,18 +386,32 @@ def globaltags(request):
         return HttpResponse("ERR")
 
     settings.domain	= request.get_host()
-    q               = request.GET.get('query', '')
+    namepattern = request.GET.get('namepattern', '')
+    status      = request.GET.get('status', '')
 
-    search = 'Search'
-    if(q is None or q==''):
+    search      = 'Search'
+
+    no_name     = namepattern is None or namepattern==''
+    no_status   = status is None or status==''
+
+    if(no_name and no_status):
         try:
             gts=GlobalTag.objects.all()
         except:
             return HttpResponse("ERR")
     else:
-        gts=GlobalTag.objects.filter(name__contains=q)
-        search='Showing results for "'+q+'". Click here and press <ENTER> to reset search.'
-    
+        gts=None
+        if (no_status):
+            gts=GlobalTag.objects.filter(name__contains=namepattern)
+            search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset search.'
+        else:
+            gts=GlobalTag.objects.filter(status=status)
+            if(not no_name):
+                gts=gts.filter(name__contains=namepattern)
+            
+    # Defer this approach to the selector:
+    # selector=gtStatusSelector(request, 'ALL', [('ALL','All'), ('PUB','Published'),])
+
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
