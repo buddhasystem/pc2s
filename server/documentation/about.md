@@ -5,13 +5,14 @@ type as requested by the client, which are considered valid
 at a particular point in time and relevant to a certiain type of
 processing of the experiment's data.
 Logically, the overall system is a tandem of a **metadata service**
-and a **data delivery** system which can beimplemented using any
-suitable technology (Apache, nginx, CVMFS etc or
+and a **data delivery** system. The data delivery can be implemented
+using a number of suitable technologies (Apache, nginx, CVMFS etc or
 even a combination of these platforms).
-This two components are weakly coupled. The only connection between
+
+These two components are weakly coupled. The only connection between
 them is the requiment that the metadata component needs to provide a
 valid URL pointing to a data product to be shipped to the consumer by
-the data delivery part. his provides considerable flexibility in implementation stage.
+the data delivery part. This provides considerable flexibility in implementation stage.
 
 The PC2S project comprises the metadata service component. Web pages
 on this site are a Web interface to that service, and are complemented by a suite

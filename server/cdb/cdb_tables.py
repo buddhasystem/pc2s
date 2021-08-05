@@ -51,13 +51,18 @@ class TagTable(tables.Table):
             gt_url=makelink('globaltagdetail', 'name', gtm.globaltag)
             # gts.append(gtm.globaltag)
             gts.append(gt_url)
-        
-        
+               
         if(len(gts)==0):
             return '-'
         else:
             return(mark_safe(', '.join(gts)))
 
+    def order_n_of_payloads(self,QuerySet, is_descending):
+        return (QuerySet, True)
+    
+    def order_global_tags(self,QuerySet, is_descending):
+        return (QuerySet, True)
+    
     class Meta:
         model=Tag
 
