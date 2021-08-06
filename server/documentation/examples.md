@@ -72,23 +72,3 @@ removing the corresponding Global Tag Map objects.
 Global tags can be created at any point in time, even before
 their content (i.e. tags) are decided upon.
 
-
-#### Implementation
-
-PC2S is a Web application based on the Django framework and written
-in Python (verison 3.9 was originally used). Included are both
-the Web client for monitoring and exploring the database contents, and the
-CLI client suite used to manipulate the database content. At the time of writing,
-the data delivery portion (e.g. an instance of a *nginx* service) has not yet
-been established and will be finalized later.
-
-Sample requirements (as they are set in the virtual environment):
-```bash
-asgiref==3.3.1
-Django==3.1.5
-django-tables2==2.4.0
-Markdown==3.3.4
-pytz==2020.5
-PyYAML==5.4.1
-sqlparse==0.4.1
-```

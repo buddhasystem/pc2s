@@ -24,6 +24,10 @@ urlpatterns = [
             views.documentation,
             {'what':'/clients.md', 'header':'PC2S CLI Clients'},
             name='clients'),
+    path('examples',
+            views.documentation,
+            {'what':'/examples.md', 'header':'Examples of PC2S use'},
+            name='examples'),
 
     path('stats',           views.stats,            name='stats'),
     path('test',            views.test,             name='test'),
