@@ -573,7 +573,7 @@ def stats(request):
         stat_dict = [
             {'name':'Global Tag',   'count': GlobalTag.objects.all().count()},
             {'name':'Tag',          'count': Tag.objects.all().count()},
-            {'name':'Payload',          'count': Payload.objects.all().count()},
+            {'name':'Payload',      'count': Payload.objects.all().count()},
             ]
         stattable = StatTable(stat_dict)
         RequestConfig(request, paginate={'per_page': 10}).configure(stattable)

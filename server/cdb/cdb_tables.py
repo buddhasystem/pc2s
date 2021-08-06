@@ -27,11 +27,9 @@ def highlight(name):
 ####################### Tables ##########################
 ###
 class StatTable(tables.Table):
-    name	    = tables.Column(verbose_name='Object', empty_values=())
-    count	= tables.Column(verbose_name='#', empty_values=())
+    name	    = tables.Column(verbose_name='Object',  empty_values=())
+    count	    = tables.Column(verbose_name='#',       empty_values=())
 
-#    class Meta:
-#        fields =('name', 'count')
 ###
 class GlobalTagTable(tables.Table):
     def render_name(self, value):
