@@ -332,7 +332,8 @@ def payloadcreate(request):
         tag         = post.get('tag',       None)
         since       = post.get('since',     None)
         url         = post.get('url',       None)
-####### print(sha256, tag, since, url)
+
+        # print(sha256, tag, since, url)
 
         try:
             found_tag=Tag.objects.get(name=tag)
