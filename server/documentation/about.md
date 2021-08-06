@@ -67,7 +67,8 @@ simplify the system.
     specific Monte Carlo campaign.
 * **Global Tag Map**
     * A simple object which helps manage which types of data (*"Tags"*, see below) are included
-    in a particular Global Tag.
+    in a particular Global Tag. The content of a *Global Tag* are managed by creation, deletion
+    or modification of the relevant *Global Tag Map* objects.
 * **Tag**
     * This object is used to denote a particular type of data (e.g. EMCal calibrations etc) and also specify
     the time limit of these data validity, i.e. the expiry of validity. The name of the corresponding

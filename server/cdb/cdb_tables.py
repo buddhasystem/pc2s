@@ -14,7 +14,7 @@ import operator
 
 #####
 #########################################################
-############## Links formatters #########################
+###### Link formatters and other helpers ################
 #########################################################
 def makelink(what, key, value):
     return mark_safe('<a href="http://%s%s?%s=%s">%s</a>'
@@ -23,6 +23,15 @@ def makelink(what, key, value):
 ###
 def highlight(name):
     return '<span style="color:red;">'+name+'</span>'
+
+####################### Tables ##########################
+###
+class StatTable(tables.Table):
+    name	    = tables.Column(verbose_name='Object', empty_values=())
+    count	= tables.Column(verbose_name='#', empty_values=())
+
+#    class Meta:
+#        fields =('name', 'count')
 ###
 class GlobalTagTable(tables.Table):
     def render_name(self, value):

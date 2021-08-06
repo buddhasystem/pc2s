@@ -567,6 +567,26 @@ def documentation(request, what, header):
                         }
                     )
 
+#####
+@csrf_exempt
+def stats(request):
+        stat_dict = [
+            {'name':'Global Tag',   'count': GlobalTag.objects.all().count()},
+            {'name':'Tag',          'count': Tag.objects.all().count()},
+            {'name':'Payload',          'count': Payload.objects.all().count()},
+            ]
+        stattable = StatTable(stat_dict)
+        RequestConfig(request, paginate={'per_page': 10}).configure(stattable)
+
+        return render(request, 'tablepage.html',
+            {
+                'header': 'System Stats',
+                'main_table_width': main_table_width,
+                'main_table': stattable,
+                }
+            )
+
+#####
 @csrf_exempt
 def test(request):
 
