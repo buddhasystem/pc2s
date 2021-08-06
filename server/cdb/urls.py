@@ -30,7 +30,7 @@ urlpatterns = [
     path('tag/create',      views.tagcreate,            name='tagcreate'),
     path('tag/delete',      views.tagdelete,            name='tagdelete'),
     path('tag/rename',      views.tagrename,            name='tagrename'),
-    path('tag/until',      views.taguntil,            name='taguntil'),
+    path('tag/until',       views.taguntil,             name='taguntil'),
 
     # Payloads
     path('payload',         views.payload,              name='payload'),

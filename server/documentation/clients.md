@@ -1,6 +1,11 @@
 #### CLI client utilities
 PC2S comes with a suite of CLI utilities (clients) supporting the entirety
-of its functionality.
+of its functionality. It is possible to make modifications to some objects
+after they are create, for example:
+
+* Global Tags can be renamed
+* Tags can be renamed, while preserving references to other objects
+* The *until* timestamp of the Tag obejct can be modified if needed
 
 <hr/>
 
@@ -55,7 +60,7 @@ optional arguments:
 
 ##### Tag
 ```bash
-usage: tag.py [-h] [-S SERVER] [-c] [-d] [-r] [-U] [-n NAME] [-N NEWNAME]
+usage: tag.py [-h] [-S SERVER] [-c] [-d] [-r] [-U] [-m] [-n NAME] [-N NEWNAME]
               [-u UNTIL] [-v VERBOSITY]
 
 optional arguments:
@@ -66,6 +71,7 @@ optional arguments:
   -d, --delete          Delete a Tag
   -r, --rename          Rename a Tag
   -U, --usage           Useful tips
+  -m, --modify          Modify the timestamp
   -n NAME, --name NAME  Tag Name
   -N NEWNAME, --newname NEWNAME
                         New Tag Name (for renaming)

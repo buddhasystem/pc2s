@@ -5,7 +5,7 @@ type as requested by the client, which are considered valid
 at a particular point in time and relevant to a certiain type of
 processing of the experiment's data.
 Logically, the overall system is a tandem of a **metadata service**
-and a **data delivery** system. The data delivery can be implemented
+and a **data delivery** system. Data delivery can be implemented
 using a number of suitable technologies (Apache, nginx, CVMFS etc or
 even a combination of these platforms).
 
@@ -16,7 +16,7 @@ the data delivery part. This provides considerable flexibility in implementation
 
 The PC2S project comprises the metadata service component. Web pages
 on this site are a Web interface to that service, and are complemented by a suite
-of command line clients.
+of [command line clients](/clients).
 
 #### Portable Conditions and Calibrations Service (PC2S)
 PC2S stands for *"portable conditions and calibration service"*.
