@@ -36,6 +36,7 @@ parser.add_argument("-c", "--create", action='store_true',	help="Create a Tag")
 parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Tag")
 parser.add_argument("-r", "--rename", action='store_true',	help="Rename a Tag")
 parser.add_argument("-U", "--usage",  action='store_true',	help="Useful tips")
+parser.add_argument("-m", "--modify", action='store_true',	help="Modify the timestamp")
 
 parser.add_argument("-n", "--name",   type=str,	            help="Tag Name",    default='')
 parser.add_argument("-N", "--newname",type=str,	            help="New Tag Name (for renaming)", default='')
@@ -50,6 +51,7 @@ server	= args.server
 create  = args.create
 delete  = args.delete
 rename  = args.rename
+modify  = args.modify
 usage   = args.usage
 
 name    = args.name
@@ -75,6 +77,15 @@ if(create):
         exit(-1)
     else:
         resp = API.post2server('cdb', 'tagcreate', {'name':name, 'until':until})
+        print(resp)
+        exit(0)
+
+if(modify):
+    if(until is None or until=='' or name is None or name==''):
+        print('Please supply a valid name and the end time of the tag validity for this operation')
+        exit(-1)
+    else:
+        resp = API.post2server('cdb', 'taguntil', {'name':name, 'until':until})
         print(resp)
         exit(0)
 

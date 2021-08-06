@@ -6,8 +6,8 @@ of its functionality.
 
 ##### Global Tag
 ```bash
-usage: gt.py [-h] [-S SERVER] [-c] [-d] [-l] [-t] [-n NAME] [-s STATUS]
-             [-y [YAML_FILE]] [-v VERBOSITY]
+usage: gt.py [-h] [-S SERVER] [-c] [-d] [-r] [-l] [-t] [-n NAME] [-N NEWNAME]
+             [-q QUERY] [-s STATUS] [-y [YAML_FILE]] [-v VERBOSITY]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -15,11 +15,16 @@ optional arguments:
                         server URL: defaults to http://localhost:8000/
   -c, --create          Create a Global Tag
   -d, --delete          Delete a Global Tag
+  -r, --rename          Rename a Global Tag
   -l, --list_gt         List names of all Global Tags
   -t, --tag_list        List names of tags in a Global Tag
   -n NAME, --name NAME  Global Tag Name
+  -N NEWNAME, --newname NEWNAME
+                        New Global Tag Name (for renaming)
+  -q QUERY, --query QUERY
+                        Partial Name to narrow down the list of Global Tags
   -s STATUS, --status STATUS
-                        Status to be set
+                        Set status: NEW, INV, PUB
   -y [YAML_FILE], --yaml_file [YAML_FILE]
                         YAML definition
   -v VERBOSITY, --verbosity VERBOSITY

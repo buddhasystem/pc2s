@@ -86,6 +86,17 @@ simplify the system.
     all *Payload* records are deleted as well. Keep in mind that this only applies to the database
     records, while the payload data on disk is managed separately.
 
+#### Time reference
+PC2S is using timezone-aware DateTime objects. In the current version the UTC
+timezone is utilized to reduce ambiguity. A valid string representation of
+time (as required in certain client commands) follows the pattern illustrated
+by this string:
+```
+2026-07-21 22:50:50+00:00
+```
+The section of the string following the "+" sign represents the offset due
+to the time zone. In case of UTC as illustrated here it is simply 00:00.
+
 #### Example
 
 Let's assume that a user wishes to record and later use dead channel maps
@@ -95,8 +106,8 @@ All clients are equipped with the "-h" options which produces a help screen.
 
 **Create a tag**
 
-The name is immaterial, but it may be useful to make it
-recognizable e.g. *EMCalDeadMap* or similar. The **tag.py" client
+The name of the tag we are about to create is immaterial, but it may be useful
+to make it recognizable e.g. *EMCalDeadMap* or similar. The *tag.py* client
 will be used for this purpose, with two arguments - the desired name
 of the tag and the time of its expiry (i.e. the time after which the tag
 is considered definitely invalid).
@@ -109,11 +120,12 @@ Note the correct format of the timestamp, which is timezone-aware.
 **Register payloads**
 
 Let's assume that the dead channel maps were produced by the appropriate
-software and exist as four separate files, named deadmap[1-4].root.
+EMCal software and exist as four separate files, named deadmap[1-4].root.
 The files are then placed on the data delivery system (not in the scope
 of this discussion) and at this point are assigned valid URLs. For demonstration
 purposes, let's assume the URLs follow the pattern:
 *https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root* etc.
+PC2S does not have any requirements as to the specific pattern of URLs.
 
 We will use the "payload.py" client to assign these payloads to the tag:
 ```bash
@@ -155,6 +167,9 @@ We will use the "global tag map" client to associate this particular tag
 Additional tags can be assigned as necessary to the Global Tag in
 a similar manner. The tags can also be detached from a Global Tag by
 removing the corresponding Global Tag Map objects.
+
+Global tags can be created at any point in time, even before
+their content (i.e. tags) are decided upon.
 
 
 #### Implementation

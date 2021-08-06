@@ -355,6 +355,28 @@ def tagrename(request):
     else:
         return HttpResponse('ERR')
 
+
+#####
+@csrf_exempt
+def taguntil(request):
+    if request.method =='POST':
+        post         = request.POST
+        name         = post.get('name', None)
+        until        = post.get('until',None)
+
+        if(name is None or name=='' or until is None or until==''): return HttpResponse("ERR")
+
+        try:
+            tag = Tag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+
+        tag.until=until
+        tag.save()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse("ERR")
+
 #####
 ################################### PAYLOAD ######################
 #####
