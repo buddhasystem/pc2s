@@ -157,6 +157,40 @@ def gtdelete(request):
 
 #####
 @csrf_exempt
+def gtrename(request):
+    if request.method =='POST':
+        post         = request.POST
+        name         = post.get('name', None)
+        newname      = post.get('newname', None)
+
+        if(name is None or name=='' or newname is None or newname==''):
+            return HttpResponse("ERR")
+
+        try:
+            gt=GlobalTag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+       
+        gt.name=newname
+        gt.save()
+
+        try:
+            GlobalTagMap.objects.filter(globaltag=name).update(globaltag=newname)
+        except:
+            pass
+
+        try:
+            GlobalTag.objects.get(name=name).delete()
+        except:
+            return HttpResponse("ERR")
+        
+        return HttpResponse('OK')
+    else:
+        return HttpResponse('ERR')
+
+
+#####
+@csrf_exempt
 def gtstatus(request):
     if request.method =='POST':
         post    = request.POST
@@ -279,6 +313,44 @@ def tagdelete(request):
             pass
 
         tag.delete()
+        return HttpResponse('OK')
+    else:
+        return HttpResponse('ERR')
+
+#####
+@csrf_exempt
+def tagrename(request):
+    if request.method =='POST':
+        post         = request.POST
+        name         = post.get('name', None)
+        newname      = post.get('newname', None)
+
+        if(name is None or name=='' or newname is None or newname==''):
+            return HttpResponse("ERR")
+        
+        try:
+            tag=Tag.objects.get(name=name)
+        except:
+            return HttpResponse("ERR")
+
+        tag.name=newname
+        tag.save()
+        
+        try:
+            Payload.objects.filter(tag=name).update(tag=newname)
+        except:
+            pass
+
+        try:
+            GlobalTagMap.objects.filter(tag=name).update(tag=newname)
+        except:
+            pass
+
+        try:
+            Tag.objects.get(name=name).delete()
+        except:
+            return HttpResponse("ERR")
+
         return HttpResponse('OK')
     else:
         return HttpResponse('ERR')

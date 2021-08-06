@@ -34,9 +34,11 @@ parser.add_argument("-S", "--server",	type=str,
 
 parser.add_argument("-c", "--create", action='store_true',	help="Create a Tag")
 parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Tag")
+parser.add_argument("-r", "--rename", action='store_true',	help="Rename a Tag")
 parser.add_argument("-U", "--usage",  action='store_true',	help="Useful tips")
 
 parser.add_argument("-n", "--name",   type=str,	            help="Tag Name",    default='')
+parser.add_argument("-N", "--newname",type=str,	            help="New Tag Name (for renaming)", default='')
 parser.add_argument("-u", "--until",  type=str,	            help="Valid until", default='')
 
 parser.add_argument("-v", "--verbosity",type=int,	help="Verbosity level",     default=0)
@@ -47,9 +49,11 @@ server	= args.server
 
 create  = args.create
 delete  = args.delete
+rename  = args.rename
 usage   = args.usage
 
 name    = args.name
+newname = args.newname
 until   = args.until
 
 verb    = args.verbosity
@@ -79,6 +83,14 @@ if(delete):
     print(resp)
     exit(0)
 
+if(rename):
+    if(newname is None or newname==''):
+        print('Please supply a valid new name for the rename operation')
+        exit(-1)
+    else:
+        resp = API.post2server('cdb', 'tagrename', {'name':name, 'newname':newname})
+        print(resp)
+        exit(0)
 
 resp=API.simple_get('cdb', 'tag', {'name':name})
 print(resp)

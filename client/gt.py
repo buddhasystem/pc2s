@@ -36,9 +36,11 @@ parser.add_argument("-S", "--server",	type=str,
 
 parser.add_argument("-c", "--create",       action='store_true',	help="Create a Global Tag")
 parser.add_argument("-d", "--delete",       action='store_true',	help="Delete a Global Tag")
+parser.add_argument("-r", "--rename",       action='store_true',	help="Rename a Global Tag")
 parser.add_argument("-l", "--list_gt",      action='store_true',	help="List names of all Global Tags")
 parser.add_argument("-t", "--tag_list",     action='store_true',	help="List names of tags in a Global Tag")
 parser.add_argument("-n", "--name",         type=str,	            help="Global Tag Name",	    default='')
+parser.add_argument("-N", "--newname",      type=str,	            help="New Global Tag Name (for renaming)", default='')
 parser.add_argument("-q", "--query",        type=str, help="Partial Name to narrow down the list of Global Tags",default='')
 parser.add_argument("-s", "--status",       type=str, help="Set status: NEW, INV, PUB",    default='')
 parser.add_argument("-y", "--yaml_file",    type=str,	            help="YAML definition",     default='', nargs='?')
@@ -50,10 +52,12 @@ server	= args.server
 
 create  = args.create
 delete  = args.delete
+rename  = args.rename
 list_gt = args.list_gt
 tag_list= args.tag_list
 
 name    = args.name
+newname = args.newname
 query   = args.query
 status  = args.status
 
@@ -95,6 +99,19 @@ if(delete):
         exit(-1)
     
     resp = API.post2server('cdb', 'gtdelete', {'name':name})
+    print(resp)
+    exit(0)
+
+if(rename):
+    if(name is None or name==''):
+        print('Please provide a valid global tag name')
+        exit(-1)
+
+    if(newname is None or newname==''):
+        print('Please provide a valid new global tag name for this operation')
+        exit(-1)
+        
+    resp = API.post2server('cdb', 'gtrename', {'name':name, 'newname':newname})
     print(resp)
     exit(0)
 

@@ -18,6 +18,7 @@ urlpatterns = [
     path('globaltag/taglist',views.gttaglist,           name='gttaglist'),
     path('globaltag/create',views.gtcreate,             name='gtcreate'),
     path('globaltag/delete',views.gtdelete,             name='gtdelete'),
+    path('globaltag/rename',views.gtrename,             name='gtrename'),
     path('globaltag/status',views.gtstatus,             name='gtstatus'),
     # Global Tag Maps
     path('gtm',             views.gtm,                  name='gtm'),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('tag',             views.tag,                  name='tag'),
     path('tag/create',      views.tagcreate,            name='tagcreate'),
     path('tag/delete',      views.tagdelete,            name='tagdelete'),
+    path('tag/rename',      views.tagrename,            name='tagrename'),
 
     # Payloads
     path('payload',         views.payload,              name='payload'),

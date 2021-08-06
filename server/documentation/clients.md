@@ -50,8 +50,8 @@ optional arguments:
 
 ##### Tag
 ```bash
-usage: tag.py [-h] [-S SERVER] [-c] [-d] [-U] [-n NAME] [-u UNTIL]
-              [-v VERBOSITY]
+usage: tag.py [-h] [-S SERVER] [-c] [-d] [-r] [-U] [-n NAME] [-N NEWNAME]
+              [-u UNTIL] [-v VERBOSITY]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -59,8 +59,11 @@ optional arguments:
                         server URL: defaults to http://localhost:8000/
   -c, --create          Create a Tag
   -d, --delete          Delete a Tag
+  -r, --rename          Rename a Tag
   -U, --usage           Useful tips
   -n NAME, --name NAME  Tag Name
+  -N NEWNAME, --newname NEWNAME
+                        New Tag Name (for renaming)
   -u UNTIL, --until UNTIL
                         Valid until
   -v VERBOSITY, --verbosity VERBOSITY
