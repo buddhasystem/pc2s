@@ -47,3 +47,6 @@ def find_payload(globaltag, tag, payload_time):
             return p
 
     return None
+
+def search_message(name):
+    return 'Showing results for "'+name+'". Click here and press <ENTER> to reset search.'

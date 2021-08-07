@@ -498,11 +498,12 @@ def globaltags(request):
         gts=None
         if (no_status):
             gts=GlobalTag.objects.filter(name__contains=namepattern)
-            search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset.'
+            search = search_message(namepattern)
+
         else:
             gts=GlobalTag.objects.filter(status=status)
             if(not no_name):
-                search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset.'
+                search = search_message(namepattern)
                 gts=gts.filter(name__contains=namepattern)
             
     # Defer this approach to the selector:
@@ -544,7 +545,7 @@ def tags(request):
             return HttpResponse("ERR")
     else:
         tags=Tag.objects.filter(name__contains=namepattern)
-        search='Showing results for "'+namepattern+'". Click here and press <ENTER> to reset search.'
+        search=search_message(namepattern)
     
     tag_table = TagTable(tags)
     RequestConfig(request, paginate={'per_page': 10}).configure(tag_table)
@@ -634,7 +635,7 @@ def tagdetail(request):
 @csrf_exempt
 def documentation(request, what, header):
     path = str(settings.DOCUMENTATION)+what # '/documentation.md'
-    print(path)
+
     try:
         file = open(path,mode='r')
     except:
