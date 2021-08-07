@@ -551,11 +551,11 @@ def tags(request):
     RequestConfig(request, paginate={'per_page': 10}).configure(tag_table)
 
     page_dict = {
-        'header':'Tags',
+        'header':           'Tags',
         'main_table_width': main_table_width,
-        'main_table':tag_table,
-        'search':search,
-        'show_query':True,
+        'main_table':       tag_table,
+        'search':           search,
+        'show_query':       True,
         }
 
     return render(request, 'tablepage.html', page_dict)
@@ -622,11 +622,11 @@ def tagdetail(request):
 
         return render(request, 'tablepage.html',
             {
-                'header': mark_safe('Payloads for the tag: '+highlight(name)),
+                'header':           mark_safe('Payloads for the tag: '+highlight(name)),
                 'main_table_width': main_table_width_max,
-                'main_table':payloadtable,
-                'aux_list_header':mark_safe('Global Tags Referencing tag: '+highlight(name)),
-                'aux_list': gts
+                'main_table':       payloadtable,
+                'aux_list_header':  mark_safe('Global Tags Referencing tag: '+highlight(name)),
+                'aux_list':         gts
                 }
             )
 
@@ -641,9 +641,9 @@ def documentation(request, what, header):
     except:
         return render(request, 'textpage.html',
             {
-                'header':'Documentation',
-                'width': text_width,
-                'text':'Under construction'
+                'header':   'Documentation',
+                'width':    text_width,
+                'text':'    Under construction'
                 }
             )
     
@@ -657,9 +657,9 @@ def documentation(request, what, header):
     return render(request,
                     'textpage.html',
                     {
-                        'header':header,
-                        'width': text_width,
-                        'text':html_docs
+                        'header':   header,
+                        'width':    text_width,
+                        'text':     html_docs
                         }
                     )
 
@@ -676,9 +676,9 @@ def stats(request):
 
         return render(request, 'tablepage.html',
             {
-                'header': 'System Stats',
+                'header':           'System Stats',
                 'main_table_width': main_table_width,
-                'main_table': stattable,
+                'main_table':       stattable,
                 }
             )
 

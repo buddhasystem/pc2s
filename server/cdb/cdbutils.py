@@ -1,6 +1,7 @@
 from .models import *
 from django.utils.dateparse import parse_datetime
 
+###
 def tag2dict(name):
     try:
         tag=Tag.objects.get(name=name)
@@ -20,7 +21,7 @@ def tag2dict(name):
     result = {'name':tag.name, 'until':tag.until, 'payloads':payload_list}
     return result
 
-
+###
 def find_payload(globaltag, tag, payload_time):
     gtms=GlobalTagMap.objects.filter(globaltag=globaltag, tag=tag)
     if(len(gtms)==0):
@@ -48,5 +49,6 @@ def find_payload(globaltag, tag, payload_time):
 
     return None
 
+###
 def search_message(name):
     return 'Showing results for "'+name+'". Click here and press <ENTER> to reset search.'
