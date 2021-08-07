@@ -1,4 +1,15 @@
-#### Example 1: Create and Populate a Global Tag
+<hr>
+#### Example 1: Look up and Explore a Global Tag
+Obtain a listing of all Global Tags in the systems, in YAML format - names shown here
+are arbitrary and only serve illustration purposes:
+```bash
+./gt.py -l
+- name: gt_test
+- name: sPHENIX2024
+- name: ECCE_MC_2023
+```
+<hr>
+#### Example 2: Create and Populate a Global Tag
 
 Let's assume that a user wishes to record and later use dead channel maps
 for the Electromagnetic Calorimeter (EMCal). The [PC2S CLI clients](/clients)
