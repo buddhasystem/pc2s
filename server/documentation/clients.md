@@ -84,9 +84,7 @@ optional arguments:
 
 ##### Payload
 ```bash
-usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-s [SHA256]] [-t TAG]
-                  [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG] [-v VERBOSITY]
-                  [-p [POPULATE]]
+usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-s [SHA256]] [-t TAG] [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG] [-v VERBOSITY] [-p [POPULATE]]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -94,7 +92,7 @@ optional arguments:
                         server URL: defaults to http://localhost:8000/
   -c, --create          Create a Payload
   -d, --delete          Delete a Payload
-  -f, --fetch           Fetch a payload, by hash or Global Tag and time value
+  -f, --fetch           Fetch a payload, by hash or (Global Tag, Tag, time)
   -U, --usage           Useful tips
   -s [SHA256], --sha256 [SHA256]
                         sha256
@@ -107,6 +105,5 @@ optional arguments:
   -v VERBOSITY, --verbosity VERBOSITY
                         Verbosity level
   -p [POPULATE], --populate [POPULATE]
-                        For testing only: number of simulated records to
-                        create, with random IOVs. Requires a tag name.
+                        For testing only: number of simulated records to create, with random IOVs. Requires a tag name.
 ```

@@ -39,7 +39,7 @@ parser.add_argument("-S", "--server",	type=str,
 
 parser.add_argument("-c", "--create",   action='store_true',	help="Create a Payload")
 parser.add_argument("-d", "--delete",   action='store_true',	help="Delete a Payload")
-parser.add_argument("-f", "--fetch",    action='store_true',	help="Fetch a payload, by hash or Global Tag and time value")
+parser.add_argument("-f", "--fetch",    action='store_true',	help="Fetch a payload, by hash or (Global Tag, Tag, time)")
 parser.add_argument("-U", "--usage",    action='store_true',	help="Useful tips")
 
 parser.add_argument("-s", "--sha256",       type=str,	help="sha256",  default='', nargs='?')
