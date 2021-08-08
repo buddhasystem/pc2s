@@ -21,7 +21,7 @@ from serverAPI		import serverAPI
 #########################################################
 settings.configure(USE_TZ = True)
 
-user		= os.environ['USER']
+# user		= os.environ['USER']
 
 server = 'http://localhost:8000/'
 verb = 0
