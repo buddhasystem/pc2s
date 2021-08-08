@@ -18,7 +18,10 @@ def tag2dict(name):
         p_dict['url']   = p.url
         payload_list.append(p_dict)
         
-    result = {'name':tag.name, 'until':tag.until, 'payloads':payload_list}
+    
+    gts=[str(elem) for elem in list(GlobalTagMap.objects.filter(tag=name).values_list('globaltag', flat=True))]
+
+    result = {'name':tag.name, 'until':tag.until, 'globaltags': gts, 'payloads':payload_list}
     return result
 
 ###

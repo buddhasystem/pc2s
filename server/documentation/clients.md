@@ -11,8 +11,7 @@ after they are create, for example:
 
 ##### Global Tag
 ```bash
-usage: gt.py [-h] [-S SERVER] [-c] [-d] [-r] [-l] [-t] [-n NAME] [-N NEWNAME]
-             [-q QUERY] [-s STATUS] [-y [YAML_FILE]] [-v VERBOSITY]
+usage: gt.py [-h] [-S SERVER] [-c] [-d] [-r] [-l] [-t] [-n NAME] [-N NEWNAME] [-q QUERY] [-s STATUS] [-y [YAML_FILE]] [-v VERBOSITY]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -34,6 +33,7 @@ optional arguments:
                         YAML definition
   -v VERBOSITY, --verbosity VERBOSITY
                         Verbosity level
+
 ```
 <hr/>
 

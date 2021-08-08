@@ -1,15 +1,53 @@
 <hr>
 
-#### Example 1: Look up and Explore a Global Tag
-Obtain a listing of all Global Tags in the systems, in YAML format - names shown here
-are arbitrary and only serve illustration purposes:
+#### Introductory Note
+Please note that all examples presented here are for demonstration
+purposes, all object names and attributes shown here are arbitrary
+and only for illustration.
 
+#### Example 1: Look up and Explore a Global Tag
+Obtain a listing of all Global Tags in the systems, in YAML format:
 ```bash
-./gt.py -l
+$ ./gt.py -l
 - name: gt_test
 - name: sPHENIX2024
 - name: ECCE_MC_2023
 ```
+Look at the list of tags included in a particular Global Tag:
+```bash
+$ ./gt.py -n sPHENIX2024 -t
+name: sPHENIX2024
+tags:
+- EMCalDeadMap
+- IHCalDeadMap
+```
+Look at the contents of a particular tag:
+```bash
+name: EMCalDeadMap
+until: 2024-12-24 22:50:50+00:00
+globaltags:
+- sPHENIX2024
+payloads:
+- sha26: 0309d592920880cce3a86d6b70d0fb87668de893f2b7792970853c26d6ede95c
+  since: 2024-01-01 00:01:59+00:00
+  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root
+- sha26: 21eb8c9fd4d3b795c39f08d565ff5d3d019455e7a16001a1e81c08d94a602e8b
+  since: 2024-03-01 00:01:01+00:00
+  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
+- sha26: 0fc352fd32dd7a616082974a067702d4faed3770ad8624f94ffbfb89653539d2
+  since: 2024-06-01 00:05:01+00:00
+  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap3.root
+- sha26: e3afbd1c1557c3fa3b14fc6d7a3fdd24a1c53e3abd91205f9b8c198ff5bb9f5d
+  since: 2024-09-01 01:01:15+00:00
+  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap4.root
+```
+Things to note:
+
+* There is a list of all Global Tags referencing this particular tag. In this case,
+there is only one Global Tag, "sPHENIX2024".
+* There is a list of payloads included in this YAML output, with complete information
+about each payload.
+
 
 <hr>
 
@@ -28,7 +66,7 @@ will be used for this purpose, with two arguments - the desired name
 of the tag and the time of its expiry (i.e. the time after which the tag
 is considered definitely invalid).
 ```bash
-./tag.py -c -n EMCalDeadMap -u '2024-12-25 22:50:50+00:00'
+$ ./tag.py -c -n EMCalDeadMap -u '2024-12-25 22:50:50+00:00'
 ```
 Here "-c" stands for "create", "-n" for "name" and "-u" for "until".
 Note the correct format of the timestamp, which is timezone-aware.
@@ -45,7 +83,7 @@ PC2S does not have any requirements as to the specific pattern of URLs.
 
 We will use the "payload.py" client to assign these payloads to the tag:
 ```bash
-./payload.py -c -t EMCalDeadMap -i '2024-01-01 00:00:00+00:00' \
+$ ./payload.py -c -t EMCalDeadMap -i '2024-01-01 00:00:00+00:00' \
 -u https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root \
 -s 0309d592920880cce3a86d6b70d0fb87668de893f2b7792970853c26d6ede95c
 ```
@@ -67,7 +105,7 @@ monitor screen (see the "Tags") entry in the left had side navigation bar.
 
 Let's now create a Global Tag wiith a descriptive name, e.g. "sPHENIX2024":
 ```bash
-./gt.py -c -n sPHENIX2024
+$ ./gt.py -c -n sPHENIX2024
 ```
 This global tag can contain any number of different types of data relevant
 for the EMCal, e.g. channel gains, pedestals etc. We'll limit our example
@@ -78,7 +116,7 @@ to just one tag which is the dead channel map.
 We will use the "global tag map" client to associate this particular tag
 - EMCalDeadMap - with the Global Tag "EMCal".
 ```bash
-./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap -v 1
+$ ./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap -v 1
 ```
 Additional tags can be assigned as necessary to the Global Tag in
 a similar manner. The tags can also be detached from a Global Tag by
