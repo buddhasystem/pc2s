@@ -37,6 +37,7 @@ parser.add_argument("-d", "--delete", action='store_true',	help="Delete a Tag")
 parser.add_argument("-r", "--rename", action='store_true',	help="Rename a Tag")
 parser.add_argument("-U", "--usage",  action='store_true',	help="Useful tips")
 parser.add_argument("-m", "--modify", action='store_true',	help="Modify the timestamp")
+parser.add_argument("-l", "--list_tags", action='store_true', help="List names of all Tags")
 
 parser.add_argument("-n", "--name",   type=str,	            help="Tag Name",    default='')
 parser.add_argument("-N", "--newname",type=str,	            help="New Tag Name (for renaming)", default='')
@@ -53,6 +54,7 @@ delete  = args.delete
 rename  = args.rename
 modify  = args.modify
 usage   = args.usage
+list_tags = args.list_tags
 
 name    = args.name
 newname = args.newname
@@ -65,6 +67,11 @@ API  = serverAPI(server=server, verb=verb)
 ###########################################
 if(usage):
     print("Example of the timestamp format: '2026-07-21 22:50:50+00:00'")
+    exit(0)
+
+if(list_tags):
+    resp=API.simple_get('cdb', 'taglist', None)
+    print(resp)
     exit(0)
 
 if(name is None or name==''):

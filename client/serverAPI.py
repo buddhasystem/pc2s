@@ -35,6 +35,7 @@ class serverAPI(dict):
             'tagdelete':        server+'cdb/tag/delete',
             'tagrename':        server+'cdb/tag/rename',
             'taguntil':         server+'cdb/tag/until',
+            'taglist':         server+'cdb/tag/list',
             # Payload
             'payload':          server+'cdb/payload',
             'payloadcreate':    server+'cdb/payload/create',

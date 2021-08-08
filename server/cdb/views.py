@@ -264,6 +264,19 @@ def gtmdelete(request):
 
 ################################### TAG ##########################
 @csrf_exempt
+def taglist(request):
+    if request.method =='POST':
+        return HttpResponse("ERR")
+    else:
+        try:
+            tags=[str(elem) for elem in list(Tag.objects.values_list('name', flat=True))]
+        except:
+            return HttpResponse("ERR")
+
+        data = yaml.dump(tags, sort_keys=False)
+        return HttpResponse(data)
+#####
+@csrf_exempt
 def tag(request):
     if request.method =='POST':
         return HttpResponse("ERR")
