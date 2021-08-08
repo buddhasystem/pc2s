@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 #
 # The script to manage Global Tags with the pc2s system
 #
@@ -23,7 +23,7 @@ from serverAPI		import serverAPI
 #########################################################
 settings.configure(USE_TZ = True)
 
-user		= os.environ['USER']
+# user		= os.environ['USER']
 
 server = 'http://localhost:8000/'
 verb = 0

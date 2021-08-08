@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 #
 # The script to manage Tag pbjects with the pc2s system
 #
