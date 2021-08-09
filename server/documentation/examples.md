@@ -173,9 +173,12 @@ Let's now create a Global Tag wiith a descriptive name, e.g. "sPHENIX2024":
 ```bash
 $ ./gt.py -c -n sPHENIX2024
 ```
-This global tag can contain any number of different types of data relevant
-for the EMCal, e.g. channel gains, pedestals etc. We'll limit our example
-to just one tag which is the dead channel map.
+At this point the Global Tag only acquired a name but no actual content/references.
+
+Global Tags can contain any number of different types of data relevant
+to any detector subsystem. In case of EMCal, these could be channel gain
+values, pedestals etc. We'll limit our example to just one tag which
+is the dead channel map.
 
 **Assign the Tag to the Global Tag**
 

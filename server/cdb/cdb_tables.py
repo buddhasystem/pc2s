@@ -81,4 +81,4 @@ class PayloadTable(tables.Table):
     class Meta:
         model=Payload
         exclude=('tag',)
-        sequence=('since', 'url', 'sha256',)
+        sequence=('since', 'url', 'name',)

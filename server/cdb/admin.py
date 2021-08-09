@@ -17,6 +17,6 @@ class TagAdmin(admin.ModelAdmin):
 admin.site.register(Tag, TagAdmin)
 
 class PayloadAdmin(admin.ModelAdmin):
-    list_display=['tag','since','url','sha256']
+    list_display=['tag','since','url','name',]
     empty_value_display = '-empty-'
 admin.site.register(Payload, PayloadAdmin)

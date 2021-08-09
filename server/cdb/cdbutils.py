@@ -13,7 +13,7 @@ def tag2dict(name):
 
     for p in payloads:
         p_dict={}
-        p_dict['sha26'] = p.sha256
+        p_dict['name'] = p.name
         p_dict['since'] = p.since
         p_dict['url']   = p.url
         payload_list.append(p_dict)

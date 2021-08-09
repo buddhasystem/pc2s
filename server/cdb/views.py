@@ -398,14 +398,14 @@ def payload(request):
     if request.method =='POST':
         return HttpResponse("ERR")
     else: # GET
-        sha256  = request.GET.get('sha256', '')
+        name  = request.GET.get('name', '')
         gt      = request.GET.get('globaltag', '')
         tag     = request.GET.get('tag', '')
         p_time  = request.GET.get('time', '')
 
-        if(sha256 is not None and sha256!=''):
+        if(name is not None and name!=''):
             try:
-                payload=Payload.objects.get(sha256=sha256)
+                payload=Payload.objects.get(name=name)
             except:
                 return HttpResponse("ERR")
         elif(gt is not None and gt!='' and p_time is not None and p_time!=''):
@@ -421,7 +421,7 @@ def payload(request):
             return HttpResponse("ERR")
 
         to_dump={
-            'sha256':   payload.sha256,
+            'name':   payload.name,
             'tag':      payload.tag,
             'since':    payload.since,
             'url':      payload.url
@@ -435,12 +435,12 @@ def payload(request):
 def payloadcreate(request):
     if request.method =='POST':
         post        = request.POST
-        sha256      = post.get('sha256',    None)
+        name      = post.get('name',    None)
         tag         = post.get('tag',       None)
         since       = post.get('since',     None)
         url         = post.get('url',       None)
 
-        # print(sha256, tag, since, url)
+        # print(name, tag, since, url)
 
         try:
             found_tag=Tag.objects.get(name=tag)
@@ -451,7 +451,7 @@ def payloadcreate(request):
         if(p_since>=found_tag.until):
             return HttpResponse("ERR")
         
-        payload=Payload(sha256=sha256, tag=tag, since=since, url=url)
+        payload=Payload(name=name, tag=tag, since=since, url=url)
         payload.save()
         return HttpResponse('OK')
     else:
@@ -463,13 +463,13 @@ def payloaddelete(request):
     if request.method =='POST':
         post         = request.POST
         tag          = post.get('tag', None)
-        sha256       = post.get('sha256', None)
+        name       = post.get('name', None)
 
         if(tag is None or tag==''):
-            if(sha256 is None or sha256==''):
+            if(name is None or name==''):
                 return HttpResponse("ERR")
             else:
-                payloads = Payload.objects.filter(sha256=sha256)
+                payloads = Payload.objects.filter(name=name)
                 try:
                     payloads.delete()
                     return HttpResponse('OK')
@@ -525,7 +525,7 @@ def globaltags(request):
     gt_table = GlobalTagTable(gts)
     RequestConfig(request, paginate={'per_page': 10}).configure(gt_table)
 
-    items=[('', 'All'),]+GlobalTag.STATUS_CHOICES
+    items=[('', 'Status Filter: All'),]+GlobalTag.STATUS_CHOICES
     # items = [('', 'Filter'), ('NEW','New'), ('PUB', 'Published'),]
     page_dict = {
         'header':'Global Tags',

@@ -6,8 +6,8 @@ at a particular point in time and relevant to a certiain type of
 processing of the experiment's data.
 Logically, the overall system is a tandem of a **metadata service**
 and a **data delivery** system. Data delivery can be implemented
-using a number of suitable technologies (Apache, nginx, CVMFS etc or
-even a combination of these platforms).
+using a number of suitable technologies: HTTP (Apache, nginx etc),
+CVMFS, XRootD or even a combination of these platforms, as needed.
 
 These two components are weakly coupled. The only connection between
 them is the requiment that the metadata component needs to provide a
@@ -58,7 +58,7 @@ non-trivial distinction between PC2S and the HSF model is
 merging of the payload and IOV objects, done in order to
 simplify the system.
 
-![](/static/images/PC2S_ERD_v2.png"PC2S EDR")
+![](/static/images/PC2S_ERD_v3.png"PC2S EDR")
 
 #### Objects
 
@@ -81,11 +81,7 @@ simplify the system.
     the timestamp of the *start* of its *Interval of Validity*. The name of the corresponding
     attribute is "since". By convention, there is no expiry timestamp in the payload object.
     It is expired automatically by the next payload in the time series, according to its "since"
-    values. The *Payload* object also contains a sha256 value for the actual payload file, helping
-    in debugging and content validation. This object is always tied to a specific *Tag* by design,
-    so it can't exist meaningfully as a standalone entity. When a *Tag* is deleted from the database,
-    all *Payload* records are deleted as well. Keep in mind that this only applies to the database
-    records, while the payload data on disk is managed separately.
+    values.
 
 #### Time reference
 PC2S is using timezone-aware DateTime objects. In the current version the UTC
