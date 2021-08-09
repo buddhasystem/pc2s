@@ -42,7 +42,7 @@ parser.add_argument("-d", "--delete",   action='store_true',	help="Delete a Payl
 parser.add_argument("-f", "--fetch",    action='store_true',	help="Fetch a payload, by hash or (Global Tag, Tag, time)")
 parser.add_argument("-U", "--usage",    action='store_true',	help="Useful tips")
 
-parser.add_argument("-s", "--sha256",       type=str,	help="sha256",  default='', nargs='?')
+parser.add_argument("-n", "--name",       type=str,	help="name",  default='', nargs='?')
 parser.add_argument("-t", "--tag",          type=str,	help="tag",     default='')
 parser.add_argument("-i", "--iov",          type=str,	help="start of IOV ('since')",     default='')
 parser.add_argument("-u", "--url",          type=str,	help="url",     default='')
@@ -66,7 +66,7 @@ delete  = args.delete
 fetch   = args.fetch
 usage   = args.usage
 
-sha256  = args.sha256
+name  = args.name
 tag     = args.tag
 since   = args.iov
 url     = args.url
@@ -87,8 +87,8 @@ if(usage):
 # Deletion can be blanket for a tag (i.e. all payloads in a tag are removed)
 # or more targeted if the hash is supplied.
 if(delete):
-    if(sha256 is not None and sha256!=''):
-        resp = API.post2server('cdb', 'payloaddelete', {'sha256':sha256})
+    if(name is not None and name!=''):
+        resp = API.post2server('cdb', 'payloaddelete', {'name':name})
         if(verb>0): print(resp)
         exit(0)
 
@@ -102,8 +102,8 @@ if(delete):
 
 ###
 if(fetch):
-    if(sha256 is not None and sha256!=''):
-        resp=API.simple_get('cdb', 'payload', {'sha256':sha256})
+    if(name is not None and name!=''):
+        resp=API.simple_get('cdb', 'payload', {'name':name})
         print(resp)
         exit(0)
 
@@ -129,7 +129,7 @@ if(populate is not None and populate!=0):
     letters = string.ascii_lowercase
     for pop in range(populate):
         random_name =''.join(random.choice(letters) for i in range(10))
-        sha256      = hashlib.sha256(random_name.encode()).hexdigest()
+        name      = hashlib.name(random_name.encode()).hexdigest()
         month   = random.randint(1, 12)
         day     = random.randint(1, 30)
         hour    = random.randint(0, 23)
@@ -140,21 +140,21 @@ if(populate is not None and populate!=0):
 
         url = 'https://nginx.sphenix.bnl.gov/cdb/'+random_name+'.root'
 
-        d={'sha256': sha256, 'tag': tag, 'since': since, 'url': url}
+        d={'name': name, 'tag': tag, 'since': since, 'url': url}
         resp = API.post2server('cdb', 'payloadcreate', d)
         if(verb>0): print(resp)
         if(resp=='ERR'): exit(-1)
     exit(0)     
 ###
 if(create):
-    if(sha256 is None or sha256==''):
-        print('Automatic calculation of sha256 is not implemented yet, please supply a value')
+    if(name is None or name==''):
+        print('Automatic calculation of name is not implemented yet, please supply a value')
         exit(-1)
     if(since is None or since==''):
         print('Please supply a valid time for the start of validity')
         exit(-1)
 
-    d={'sha256': sha256, 'tag': tag, 'since' : since, 'url': url}
+    d={'name': name, 'tag': tag, 'since' : since, 'url': url}
     if(verb>1): print(d)         
     resp = API.post2server('cdb', 'payloadcreate', d)
     if(verb>0): print(resp)

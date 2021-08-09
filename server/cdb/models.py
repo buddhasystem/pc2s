@@ -29,7 +29,7 @@ class Tag(models.Model):
     until       = models.DateTimeField(verbose_name='Valid Until', default=timezone.now)
 
 class Payload(models.Model):
-    sha256      = models.CharField(max_length=64, primary_key=True, null=False, default="")
+    name     = models.CharField(max_length=64, primary_key=True, null=False, default="")
     tag		    = models.CharField(max_length=128, null=False, default="")
     since       = models.DateTimeField(default=timezone.now)
     url		    = models.CharField(max_length=256, default="")
