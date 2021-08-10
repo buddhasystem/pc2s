@@ -23,23 +23,26 @@ tags:
 ```
 Look at the contents of a particular tag:
 ```bash
+$ ./tag.py -n EMCalDeadMap
 name: EMCalDeadMap
 until: 2024-12-24 22:50:50+00:00
 globaltags:
 - sPHENIX2024
 payloads:
-- sha26: 0309d592920880cce3a86d6b70d0fb87668de893f2b7792970853c26d6ede95c
+- name: deadmap1
   since: 2024-01-01 00:01:59+00:00
   url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root
-- sha26: 21eb8c9fd4d3b795c39f08d565ff5d3d019455e7a16001a1e81c08d94a602e8b
+- name: deadmap2
   since: 2024-03-01 00:01:01+00:00
   url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
-- sha26: 0fc352fd32dd7a616082974a067702d4faed3770ad8624f94ffbfb89653539d2
+- name: deadmap3
   since: 2024-06-01 00:05:01+00:00
   url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap3.root
-- sha26: e3afbd1c1557c3fa3b14fc6d7a3fdd24a1c53e3abd91205f9b8c198ff5bb9f5d
+- name: deadmap4
   since: 2024-09-01 01:01:15+00:00
   url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap4.root
+
+
 ```
 Things to note:
 
@@ -61,16 +64,16 @@ tags:
   globaltags:
   - sPHENIX2024
   payloads:
-  - sha26: 0309d592920880cce3a86d6b70d0fb87668de893f2b7792970853c26d6ede95c
+  - name: deadmap1
     since: 2024-01-01 00:01:59+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root
-  - sha26: 21eb8c9fd4d3b795c39f08d565ff5d3d019455e7a16001a1e81c08d94a602e8b
+  - name: deadmap2
     since: 2024-03-01 00:01:01+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
-  - sha26: 0fc352fd32dd7a616082974a067702d4faed3770ad8624f94ffbfb89653539d2
+  - name: deadmap3
     since: 2024-06-01 00:05:01+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap3.root
-  - sha26: e3afbd1c1557c3fa3b14fc6d7a3fdd24a1c53e3abd91205f9b8c198ff5bb9f5d
+  - name: deadmap4
     since: 2024-09-01 01:01:15+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap4.root
 - name: IHCalDeadMap
@@ -78,22 +81,22 @@ tags:
   globaltags:
   - sPHENIX2024
   payloads:
-  - sha26: d11955a931ebe2b123394c00752e0c41f7b4edfacfbbb9d2a359147530e7e38a
+  - name: ihcalmap1
     since: 2024-01-01 00:59:00+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/ihcal/deadmap1.root
-  - sha26: 63a511f50f9ee5b2293801ecdfae68b9656ec2cad72556d3a3140b55a566586a
+  - name: ihcalmap2
     since: 2024-02-01 02:59:00+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/ihcal/deadmap2.root
-  - sha26: 7a08e7d6feeb147442d2c79957d5663c726366fbb60d20ee4dc64136c23ef090
+  - name: ihcalmap3
     since: 2024-02-22 02:59:00+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/ihcal/deadmap3.root
-  - sha26: 497cdefe2641b1222c79d4b93f58c34f38ec66b477e5fe900a9a59280cd566b7
+  - name: ihcalmap4
     since: 2024-03-01 01:01:00+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/ihcal/deadmap4.root
-  - sha26: 9b3821185218846a28ea4b484fb8b122cecf2d14d98dfbfcd92846ed81cc0959
+  - name: ihcalmap5
     since: 2024-04-11 04:01:10+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/ihcal/deadmap5.root
-  - sha26: 748e966f55adbe034462e9aea480ca80e8b1ee851cc03b4804cc0ddcdecf36f3
+  - name: ihcalmap6
     since: 2024-06-03 01:01:15+00:00
     url: https://nginx.sphenix.bnl.gov/cdb/ihcal/deadmap6.root
 ```
@@ -105,7 +108,7 @@ actual data can be reqiested from a Data Delivery service (separate from the PC2
 
 ```bash
 $ ./payload.py -f -g sPHENIX2024 -t EMCalDeadMap -T '2024-05-01 02:01:14+00:00'
-sha256: 21eb8c9fd4d3b795c39f08d565ff5d3d019455e7a16001a1e81c08d94a602e8b
+name: deadmap2
 tag: EMCalDeadMap
 since: 2024-03-01 00:01:01+00:00
 url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
@@ -151,13 +154,12 @@ validity:
 ```bash
 $ ./payload.py -c -t EMCalDeadMap -i '2024-01-01 00:00:00+00:00' \
 -u https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root \
--s 0309d592920880cce3a86d6b70d0fb87668de893f2b7792970853c26d6ede95c
+-n deadmap1
 ```
 Here "-c" stands for "create", "-t" for "tag" (which we defined as the one
 we just created), the "-i" is is the start of the interval of validity, and
-"-s" is the sha256 hash of the payload, i.e. the file deadmap1.root. It is
-used to (a) provide a unique key to the payload (b) resolve situations where
-same file name was used more than once by mistake.
+"-n" is the name of the payload, i.e. the file deadmap1.root. This is a mneumonic
+name that can be anything.
 
 The command above will be repeated four times, each time with an appropriate
 file name and the checksum, and of course timestamp for each file, corresponding
@@ -183,14 +185,14 @@ is the dead channel map.
 **Assign the Tag to the Global Tag**
 
 We will use the "global tag map" client to associate this particular tag
-- EMCalDeadMap - with the Global Tag "EMCal".
+- *EMCalDeadMap* - with the Global Tag "EMCal".
 ```bash
 $ ./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap -v 1
 ```
-Additional tags can be assigned as necessary to the Global Tag in
+Additional tags can be assigned as necessary to any Global Tag in
 a similar manner. The tags can also be detached from a Global Tag by
 removing the corresponding Global Tag Map objects.
 
 Global tags can be created at any point in time, even before
-their content (i.e. tags) are decided upon.
+their content (i.e. tags they refer to) are decided upon.
 

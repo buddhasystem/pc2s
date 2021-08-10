@@ -84,7 +84,8 @@ optional arguments:
 
 ##### Payload
 ```bash
-usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-s [SHA256]] [-t TAG] [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG] [-v VERBOSITY] [-p [POPULATE]]
+usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-n [NAME]] [-t TAG] [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG]
+                  [-v VERBOSITY] [-p [POPULATE]]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -94,8 +95,8 @@ optional arguments:
   -d, --delete          Delete a Payload
   -f, --fetch           Fetch a payload, by hash or (Global Tag, Tag, time)
   -U, --usage           Useful tips
-  -s [SHA256], --sha256 [SHA256]
-                        sha256
+  -n [NAME], --name [NAME]
+                        name
   -t TAG, --tag TAG     tag
   -i IOV, --iov IOV     start of IOV ('since')
   -u URL, --url URL     url
