@@ -10,6 +10,7 @@ after they are create, for example:
 <hr/>
 
 ##### Global Tag
+
 ```bash
 usage: gt.py [-h] [-S SERVER] [-c] [-d] [-r] [-l] [-t] [-n NAME] [-N NEWNAME] [-q QUERY] [-s STATUS] [-y [YAML_FILE]] [-v VERBOSITY]
 
@@ -35,9 +36,11 @@ optional arguments:
                         Verbosity level
 
 ```
+
 <hr/>
 
 ##### Global Tag Map
+
 ```bash
 usage: gtm.py [-h] [-S SERVER] [-c] [-d] [-n NAME] [-g GLOBAL_TAG] [-t TAG]
               [-v VERBOSITY]
@@ -59,6 +62,7 @@ optional arguments:
 <hr/>
 
 ##### Tag
+
 ```bash
 usage: tag.py [-h] [-S SERVER] [-c] [-d] [-r] [-U] [-m] [-n NAME] [-N NEWNAME]
               [-u UNTIL] [-v VERBOSITY]
@@ -80,9 +84,11 @@ optional arguments:
   -v VERBOSITY, --verbosity VERBOSITY
                         Verbosity level
 ```
+
 <hr/>
 
 ##### Payload
+
 ```bash
 usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-n [NAME]] [-t TAG] [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG]
                   [-v VERBOSITY] [-p [POPULATE]]

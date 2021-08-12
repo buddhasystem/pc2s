@@ -1,4 +1,5 @@
-<hr>
+---
+# 
 
 #### Introductory Note
 Please note that all examples presented here are for demonstration
@@ -54,6 +55,7 @@ about each payload.
 
 Now, let's get complete contents of a Global Tag, down to all payloads (which can be
 a rather long list in a realistic scenario):
+
 ```bash
 $ ./gt.py -n sPHENIX2024
 name: sPHENIX2024
@@ -114,7 +116,7 @@ since: 2024-03-01 00:01:01+00:00
 url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
 ```
 
-<hr>
+---
 
 #### Example 2: Create and Populate a Global Tag
 
@@ -123,7 +125,7 @@ for the Electromagnetic Calorimeter (EMCal). The [PC2S CLI clients](/clients)
 will be used for that purpose (please see the link for details of the API).
 All clients are equipped with the "-h" options which produces a help screen.
 
-**Create a tag**
+##### Create a tag
 
 The name of the tag we are about to create is immaterial, but it may be useful
 to make it recognizable e.g. *EMCalDeadMap* or similar. The *tag.py* client
@@ -136,7 +138,7 @@ $ ./tag.py -c -n EMCalDeadMap -u '2024-12-25 22:50:50+00:00'
 Here "-c" stands for "create", "-n" for "name" and "-u" for "until".
 Note the correct format of the timestamp, which is timezone-aware.
 
-**Register payloads**
+##### Register payloads
 
 Let's assume that the dead channel maps were produced by the appropriate
 EMCal software and exist as four separate files, named deadmap[1-4].root.
@@ -169,7 +171,7 @@ design the next one will automatically expire the previous.
 The tag *EMCalDeadMap* and its associated payloads will be then visible in the
 monitor screen (see the "Tags") entry in the left had side navigation bar.
 
-**Create a Global Tag**
+#### Create a Global Tag
 
 Let's now create a Global Tag wiith a descriptive name, e.g. "sPHENIX2024":
 ```bash
@@ -182,10 +184,11 @@ to any detector subsystem. In case of EMCal, these could be channel gain
 values, pedestals etc. We'll limit our example to just one tag which
 is the dead channel map.
 
-**Assign the Tag to the Global Tag**
+##### Assign the Tag to the Global Tag
 
 We will use the "global tag map" client to associate this particular tag
-- *EMCalDeadMap* - with the Global Tag "EMCal".
+*EMCalDeadMap* with the Global Tag "EMCal".
+
 ```bash
 $ ./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap -v 1
 ```
