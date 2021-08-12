@@ -4,7 +4,7 @@
 
 PC2S comes with a suite of CLI utilities (clients) supporting the entirety
 of its functionality. It is possible to make modifications to some objects
-after they are create, for example:
+after they are created, for example:
 
 * Global Tags can be renamed
 * Tags can be renamed, while preserving references to other objects

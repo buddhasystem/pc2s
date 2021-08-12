@@ -3,9 +3,9 @@
 # The script to manage Payload pbjects with the pc2s system
 #
 #########################################################
-# TZ-awarewness:					#
+# TZ-awarewness:					                    #
 # The following is not TZ-aware: datetime.datetime.now()#
-# so we are using timzone.now() where needed		#
+# so we are using timzone.now() where needed		    #
 #########################################################
 
 from django.conf  import settings

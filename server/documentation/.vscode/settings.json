@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "parser.C": "cpp"
+        "parser.C": "cpp",
+        "unordered_map": "cpp",
+        "payload.C": "cpp"
     }
 }
