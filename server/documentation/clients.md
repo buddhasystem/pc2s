@@ -1,4 +1,7 @@
+#
+
 #### CLI client utilities
+
 PC2S comes with a suite of CLI utilities (clients) supporting the entirety
 of its functionality. It is possible to make modifications to some objects
 after they are create, for example:
@@ -7,7 +10,7 @@ after they are create, for example:
 * Tags can be renamed, while preserving references to other objects
 * The *until* timestamp of the Tag obejct can be modified if needed
 
-<hr/>
+---
 
 ##### Global Tag
 
@@ -37,7 +40,7 @@ optional arguments:
 
 ```
 
-<hr/>
+---
 
 ##### Global Tag Map
 
@@ -59,7 +62,7 @@ optional arguments:
                         Verbosity level
 ```
 
-<hr/>
+---
 
 ##### Tag
 
@@ -85,7 +88,7 @@ optional arguments:
                         Verbosity level
 ```
 
-<hr/>
+---
 
 ##### Payload
 
@@ -114,3 +117,4 @@ optional arguments:
   -p [POPULATE], --populate [POPULATE]
                         For testing only: number of simulated records to create, with random IOVs. Requires a tag name.
 ```
+

@@ -132,9 +132,11 @@ to make it recognizable e.g. *EMCalDeadMap* or similar. The *tag.py* client
 will be used for this purpose, with two arguments - the desired name
 of the tag and the time of its expiry (i.e. the time after which the tag
 is considered definitely invalid).
+
 ```bash
 $ ./tag.py -c -n EMCalDeadMap -u '2024-12-25 22:50:50+00:00'
 ```
+
 Here "-c" stands for "create", "-n" for "name" and "-u" for "until".
 Note the correct format of the timestamp, which is timezone-aware.
 
@@ -153,11 +155,13 @@ PC2S does not have any requirements as to the specific pattern of URLs.
 We will use the "payload.py" client to assign these payloads to the tag,
 while recording the "since" timestamp i.e. the start of the file's contents
 validity:
+
 ```bash
 $ ./payload.py -c -t EMCalDeadMap -i '2024-01-01 00:00:00+00:00' \
 -u https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root \
 -n deadmap1
 ```
+
 Here "-c" stands for "create", "-t" for "tag" (which we defined as the one
 we just created), the "-i" is is the start of the interval of validity, and
 "-n" is the name of the payload, i.e. the file deadmap1.root. This is a mneumonic
@@ -174,9 +178,11 @@ monitor screen (see the "Tags") entry in the left had side navigation bar.
 #### Create a Global Tag
 
 Let's now create a Global Tag wiith a descriptive name, e.g. "sPHENIX2024":
+
 ```bash
 $ ./gt.py -c -n sPHENIX2024
 ```
+
 At this point the Global Tag only acquired a name but no actual content/references.
 
 Global Tags can contain any number of different types of data relevant
@@ -190,12 +196,13 @@ We will use the "global tag map" client to associate this particular tag
 *EMCalDeadMap* with the Global Tag "EMCal".
 
 ```bash
-$ ./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap -v 1
+$ ./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap
+
 ```
+
 Additional tags can be assigned as necessary to any Global Tag in
 a similar manner. The tags can also be detached from a Global Tag by
 removing the corresponding Global Tag Map objects.
 
 Global tags can be created at any point in time, even before
 their content (i.e. tags they refer to) are decided upon.
-
