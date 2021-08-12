@@ -2,12 +2,8 @@ from django.urls import path
 
 from . import views
 ################### CDB Monitor (Web) ##########################
-#    path('',                views.index,            name='index'),
-urlpatterns = [
-        path('',
-                views.documentation,
-                {'what':'/welcome.md', 'header':'Welcome to PC2S'}, name='index'),
 
+urlpatterns = [
         path('globaltags',      views.globaltags,       name='globaltags'),
         path('globaltagdetail', views.globaltagdetail,  name='globaltagdetail'),
         path('globaltagmaps',   views.index,            name='globaltagmaps'),
@@ -15,30 +11,19 @@ urlpatterns = [
         path('tags',            views.tags,             name='tags'),
         path('tagdetail',       views.tagdetail,        name='tagdetail'),
 
-        path('about',
-            views.documentation,
-            {'what':'/about.md', 'header':'About'},
-            name='about'),
+        path('stats',           views.stats,            name='stats'),
 
-        path('clients',
-            views.documentation,
-            {'what':'/clients.md', 'header':'PC2S CLI Clients'},
-            name='clients'),
-            
-        path('cpp',
-            views.documentation,
-            {'what':'/cpp.md', 'header':'C++ Interface'},
-            name='cpp'),
+        # Test area is not exposed in the menu
+        path('test',            views.test,             name='test'),
 
-        path('examples',
-            views.documentation,
-            {'what':'/examples.md', 'header':'Examples of PC2S use'},
-            name='examples'),
-
-    path('stats',           views.stats,            name='stats'),
-    path('test',            views.test,             name='test'),
-
-#    path('',            views.index, {'what':'main'},   name='index'),    
+        # Documentation:
+        path('',                views.documentation,    {'what':'/welcome.md',},        name='index'),
+        path('about',           views.documentation,    {'what':'/about.md',},          name='about'),
+        path('clients',         views.documentation,    {'what':'/clients.md',},        name='clients'),
+        path('cpp',             views.documentation,    {'what':'/cpp.md',},            name='cpp'),
+        path('examples',        views.documentation,    {'what':'/examples.md',},       name='examples'),
   ]
 
-
+# ATTIC
+#    path('', views.index, {'what':'main'}, name='index'), 
+#    path('',  views.index, name='index'),

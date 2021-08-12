@@ -1,18 +1,41 @@
-#
+# Python Interface
 
-#### CLI client utilities
+PC2S is a Web service. Accordigly, all interaction between the software clients
+and the service is through HTTP. For interaction with PC2S a simple Python module
+called **serverAPI**  has been created, with the following features:
 
-PC2S comes with a suite of CLI utilities (clients) supporting the entirety
-of its functionality. It is possible to make modifications to some objects
-after they are created, for example:
+* It is based on the popular *urllib* package.
+* It contains a number of helper functions facilitating interaction with the service,
+which can be as simple is a one-line function call.
+* There is a map of internal client method calls to the Web service URLs,
+which makes it easier to evolve the system without breaking the interface. For example,
+the client itself never has to generate URLs or use hardcoded strings for that purpose.
 
-* Global Tags can be renamed
-* Tags can be renamed, while preserving references to other objects
-* The *until* timestamp of the Tag obejct can be modified if needed
+For example, getting a list of Global Tags in a Python client looks something like that:
+```python
+API  = serverAPI(server='http://pc2s.sphenix.bnl.gov:80/', 0)
+resp = API.simple_get('cdb', 'gtlist')
+```
+The module can be incorporated into any Python application as needed.
 
+## CLI client utilities
+
+PC2S comes with a suite of CLI utilities (clients) written in Python and
+based on the **serverAPI** module. They support the entirety of its
+functionality, i.e. it's possible to create and/or delete any object in
+the system's data model. In addition, it is possible to make modifications
+to certain objects after they are created, for example:
+
+* Global Tags can be renamed.
+* Tags can be renamed, while preserving references to other objects e.g. payloads and Global Tags.
+* The *until* timestamp of the Tag obejct can be modified if needed.
 ---
 
-##### Global Tag
+### The "-h" option
+The CLI utilities are self-documented - they are equipped with the "-h" option producing a help
+screen. The output is presented below. For examples of the CLI usage please see the [corresponding page](/examples).
+
+### Global Tag
 
 ```bash
 usage: gt.py [-h] [-S SERVER] [-c] [-d] [-r] [-l] [-t] [-n NAME] [-N NEWNAME] [-q QUERY] [-s STATUS] [-y [YAML_FILE]] [-v VERBOSITY]
@@ -42,7 +65,7 @@ optional arguments:
 
 ---
 
-##### Global Tag Map
+### Global Tag Map
 
 ```bash
 usage: gtm.py [-h] [-S SERVER] [-c] [-d] [-n NAME] [-g GLOBAL_TAG] [-t TAG]
@@ -64,7 +87,7 @@ optional arguments:
 
 ---
 
-##### Tag
+### Tag
 
 ```bash
 usage: tag.py [-h] [-S SERVER] [-c] [-d] [-r] [-U] [-m] [-n NAME] [-N NEWNAME]
@@ -90,7 +113,7 @@ optional arguments:
 
 ---
 
-##### Payload
+### Payload
 
 ```bash
 usage: payload.py [-h] [-S SERVER] [-c] [-d] [-f] [-U] [-n [NAME]] [-t TAG] [-i IOV] [-u URL] [-T TIME] [-g GLOBAL_TAG]

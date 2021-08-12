@@ -1,20 +1,29 @@
----
-# 
+# CLI Examples
 
-#### Introductory Note
 Please note that all examples presented here are for demonstration
 purposes, all object names and attributes shown here are arbitrary
-and only for illustration.
+and only for illustration. In the examples below it is assumed
+that the clients interact with the service using the default server
+URL i.e. *localhost:8000". If another service address is needed (which
+is certainly the case in realistic scenarios) one needs to add the "-S"
+option to set the correct server location, for example:
 
-#### Example 1: Look up and Explore a Global Tag
+```bash 
+$ ./gt.py -l -S 'http://pc2s.sphenix.bnl.gov:80/'
+```
+
+## Example 1: Look up and Explore a Global Tag
 Obtain a listing of all Global Tags in the systems, in YAML format:
+
 ```bash
 $ ./gt.py -l
 - name: gt_test
 - name: sPHENIX2024
 - name: ECCE_MC_2023
 ```
+
 Look at the list of tags included in a particular Global Tag, "sPHENIX2024":
+
 ```bash
 $ ./gt.py -n sPHENIX2024 -t
 name: sPHENIX2024
@@ -22,7 +31,9 @@ tags:
 - EMCalDeadMap
 - IHCalDeadMap
 ```
+
 Look at the contents of a particular tag:
+
 ```bash
 $ ./tag.py -n EMCalDeadMap
 name: EMCalDeadMap
@@ -45,11 +56,11 @@ payloads:
 
 
 ```
+
 Things to note:
 
 * There is a list of all Global Tags referencing this particular tag. It is contained
-in the attribute "globaltags". As can be seen in this case,
-there is only one Global Tag, "sPHENIX2024".
+in the attribute "globaltags". In this particular case, there is only one Global Tag "sPHENIX2024" which is referencing this Tag. It is entirely possible that there are more, in which case this secton of YAML will contain the respective names.
 * There is a list of payloads included in this YAML output, with complete information
 about each payload.
 
@@ -118,14 +129,14 @@ url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
 
 ---
 
-#### Example 2: Create and Populate a Global Tag
+## Example 2: Create and Populate a Global Tag
 
 Let's assume that a user wishes to record and later use dead channel maps
 for the Electromagnetic Calorimeter (EMCal). The [PC2S CLI clients](/clients)
 will be used for that purpose (please see the link for details of the API).
 All clients are equipped with the "-h" options which produces a help screen.
 
-##### Create a tag
+### Create a tag
 
 The name of the tag we are about to create is immaterial, but it may be useful
 to make it recognizable e.g. *EMCalDeadMap* or similar. The *tag.py* client
@@ -140,7 +151,7 @@ $ ./tag.py -c -n EMCalDeadMap -u '2024-12-25 22:50:50+00:00'
 Here "-c" stands for "create", "-n" for "name" and "-u" for "until".
 Note the correct format of the timestamp, which is timezone-aware.
 
-##### Register payloads
+### Register payloads
 
 Let's assume that the dead channel maps were produced by the appropriate
 EMCal software and exist as four separate files, named deadmap[1-4].root.
@@ -175,7 +186,7 @@ design the next one will automatically expire the previous.
 The tag *EMCalDeadMap* and its associated payloads will be then visible in the
 monitor screen (see the "Tags") entry in the left had side navigation bar.
 
-#### Create a Global Tag
+### Create a Global Tag
 
 Let's now create a Global Tag wiith a descriptive name, e.g. "sPHENIX2024":
 
@@ -190,7 +201,7 @@ to any detector subsystem. In case of EMCal, these could be channel gain
 values, pedestals etc. We'll limit our example to just one tag which
 is the dead channel map.
 
-##### Assign the Tag to the Global Tag
+### Assign the Tag to the Global Tag
 
 We will use the "global tag map" client to associate this particular tag
 *EMCalDeadMap* with the Global Tag "EMCal".

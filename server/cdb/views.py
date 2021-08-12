@@ -646,19 +646,14 @@ def tagdetail(request):
 
 #####
 @csrf_exempt
-def documentation(request, what, header):
+def documentation(request, what):
+    
     path = str(settings.DOCUMENTATION)+what # '/documentation.md'
 
     try:
         file = open(path,mode='r')
     except:
-        return render(request, 'textpage.html',
-            {
-                'header':   'Documentation',
-                'width':    text_width,
-                'text':'    Under construction'
-                }
-            )
+        return render(request, 'textpage.html', {'width': text_width, 'text':'Under construction'})
     
     
     md_docs = file.read()
@@ -667,14 +662,7 @@ def documentation(request, what, header):
     md = markdown.Markdown(extensions=['extra'])
     html_docs = md.convert(md_docs) # print(html_docs)
 
-    return render(request,
-                    'textpage.html',
-                    {
-                        'header':   header,
-                        'width':    text_width,
-                        'text':     html_docs
-                        }
-                    )
+    return render(request, 'textpage.html', {'width': text_width, 'text': html_docs})
 
 #####
 @csrf_exempt
