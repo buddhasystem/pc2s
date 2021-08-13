@@ -588,10 +588,7 @@ def globaltagdetail(request):
         except:
             return HttpResponse("ERR")
         
-        gtms=GlobalTagMap.objects.filter(globaltag=name)
-        tag_names=[]
-        for gtm in gtms:
-            tag_names.append(gtm.tag)
+        tag_names=[str(elem) for elem in list(GlobalTagMap.objects.filter(globaltag=name).values_list('tag', flat=True))]
 
         tags=Tag.objects.filter(pk__in=tag_names)
         tagtable = TagTable(tags)
@@ -647,7 +644,7 @@ def tagdetail(request):
 #####
 @csrf_exempt
 def documentation(request, what):
-    
+
     path = str(settings.DOCUMENTATION)+what # '/documentation.md'
 
     try:
