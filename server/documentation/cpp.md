@@ -1,8 +1,10 @@
 # C++ Interface to PC2S
 
 The C++ interface to PC2S uses the popular *curl* library to
-interact with the service. Currently it exists as a C++ aplication
-which can be refactored into a library if needed. Itretrieves conditions
+interact with the service, using the same set of URLs and conventions
+as the Python interface. 
+Currently it exists as a C++ aplication prototype
+which can be refactored into a library if needed. It retrieves conditions
 data from a remote server, based on the *Metadata* that includes:
 
 * The name of the *Global Tag*
