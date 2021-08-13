@@ -16,9 +16,11 @@ them is the requiment that the metadata component needs to provide a
 valid URL pointing to a data product to be shipped to the consumer by
 the data delivery part. This provides considerable flexibility in implementation stage.
 
-The PC2S project comprises the metadata service component. Web pages
-on this site are a Web interface to that service, and are complemented by a suite
-of [command line clients](/clients). Examples of the PC2S use can be
+The PC2S project comprises the Metadata service component
+and a mock-up data delivery service for intergration testing.
+Web pages on this site are a Web interface to the Metadata service,
+and are complemented by a suite of [command line clients](/clients).
+Examples of the PC2S use can be
 found on the [corresponding page](/examples).
 
 #### Portable Conditions and Calibrations Service (PC2S)
@@ -99,11 +101,14 @@ to the time zone. In case of UTC as illustrated here it is simply 00:00.
 #### Implementation
 
 PC2S is a Web application based on the Django framework and written
-in Python (verison 3.9 was originally used). Included are both
-the Web client for monitoring and exploring the database contents, and the
-CLI client suite used to manipulate the database content. At the time of writing,
-the data delivery portion (e.g. an instance of a *nginx* service) has not yet
-been established and will be finalized later.
+in Python (verison 3.9 was originally used). It's a Web service which
+is interfaced and interacted with using HTTP. The package includes:
+
+* The PC2S Web service
+* The Web UI for monitoring and exploring the database contents (this website)
+* A Python interface and a CLI client suite based on it, which is used
+to manipulate the database content
+* A C++ interface
 
 Sample requirements (as they are set in the virtual environment):
 ```bash
