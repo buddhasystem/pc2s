@@ -4,21 +4,21 @@
 The aim of the project is to realize a lightweight, fully portable, configurable,
 experiment-agnostic service for the Conditons and Calibrations data.
 It was inspired in part by the Belle II CDB and is based on recommendations
-of the HEP Software Foundation, slosely following the suggested data model.
+of the HEP Software Foundation, closely following the suggested data model.
 
 ## Components
 
 PC2S consists of two web services working in tandem, and
-client software. The web services are
+client software. The two web services are
 
-* the PC2S Metadata server
-* the data delivery service (included as a simple test server in this repository)
+* The PC2S Metadata server
+* The data delivery service (included as a simple nginx-based test server in this repository)
 
 The role of the former is to locate the URLs of data payloads to be delivered
 by the latter, based on queries from a client. Queries include:
 
-* The name of the aggregation to be queried i.e. the "Global Tag"
-* The name of the Tag, identifying the type of data to be retrieved
+* The name of the data aggregation to be queried i.e. the *"Global Tag"*
+* The name of the Tag, identifying the *type* of data to be retrieved
 * A timestamp - the time at which the data is considered valid
 
 If there is a data product satisfying the query the service returns
@@ -34,16 +34,25 @@ The clients are
 Both are based on the *urllib* library and using the same identical interface
 of the the PC2S Metadata server.
 
-## Test-Driving the System using Docker
-### Get the Image from Docker Hub
+## Evaluation of the System using Docker
+
+### Outline of the setup
+
+In a nutshell, the user pulls two Docker images, one for the PC2S
+Metadata service, and another for the NGIX-based test instance of the
+data delivery service.
+
+### Get Images from Docker Hub
 
 ```bash
-docker pull buddhasystem/pc2s:latest
+docker pull buddhasystem/pc2s-metadata:latest
+docker pull buddhasystem/pc2s-nginx:latest
 ```
 
-### Create a Container
+### Create Containers
 
-Start a pc2s container with port mapping, in this case 8000 to 8000 will do,
+Start a PC2S container exposing port 8000 to the host.
+In this case 8000 to 8000 will do,
 provided it's not used by some other service on your system. Other port
 numbers can be used, too.
 
@@ -51,8 +60,8 @@ numbers can be used, too.
 docker run -p 8000:8000 pc2s:latest
 ```
 
-* Point your browser to "localhost:8000
-* Connect to the running container by running interactive shell (bash)
+* Point your browser to *localhost:8000*
+* Connect to the running container by running interactive shell (bash), e.g. by running ```docker exec -it XXX bash``` where "XXX" is the hash of the running container
 
 ## Misc
 
