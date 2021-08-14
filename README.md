@@ -42,14 +42,14 @@ In a nutshell, the user pulls two Docker images, one for the PC2S
 Metadata service and its clients, and another for the NGINX-based test
 instance of the data delivery service.
 
-### Pull images from Docker Hub, start containers
-
-Pull:
+### Pull images from Docker Hub
 
 ```bash
 docker pull buddhasystem/pc2s-metadata:latest
 docker pull buddhasystem/pc2s-nginx:latest
 ```
+
+### Start containers
 
 Start a PC2S Metadata container exposing port 8000 to the host.
 In this case 8000 to 8000 will do, provided it's not used by some
@@ -58,9 +58,21 @@ other service on your system. Other port numbers can be used, too.
 ```bash
 docker run -p 8000:8000 pc2s:latest
 ```
+Start a NGINX container
+
+```bash
+docker run -it --rm -d -p 8080:80 pc2s-nginx
+```
+
+In this case, the container-internal post 80 is mapped to the host port
+8080.
+
+To start accessing the metadata service:
 
 * Point your browser to *localhost:8000*.
-* Connect to the running container by running interactive shell (bash), e.g. by running ```docker exec -it XXX bash``` where "XXX" is the hash of the running container.
+* Connect to the running container by running interactive shell (bash), e.g. by running ```docker exec -it XXX bash``` where "XXX" is the hash of the running container. At the
+prompt, the user will be in the "clients" directory, ready to use the Python client software
+for testing.
 
 ## Misc
 
