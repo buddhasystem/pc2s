@@ -39,29 +39,28 @@ of the the PC2S Metadata server.
 ### Outline of the setup
 
 In a nutshell, the user pulls two Docker images, one for the PC2S
-Metadata service, and another for the NGIX-based test instance of the
-data delivery service.
+Metadata service and its clients, and another for the NGINX-based test
+instance of the data delivery service.
 
-### Get Images from Docker Hub
+### Pull images from Docker Hub, start containers
+
+Pull:
 
 ```bash
 docker pull buddhasystem/pc2s-metadata:latest
 docker pull buddhasystem/pc2s-nginx:latest
 ```
 
-### Create Containers
-
-Start a PC2S container exposing port 8000 to the host.
-In this case 8000 to 8000 will do,
-provided it's not used by some other service on your system. Other port
-numbers can be used, too.
+Start a PC2S Metadata container exposing port 8000 to the host.
+In this case 8000 to 8000 will do, provided it's not used by some
+other service on your system. Other port numbers can be used, too.
 
 ```bash
 docker run -p 8000:8000 pc2s:latest
 ```
 
-* Point your browser to *localhost:8000*
-* Connect to the running container by running interactive shell (bash), e.g. by running ```docker exec -it XXX bash``` where "XXX" is the hash of the running container
+* Point your browser to *localhost:8000*.
+* Connect to the running container by running interactive shell (bash), e.g. by running ```docker exec -it XXX bash``` where "XXX" is the hash of the running container.
 
 ## Misc
 

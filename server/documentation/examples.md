@@ -199,7 +199,7 @@ At this point the Global Tag only acquired a name but no actual content/referenc
 Global Tags can contain any number of different types of data relevant
 to any detector subsystem. In case of EMCal, these could be channel gain
 values, pedestals etc. We'll limit our example to just one tag which
-is the dead channel map.
+is the so-called *dead channel map*.
 
 ### Assign the Tag to the Global Tag
 
@@ -212,8 +212,7 @@ $ ./gtm.py -c -n emcaldead -g sPHENIX2024 -t EMCalDeadMap
 ```
 
 Additional tags can be assigned as necessary to any Global Tag in
-a similar manner. The tags can also be detached from a Global Tag by
-removing the corresponding Global Tag Map objects.
+a similar manner. *The tags can also be detached from a Global Tag by removing corresponding Global Tag Map objects*.
 
 Global tags can be created at any point in time, even before
 their content (i.e. tags they refer to) are decided upon.
