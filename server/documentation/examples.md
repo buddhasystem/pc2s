@@ -43,18 +43,16 @@ globaltags:
 payloads:
 - name: deadmap1
   since: 2024-01-01 00:01:59+00:00
-  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root
+  url: https://opendata.cern.ch/record/15011/files/ERTntup_ggntuple.root
 - name: deadmap2
   since: 2024-03-01 00:01:01+00:00
-  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
+  url: https://opendata.cern.ch/record/15011/files/ERTntup_gnt.root
 - name: deadmap3
   since: 2024-06-01 00:05:01+00:00
-  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap3.root
+  url: https://opendata.cern.ch/record/15011/files/MBntup_ggntuple.root
 - name: deadmap4
   since: 2024-09-01 01:01:15+00:00
-  url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap4.root
-
-
+  url: https://opendata.cern.ch/record/15011/files/MBntup_gnt.root
 ```
 
 Things to note:
@@ -63,8 +61,10 @@ Things to note:
 in the attribute "globaltags". In this particular case, there is only one Global Tag "sPHENIX2024" which is referencing this Tag. It is entirely possible that there are more, in which case this secton of YAML will contain the respective names.
 * There is a list of payloads included in this YAML output, with complete information
 about each payload.
+* In this particular example, the payloads are files (originally produced in PHENIX) hosted at CERN.
+In practice, the Web server hosting the payloads can be located anywhere, which is demonstrated in this example.
 
-Now, let's get complete contents of a Global Tag, down to all payloads (which can be
+Now, let's get the complete contents of a Global Tag, down to all payloads (which can be
 a rather long list in a realistic scenario):
 
 ```bash
@@ -79,16 +79,16 @@ tags:
   payloads:
   - name: deadmap1
     since: 2024-01-01 00:01:59+00:00
-    url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap1.root
+    url: https://opendata.cern.ch/record/15011/files/ERTntup_ggntuple.root
   - name: deadmap2
     since: 2024-03-01 00:01:01+00:00
-    url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap2.root
+    url: https://opendata.cern.ch/record/15011/files/ERTntup_gnt.root
   - name: deadmap3
     since: 2024-06-01 00:05:01+00:00
-    url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap3.root
+    url: https://opendata.cern.ch/record/15011/files/MBntup_ggntuple.root
   - name: deadmap4
     since: 2024-09-01 01:01:15+00:00
-    url: https://nginx.sphenix.bnl.gov/cdb/emcal/deadmap4.root
+    url: https://opendata.cern.ch/record/15011/files/MBntup_gnt.root
 - name: IHCalDeadMap
   until: 2024-12-24 22:50:50+00:00
   globaltags:
