@@ -12,7 +12,7 @@ PC2S consists of two web services working in tandem, and
 client software. The two web services are
 
 * The PC2S Metadata server
-* The data delivery service (included as a simple nginx-based test server in this repository)
+* The Data Delivery service (included as a simple nginx-based test server in this repository)
 
 The role of the former is to locate the URLs of data payloads to be delivered
 by the latter, based on queries from a client. Queries include:
@@ -49,6 +49,11 @@ docker pull buddhasystem/pc2s-metadata:latest
 docker pull buddhasystem/pc2s-nginx:latest
 ```
 
+The NGINX image contains some test data in ROOT format that's useful for testing.
+The content of the data is not relevant for this test.
+The scope of the test is to run a PC2S client to get a proper URL and
+then to download the correct file from the delivery service (NGINX).
+
 ### Start containers
 
 Start a PC2S Metadata container exposing port 8000 to the host.
@@ -58,19 +63,20 @@ other service on your system. Other port numbers can be used, too.
 ```bash
 docker run -p 8000:8000 pc2s:latest
 ```
-Start a NGINX container
+Start a PC2S NGINX container, exposing port 80 as 8080 on the host machine:
 
 ```bash
 docker run -it --rm -d -p 8080:80 pc2s-nginx
 ```
 
-In this case, the container-internal post 80 is mapped to the host port
-8080.
+In this case, the container-internal port 80 is mapped to the host port 8080.
+
+### Use CLI clients to interact with the Metadata Service
 
 To start accessing the metadata service:
 
 * Point your browser to *localhost:8000*.
-* Connect to the running container by running interactive shell (bash), e.g. by running ```docker exec -it XXX bash``` where "XXX" is the hash of the running container. At the
+* Connect to the running PC2S Metadata container by running interactive shell (bash), e.g. by using ```docker exec -it XXX bash``` where "XXX" is the hash of the running container. At the
 prompt, the user will be in the "clients" directory, ready to use the Python client software
 for testing.
 
