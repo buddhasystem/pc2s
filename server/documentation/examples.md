@@ -178,8 +178,8 @@ we just created), the "-i" is is the start of the interval of validity, and
 "-n" is the name of the payload, i.e. the file deadmap1.root. This is a mneumonic
 name that can be anything.
 
-The command above will be repeated four times, each time with an appropriate
-file name and the checksum, and of course timestamp for each file, corresponding
+The command above can be repeated multiple times, each time with an appropriate
+file name and of the timestamp for each file, corresponding
 the start of its vailidity. There is no expiry date for the payloads, as by
 design the next one will automatically expire the previous.
 
