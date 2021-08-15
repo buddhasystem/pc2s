@@ -38,19 +38,21 @@ of the the PC2S Metadata server.
 
 ### Outline of the setup
 
-In a nutshell, the user pulls two Docker images, one for the PC2S
+For a basic test of the funcionality of the system, the user needs to pull
+two Docker images, one for the PC2S
 Metadata service and its clients, and another for the NGINX-based test
 instance of the data delivery service.
-
-### Pull images from Docker Hub
 
 ```bash
 docker pull buddhasystem/pc2s-metadata:latest
 docker pull buddhasystem/pc2s-nginx:latest
 ```
 
-The NGINX image contains some test data in ROOT format that's useful for testing.
-The content of the data is not relevant for this test.
+The *pc2s-metadata* image contains some mock metadata which will work
+in conjunction with the content of the *pc2s-nginx* image.
+
+The NGINX image contains some test data in ROOT format that's useful
+for basic testing. The content of these files is not relevant for this test.
 The scope of the test is to run a PC2S client to get a proper URL and
 then to download the correct file from the delivery service (NGINX).
 
@@ -61,15 +63,16 @@ In this case 8000 to 8000 will do, provided it's not used by some
 other service on your system. Other port numbers can be used, too.
 
 ```bash
-docker run -p 8000:8000 pc2s:latest
-```
-Start a PC2S NGINX container, exposing port 80 as 8080 on the host machine:
+# Start a PC2S Metadata (Django) container, exposing port 8000 as 8080 on the host machine:
+docker run -p 8000:8000 pc2s-metadata
 
-```bash
+# Start a PC2S Data Delivery (NGINX) container, exposing port 80 as 8080 on the host machine:
 docker run -it --rm -d -p 8080:80 pc2s-nginx
 ```
 
 In this case, the container-internal port 80 is mapped to the host port 8080.
+You can check that the ngnix service is live by pointing your browser to ```localhost:8080```
+which should result in a basic landing page.
 
 ### Use CLI clients to interact with the Metadata Service
 

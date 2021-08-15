@@ -1,9 +1,3 @@
-#FROM alpine:latest as build
-#WORKDIR /app
-
-#COPY ./default.conf /app/default.conf
-# RUN cat /app/default.conf
-
 FROM nginx:latest
 
 COPY ./index.html /usr/share/nginx/html/index.html
@@ -13,4 +7,4 @@ COPY ./default.conf /etc/nginx/conf.d/default.conf
 RUN cat /etc/nginx/conf.d/default.conf
 
 WORKDIR /data
-COPY EMCalDeadMap EMCalDeadMap
+COPY IHCalDeadMap IHCalDeadMap
