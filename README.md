@@ -28,8 +28,8 @@ using the URL previouly obtained.
 
 The clients are
 
-* Python
-* C++
+* Python: a reusable interface package and a few CLI utilities based on it.
+* C++: a simple prototype application demonstrating access to the service.
 
 Both are based on the *urllib* library and using the same identical interface
 of the the PC2S Metadata server.
