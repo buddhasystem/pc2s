@@ -12,24 +12,30 @@ PC2S consists of two web services working in tandem, and
 client software. The two web services are
 
 * The PC2S Metadata server
-* The Data Delivery service (included as a simple nginx-based test server in this repository)
+* The Data Delivery service included as a simple nginx-based test server in this repository.
+The nginx server can be easily configured for the needs of the target experiment.
 
-The role of the former is to locate the URLs of data payloads to be delivered
-by the latter, based on queries from a client. Queries include:
+The role of the Metadata server is to locate the URLs of data payloads to
+be delivered by the latter, based on queries from a client. Queries include:
 
-* The name of the data aggregation to be queried i.e. the *"Global Tag"*
-* The name of the Tag, identifying the *type* of data to be retrieved
+* The name of the specific data aggregation to be queried i.e. the *"Global Tag"*.
+Examples of such aggregation would be a Global Tag used in production for a certain
+run-year, or a set of parameters for some Monte Carlo campaign
+* The name of the Tag, identifying the *type* of data to be retrieved. For example,
+this could be data describing pedestals in a calorimeter, or a corresponding
+dead channel map
 * A timestamp - the time at which the data is considered valid
 
 If there is a data product satisfying the query the service returns
-a response in YAML format, containing the URL of the payload. The client
-then has access to the payload, to be retrieved from the data delivery service
-using the URL previouly obtained.
+a response in YAML format, containing the **URL of the payload**. The client
+then uses this URL to access to the payload, to be retrieved from the data
+delivery service.
 
-The clients are
+At the moment the clients interfacing the two services described above are
+implemented in two languages:
 
-* Python: a reusable interface package and a few CLI utilities based on it.
-* C++: a simple prototype application demonstrating access to the service.
+* Python: includes a reusable interface package and a few CLI utilities based on it.
+* C++: a simple prototype application demonstrating access to the service using that platform.
 
 Both are based on the *urllib* library and using the same identical interface
 of the the PC2S Metadata server.
@@ -38,10 +44,9 @@ of the the PC2S Metadata server.
 
 ### Outline of the setup
 
-For a basic test of the funcionality of the system, the user needs to pull
-two Docker images, one for the PC2S
-Metadata service and its clients, and another for the NGINX-based test
-instance of the data delivery service.
+For a basic test of the funcionality of the system, the user needs to use
+two Docker images, one for the PC2S Metadata service and its clients, and
+another for the NGINX-based test instance of the data delivery service.
 
 ```bash
 docker pull buddhasystem/pc2s-metadata:latest
@@ -49,7 +54,9 @@ docker pull buddhasystem/pc2s-nginx:latest
 ```
 
 The *pc2s-metadata* image contains some mock metadata which will work
-in conjunction with the content of the *pc2s-nginx* image.
+in conjunction with the content of the *pc2s-nginx* image. That is to
+say that contents of a specific tag recorded in *pc2s-metadata* point
+to valid files hosted on pc2s-nginx.
 
 The NGINX image contains some test data in ROOT format that's useful
 for basic testing. The content of these files is not relevant for this test.

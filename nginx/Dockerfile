@@ -8,3 +8,6 @@ RUN cat /etc/nginx/conf.d/default.conf
 
 WORKDIR /data
 COPY IHCalDeadMap IHCalDeadMap
+COPY SiPMtemp SiPMtemp
+
+
