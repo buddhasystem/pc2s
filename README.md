@@ -94,15 +94,36 @@ In this case, the container-internal port 80 is mapped to the host port 8080.
 You can check that the ngnix service is live by pointing your browser to ```localhost:8080```
 which should result in a basic landing page.
 
-### Use CLI clients to interact with the Metadata Service
+### Use Python-based CLI clients to interact with the Metadata Service
 
-To start accessing the metadata service:
+Determine the IDs of running PC2S containers, in a way similar to presented here:
 
-* Point your browser to *localhost:8000*.
-* Connect to the running PC2S Metadata container by running interactive shell (bash), e.g. by using ```docker exec -it XXX bash``` where "XXX" is the hash of the running container. At the
-prompt, the user will be in the "clients" directory, ready to use the Python client software
-for testing.
+```bash
+$ docker ps -a
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+96c59bf2a088   pc2s-metadata   "python ../server/ma…"   16 seconds ago   Up 15 seconds   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   gifted_bhabha
+6c06371c01bc   pc2s-nginx      "/docker-entrypoint.…"   21 hours ago     Up 21 hours     0.0.0.0:8080->80/tcp, :::8080->80/tcp       stoic_lamarr
+```
+In this case, *96c59bf2a088* is the ID of the metadata container which will be needed
+to connect to it and run clients. Connect to the running PC2S Metadata container by running interactive shell (bash), e.g. by using ```docker exec -it XXX bash``` where "XXX" is the hash of the running container, which would be 96c59bf2a088 in the example above.
+At the prompt, the user will have a ```bash`` session open in the "clients" directory,
+which contains the following clients:
 
+* ```gt.py``` - the Global Tag client
+* ```gtm.py``` - the Global Tag Map client
+* ```tag.py``` - the Tag client
+* ```payload.py``` - the Payload client
+
+All clients are equipped with the "help" function activated by the ```"-h"``` option.
+Most of possible input errors will result in helpful error messages. For concrete
+examples of interacting with the service, please see the "Examples" section of
+the PC2S website which is now available to you as a container running at ```localhost:8000```.
+
+
+PC2S is using timezone-aware datetime. For that reason, all clients are expected
+to provide timestamps etc in a format similar to this: ```'2024-06-07 02:01:14+00:00'```.
+
+---
 ## Misc
 
 ### TZ-aware parsing of time in Django
