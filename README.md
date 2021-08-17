@@ -80,7 +80,7 @@ be used, too.
 
 ```bash
 # Start a PC2S Metadata (Django) container, exposing port 8000 as 8000 on the host machine:
-docker run -p 8000:8000 pc2s-metadata
+docker run --rm -d -p 8000:8000 pc2s-metadata
 ```
 
 To verify that the container is live, the user can now point the browser to
