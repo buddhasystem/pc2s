@@ -63,7 +63,7 @@ to valid files hosted on pc2s-nginx.
 The *pc2s-metadata* image relies on the included sqlite database as the back end,
 for most production scenarios a more robust delpoyment can be achieved
 with Postgres, MariaDB or a similar solution. Likewise, the Web service
-runs as the django development server, and so an Apache instance will need
+runs as the Django development server, and so an Apache instance will need
 to be put in place in the production scenario.
 
 The NGINX image contains some test data in ROOT and text formats that's useful
@@ -74,8 +74,9 @@ URL and then to optionally download the correct file from the delivery service (
 ### Starting Services
 
 Start a PC2S Metadata container exposing port 8000 to the host.
-In this case 8000 to 8000 will do, provided it's not used by some
-other service on your system. Other port numbers can be used, too.
+In this case mapping the internal 8000 to the host 8000 will do, provided
+it's not used by some other service on your system. Other port numbers can
+be used, too.
 
 ```bash
 # Start a PC2S Metadata (Django) container, exposing port 8000 as 8000 on the host machine:
@@ -120,6 +121,9 @@ All clients are equipped with the "help" function activated by the ```"-h"``` op
 Most of possible input errors will result in helpful error messages. For detailed
 examples of interacting with the service, please see the "Examples" section of
 the PC2S website which is now available to you as a container running at ```localhost:8000```.
+If the container port 8000 is mapped to some other port number on the host
+for whatver reason, the clients will require an additional command line argument
+in the form ```-S 'http://localhost:XXXX/'``` to point to the correect URLs.
 
 The simplest queries may look like this (actual output may vary):
 ```bash
