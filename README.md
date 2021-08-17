@@ -164,8 +164,20 @@ payloads:
   since: 2024-06-03 01:01:15+00:00
   url: http://localhost:8080/IHCalDeadMap/deadmap6.root
 
+# locate a payload of a specific type, valid at the specified point in time
+$ ./payload.py -f -g sPHENIX2024 -t IHCalDeadMap -T '2024-03-20 22:50:50+00:00'
+name: ihcalmap4
+tag: IHCalDeadMap
+since: 2024-03-01 01:01:00+00:00
+url: http://localhost:8080/IHCalDeadMap/deadmap4.root
+
 ```
 
+The URL thus obtained can now be used to download the content using ```curl```, ```wget``
+or any other suitable client.
+
+The C++ client included in this repository for demo purposes can also be used.
+It is not packaged in the image and should be compiled locally.
 
 PC2S is using timezone-aware datetime. For that reason, all clients are expected
 to provide timestamps etc in a format similar to this: ```'2024-06-07 02:01:14+00:00'```.
