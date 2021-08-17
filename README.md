@@ -60,9 +60,11 @@ in conjunction with the content of the *pc2s-nginx* image. That means
 that contents of a specific tag recorded in *pc2s-metadata* point
 to valid files hosted on pc2s-nginx.
 
-The *pc2s-metadata* image relies on a sqlite database as the back end,
+The *pc2s-metadata* image relies on the included sqlite database as the back end,
 for most production scenarios a more robust delpoyment can be achieved
-with Postgres, MariaDB or a similar solution.
+with Postgres, MariaDB or a similar solution. Likewise, the Web service
+runs as the django development server, and so an Apache instance will need
+to be put in place in the production scenario.
 
 The NGINX image contains some test data in ROOT and text formats that's useful
 for for demonstration purposes. The content of these files is not relevant
@@ -119,14 +121,13 @@ Most of possible input errors will result in helpful error messages. For detaile
 examples of interacting with the service, please see the "Examples" section of
 the PC2S website which is now available to you as a container running at ```localhost:8000```.
 
-The simplest queries may look like this
+The simplest queries may look like this (actual output may vary):
 ```bash
 # get a list of all global tags
 $ ./gt.py -l
 - name: gt_test
 - name: gt_other
 - name: sPHENIX2024
-- name: supertest
 
 # get a list of all tags
 $ ./tag.py -l
@@ -134,8 +135,6 @@ $ ./tag.py -l
 - tag_other
 - EMCalDeadMap
 - IHCalDeadMap
-- init
-- oldtest
 - SiPMtemp
 
 # look at the content of a tag
