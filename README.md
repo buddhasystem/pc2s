@@ -115,9 +115,56 @@ which contains the following clients:
 * ```payload.py``` - the Payload client
 
 All clients are equipped with the "help" function activated by the ```"-h"``` option.
-Most of possible input errors will result in helpful error messages. For concrete
+Most of possible input errors will result in helpful error messages. For detailed
 examples of interacting with the service, please see the "Examples" section of
 the PC2S website which is now available to you as a container running at ```localhost:8000```.
+
+The simplest queries may look like this
+```bash
+# get a list of all global tags
+$ ./gt.py -l
+- name: gt_test
+- name: gt_other
+- name: sPHENIX2024
+- name: supertest
+
+# get a list of all tags
+$ ./tag.py -l
+- tag_test_2
+- tag_other
+- EMCalDeadMap
+- IHCalDeadMap
+- init
+- oldtest
+- SiPMtemp
+
+# look at the content of a tag
+$ ./tag.py -n IHCalDeadMap
+name: IHCalDeadMap
+until: 2024-12-24 22:50:50+00:00
+globaltags:
+- sPHENIX2024
+payloads:
+- name: ihcalmap1
+  since: 2024-01-01 00:59:00+00:00
+  url: http://localhost:8080/IHCalDeadMap/deadmap1.root
+- name: ihcalmap2
+  since: 2024-02-01 02:59:00+00:00
+  url: http://localhost:8080/IHCalDeadMap/deadmap2.root
+- name: ihcalmap3
+  since: 2024-02-22 02:59:00+00:00
+  url: http://localhost:8080/IHCalDeadMap/deadmap3.root
+- name: ihcalmap4
+  since: 2024-03-01 01:01:00+00:00
+  url: http://localhost:8080/IHCalDeadMap/deadmap4.root
+- name: ihcalmap5
+  since: 2024-04-11 04:01:10+00:00
+  url: http://localhost:8080/IHCalDeadMap/deadmap5.root
+- name: ihcalmap6
+  since: 2024-06-03 01:01:15+00:00
+  url: http://localhost:8080/IHCalDeadMap/deadmap6.root
+
+```
 
 
 PC2S is using timezone-aware datetime. For that reason, all clients are expected
