@@ -80,7 +80,7 @@ be used, too.
 
 ```bash
 # Start a PC2S Metadata (Django) container, exposing port 8000 as 8000 on the host machine:
-docker run --rm -d -p 8000:8000 pc2s-metadata
+docker run --rm -d -p 8000:8000 buddhasystem/pc2s-metadata
 ```
 
 To verify that the container is live, the user can now point the browser to
@@ -90,7 +90,7 @@ to monitoring pages as well as documentation.
 Now start the data delivery container:
 ```bash
 # Start a PC2S Data Delivery (NGINX) container, exposing port 80 as 8080 on the host machine:
-docker run -it --rm -d -p 8080:80 pc2s-nginx
+docker run -it --rm -d -p 8080:80 buddhasystem/pc2s-nginx
 ```
 
 In this case, the container-internal port 80 is mapped to the host port 8080.
