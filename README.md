@@ -12,11 +12,13 @@ PC2S consists of two web services working in tandem, and
 client software. The two web services are
 
 * The PC2S Metadata server
-* The Data Delivery service included as a simple nginx-based test server in this repository.
-The nginx server can be easily configured for the needs of the target experiment.
+* The Data Delivery service included as a simple nginx-based test server
+in this repository. The nginx server can be easily configured for the needs
+of the target experiment.
 
 The role of the Metadata server is to locate the URLs of data payloads to
-be delivered by the latter, based on queries from a client. Queries include:
+be delivered by the latter, based on queries from a client. Such queries
+consist of the following parameters:
 
 * The name of the specific data aggregation to be queried i.e. the *"Global Tag"*.
 Examples of such aggregation would be a Global Tag used in production for a certain
@@ -28,7 +30,7 @@ dead channel map
 
 If there is a data product satisfying the query the service returns
 a response in YAML format, containing the **URL of the payload**. The client
-then uses this URL to access to the payload, to be retrieved from the data
+then can use this URL to access to the payload, to be retrieved from the data
 delivery service.
 
 At the moment the clients interfacing the two services described above are
@@ -42,7 +44,7 @@ of the the PC2S Metadata server.
 
 ## Evaluation of the System using Docker
 
-### Outline of the setup
+### Images
 
 For a basic test of the funcionality of the system, the user needs to use
 two Docker images, one for the PC2S Metadata service and its clients, and
@@ -54,25 +56,36 @@ docker pull buddhasystem/pc2s-nginx:latest
 ```
 
 The *pc2s-metadata* image contains some mock metadata which will work
-in conjunction with the content of the *pc2s-nginx* image. That is to
-say that contents of a specific tag recorded in *pc2s-metadata* point
+in conjunction with the content of the *pc2s-nginx* image. That means
+that contents of a specific tag recorded in *pc2s-metadata* point
 to valid files hosted on pc2s-nginx.
 
-The NGINX image contains some test data in ROOT format that's useful
-for basic testing. The content of these files is not relevant for this test.
-The scope of the test is to run a PC2S client to get a proper URL and
-then to download the correct file from the delivery service (NGINX).
+The *pc2s-metadata* image relies on a sqlite database as the back end,
+for most production scenarios a more robust delpoyment can be achieved
+with Postgres, MariaDB or a similar solution.
 
-### Start containers
+The NGINX image contains some test data in ROOT and text formats that's useful
+for for demonstration purposes. The content of these files is not relevant
+for this test. The scope of the test is to run a PC2S client to get a proper payload
+URL and then to optionally download the correct file from the delivery service (NGINX).
+
+### Starting Services
 
 Start a PC2S Metadata container exposing port 8000 to the host.
 In this case 8000 to 8000 will do, provided it's not used by some
 other service on your system. Other port numbers can be used, too.
 
 ```bash
-# Start a PC2S Metadata (Django) container, exposing port 8000 as 8080 on the host machine:
+# Start a PC2S Metadata (Django) container, exposing port 8000 as 8000 on the host machine:
 docker run -p 8000:8000 pc2s-metadata
+```
 
+To verify that the container is live, the user can now point the browser to
+```localhost:8000```. The landing page will be shown, which contains links
+to monitoring pages as well as documentation.
+
+Now start the data delivery container:
+```bash
 # Start a PC2S Data Delivery (NGINX) container, exposing port 80 as 8080 on the host machine:
 docker run -it --rm -d -p 8080:80 pc2s-nginx
 ```
