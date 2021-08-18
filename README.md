@@ -18,7 +18,7 @@ folder in this repository:
 This content is also available from the pc2s-metadata service run as a container
 (see below).
 
-![](./server/static/images/PC2S_data_delivery.jpeg"PC2S Component Interaction"
+![](./server/static/images/PC2S_data_delivery.jpeg"PC2S Component Interaction")
 
 ## Components
 
