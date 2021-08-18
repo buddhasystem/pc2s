@@ -15,6 +15,11 @@ folder in this repository:
 * ```clients.md``` - a digest of the CLI clients (Python-based)
 * ```examples.md``` - examples of using the CLI clients to interact with the system
 
+This content is also available from the pc2s-metadata service run as a container
+(see below).
+
+![](/server/static/images/PC2S_data_delivery.jpeg"PC2S Component Interaction"
+
 ## Components
 
 PC2S consists of two web services working in tandem, and
