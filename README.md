@@ -18,8 +18,6 @@ folder in this repository:
 This content is also available from the pc2s-metadata service run as a container
 (see below).
 
-![plot](./server/static/images/PC2S_data_delivery.jpeg)
-
 ## Components
 
 PC2S consists of two web services working in tandem, and
@@ -45,7 +43,10 @@ dead channel map
 If there is a data product satisfying the query the service returns
 a response in YAML format, containing the **URL of the payload**. The client
 then can use this URL to access to the payload, to be retrieved from the data
-delivery service.
+delivery service. The workflow is illustrated in the diagram below:
+
+![pc2s workflow](./server/static/images/PC2S_data_delivery.jpeg)
+
 
 At the moment the clients interfacing the two services described above are
 implemented in two languages:
