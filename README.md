@@ -6,6 +6,15 @@ experiment-agnostic service for the Conditons and Calibrations data.
 It was inspired in part by the Belle II CDB and is based on recommendations
 of the HEP Software Foundation, closely following the suggested data model.
 
+## General Info
+
+General information about the system can be found in the ```server/documentation```
+folder in this repository:
+
+* ```about.md``` - description of the system design
+* ```clients.md``` - a digest of the CLI clients (Python-based)
+* ```examples.md``` - examples of using the CLI clients to interact with the system
+
 ## Components
 
 PC2S consists of two web services working in tandem, and
