@@ -20,6 +20,13 @@
       <input type="submit" class="w-auto"/>
       </div> 
     </form>
+
+    {% else %}
+    <div style="color:white;font-size:x-small;">Powered by &nbsp;
+    <img src="{% static 'images/django_logo1_transparent.png' %}" height="40">
+    <img src="{% static 'images/nginx_transparent.png' %}" height="40">
+    &nbsp;
+    </div>
     {% endif %} 
       <!-- ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
