@@ -23,6 +23,8 @@ Logically, the overall system is a tandem of a **metadata service**
 and a **data delivery** system. Data delivery can be implemented
 using a number of suitable technologies: HTTP (Apache, nginx etc),
 CVMFS, XRootD or even a combination of these platforms, as needed.
+There are a variety of caching techniques applicable to each of
+these solutions, providing ways to scale performance.
 
 These two components are weakly coupled. The only connection between
 them is the requiment that the metadata component needs to provide a

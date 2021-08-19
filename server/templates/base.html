@@ -4,9 +4,9 @@
   {% include "head.html" %}
   <body>
 
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 fixed-top">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">
-        <img src="{% static 'images/sphenix-logo-black-bg.png' %}" height="40">&nbsp;&nbsp; PC2S
+      <img src="{% static 'images/sphenix-logo-black-bg.png' %}" height="40">&nbsp;&nbsp; <b>PC2S</b>
       </a>
 
     {% if show_query %}
@@ -23,7 +23,7 @@
 
     {% else %}
     <div style="color:white;font-size:x-small;">Powered by &nbsp;
-    <img src="{% static 'images/django_logo1_transparent.png' %}" height="40">
+    <img src="{% static 'images/django_logo1_transparent.png' %}" height="50">
     <img src="{% static 'images/nginx_transparent.png' %}" height="40">
     &nbsp;
     </div>
